@@ -14,17 +14,16 @@ module Jekyll
       # ![](IMAG00071.jpg "IMAG0007")
       # [![](IMAG00071.jpg "IMAG0007")](some-url)
       # 中的图片链接
-      INLINE_IMAGE_MATCHER = %r(!\[([^\[\]]*)\]\((?'url'[^ ]*)\b+([^\[\]]**)\))
+      INLINE_IMAGE_MATCHER = %r(!\[([^\[\]]*)\]\((?'url'[^ \)]*)\b+([^\)]*)\))
       # 能匹配出
       # [label](url)
       # [![](IMAG00071.jpg "IMAG0007")](some-url)
       # 甚至多层嵌套
       # 中的 url
-      INLINE_LINK_MATCER = %r((?<!!)(?<label>\[[^\[\]]*\g<label>?[^\[\]]*])\((?'url'[^\(\)]*)\))
-
+      INLINE_LINK_MATCHER = %r((?<!!)(?<label>\[[^\[\]]*\g<label>?[^\[\]]*\])\((?'url'[^\)]*)\))
       # 匹配引用链接
       # [lable]: url
-      REFERENCE_LINK_MATCHER = %r(^\s*\[[^\]]+]:\s*(?'url'.*)$)
+      REFERENCE_LINK_MATCHER = %r(^\s*\[[^\]]+\]:\s*(?'url'.*)$)
 
       # Initialize the converter.
       #
@@ -67,6 +66,7 @@ module Jekyll
 
       def convert(content)
         dir_parts = [@doc.site.in_source_dir(media_name)]
+        puts @doc.data['title']
         if not @doc.is_a?(Jekyll::Page)
           dir_parts << @doc.collection.label
           remain = @doc.data['draft'] ? @doc.path.sub(@doc.site.in_source_dir("_drafts"),"") :
@@ -85,7 +85,7 @@ module Jekyll
       end
 
       def convert_inline_link(media_dir,content)
-        convert_inner(media_dir,content,INLINE_LINK_MATCER)
+        convert_inner(media_dir,content,INLINE_LINK_MATCHER)
       end
 
       def convert_inline_image(media_dir,content)
@@ -96,11 +96,15 @@ module Jekyll
         convert_inner(media_dir,content,REFERENCE_LINK_MATCHER)
       end
 
+
+
+      # 根据正则替换掉各个 url
       def convert_inner(media_dir,content,matcher)
         content.gsub!(matcher) do
           m = Regexp.last_match
           url = to_smart_url(media_dir,m['url'])
           str = m.to_s.dup
+          # 如果 url 被转换到 media 目录下的文件，则将原 url 替换成新 url
           if not m['url'] == url
             offset = m.offset(0)[0]
             start = m.begin('url')-offset
@@ -113,11 +117,15 @@ module Jekyll
         content
       end
 
+      # 将相对路径转换到指向 media 内相同文件的绝对路径
+      # 如果文件不存在或不是相对路径，则返回原 url
       def to_smart_url(media_dir,url)
+
         if url.include?("://") or Pathname.new(url).absolute?
           url
         else
           dst = File.join(media_dir,url)
+          puts dst
           # if not File.exist?(dst)
           #   move_to_dst(media_dir,url)
           # end
