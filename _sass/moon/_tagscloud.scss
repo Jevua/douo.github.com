@@ -1,0 +1,10 @@
+#tagscloud {
+    margin-bottom: 1.5em;
+    padding: 48px;
+    text {
+	      cursor: pointer;
+	      &:hover{
+	          opacity: .7 !important;
+	      }
+    }
+}

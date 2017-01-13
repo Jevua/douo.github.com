@@ -1,0 +1,49 @@
+$flash:  unquote("rgb(#{$color-primary})");
+/* '' */
+@-moz-keyframes glowheader {
+  from,to {
+    color: inherit;
+    -moz-transform: translateX(0);
+    transform: translateX(0);
+  }
+  35% {
+    color: $flash;
+    -moz-transform: translateX(-0.5em);
+    transform: translateX(-0.5em);
+  }
+}
+@-webkit-keyframes glowheader {
+  from,to {
+    color: inherit;
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+  35% {
+    color: $flash;
+    -webkit-transform: translateX(-0.5em);
+    transform: translateX(-0.5em);
+  }
+}
+@keyframes glowheader {
+  from,to {
+    color: inherit;
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+  35% {
+    color: $flash;
+    -moz-transform: translateX(-0.5em);
+    -ms-transform: translateX(-0.5em);
+    -webkit-transform: translateX(-0.5em);
+    transform: translateX(-0.5em);
+  }
+}
+/* line 15, ../sass/_moon_animate.scss */
+.glowheader {
+  -moz-animation: glowheader 0.7s ease-out;
+  -webkit-animation: glowheader 0.7s ease-out;
+  animation: glowheader 0.7s ease-out;
+}
+

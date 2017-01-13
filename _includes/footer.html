@@ -1,0 +1,40 @@
+<footer class="mdl-mega-footer">
+    <div class="mdl-mega-footer__top-section">
+        <div class="mdl-mega-footer__left-section social">
+            <ul>
+            {% for data in site.network %}
+            <li class="mdl-mega-footer__social-btn">
+            <a href="{{ data.url}}" title="{{ data.name }}">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-{{ data.id }}"></use>
+            </svg>
+            </a>
+            </li>
+            {% endfor %}
+            </ul>
+        </div>
+        <div class="mdl-mega-footer__right-section">
+            {% assign sorted = site.pages | sort:"title" %}
+            {% for page in sorted %}
+            {% if page.title != null %}
+            <a href="{{ page.url }}">{{ page.title }}</a>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="mdl-mega-footer__middle-section">
+        <div class="mdl-mega-footer__drop-down-section">
+            <h1 class="mdl-mega-footer__heading">友情链接</h1>
+            <ul class="mdl-mega-footer__link-list">
+                {% for link in site.links %}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {% endfor%}
+            </ul>
+        </div>
+    </div>
+    <div class="mdl-mega-footer__bottom-section">
+        <div class="mdl-logo">
+            ©2009-世界末日 | 基於 <a href="https://jekyllrb.com">Jekyll</a> | 主题 <a href="#">Moon</a> |
+        </div>
+    </div>
+</footer>

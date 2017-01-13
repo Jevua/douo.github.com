@@ -1,0 +1,30 @@
+---
+layout: default
+---
+<div class="content mdl-color--white mdl-shadow--4dp mdl-color-text--grey-800 mdl-cell--8-col mdl-cell">
+<div class="crumbs mdl-color-text--grey-500">
+    {{ page.date | date: "%b %-d, %Y" }}
+    {% for category in page.categories %}
+    , <a href="/categories#{{ category }}-ref">{{ category }}</a>
+    {% endfor %}
+</div>
+
+<h2>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</h2>
+<article>
+    {{ content }}
+</article>
+<hr class="tag-hr">
+{% for tag in page.tags %}
+<span class="tag mdl-chip">
+    <a href="/tags#{{ tag }}-ref">
+        <span class="mdl-chip__text">
+        {{ tag }}
+        </span>
+    </a>
+</span>
+{% endfor %}
+<button id="scroll-top" class="mdl-cell--hide-phone mdl-cell--hide-tablet mdl-button mdl-js-button mdl-js-ripple-effect">
+    <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-up"></use>
+    </svg>
+</div>

@@ -1,0 +1,22 @@
+---
+title: 分类
+date: '2010-04-20'
+permalink: /categories/
+layout: page
+---
+
+<h2>{{ page.title }}</h2>
+<!-- Posts by Categories -->
+<div class="content mdl-color--white mdl-shadow--4dp mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+    <div>
+        {% for category in site.categories %}
+        {% capture name %}{{ category | first }}{% endcapture %}
+        <h2 id="{{ name }}-ref">{{ name }}</h2>
+        <ul>
+            {% for post in site.categories[name] %}{% if post.title != null %}
+            {% include post-list post=post %}
+            {% endif %}{% endfor %}
+        </ul>
+        {% endfor %}
+    </div>
+</div>

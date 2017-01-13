@@ -1,0 +1,91 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
+title: "DouO's Blog"
+email: dourokinga@gmail.com
+description: > # this means to ignore newlines until "baseurl:"
+              有時樹會倒下，某片天頃刻明亮
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "http://dourok.info" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username: dourok
+github_username:  douo
+
+
+# Build settings
+markdown: kramdown
+# theme: minima
+gems:
+  - jekyll-feed
+exclude:
+  - Gemfile
+  - Gemfile.lock
+
+nav :
+  - title: home
+    url: /
+    describe: 主页
+  - title: notes
+    url: /notes
+    describe: 笔记
+  - title: coder
+    url: /categories#coder-ref
+    describe: 编码
+  - title: life
+    url: /categories#life-ref
+    describe: 生活
+  - title: otaku
+    url: /categories#otaku-ref
+    describe: 兴趣
+  - title: archives
+    url: /archives
+    describe: 文章归档
+
+links:
+  - title: MAGICALBOY
+    url: http://magicalboy.com/
+  - title: 驴子博客
+    url: http://www.cnlvzi.com/
+
+
+
+network :
+  - id: feed
+    url: /feed.xml
+    name: 订阅
+  - id: github
+    url: https://github.com/douo
+    name: Github
+  - id: stackoverflow
+    url: http://stackoverflow.com/users/851344/douo
+    name: StackOverflow
+  - id: googleplus
+    url: https://plus.google.com/102537448648560113422
+    name: Google Plus
+  - id: instagram
+    url: http://instagram.com/douo
+    name: Instagram
+  - id: weibo
+    url: http://weibo.com/u/2809197792
+    name: 微博
+
+
+
+
+defaults:
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+    values:
+      layout: "post"
