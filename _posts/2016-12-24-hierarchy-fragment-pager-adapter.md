@@ -2,12 +2,12 @@
 title: 'ViewPager 嵌套导致 Fragment 菜单错乱解决'
 date: '2016-12-24'
 description:
-tag:
+tag: 
+- Android
+- ViewPager
 ---
 
-
-
-以下图嵌套的 ViewPager 为例，它是一个两层嵌套的 ViewPager，可以看到不在当前页显示的 Fragment 它的菜单项也显示出来了。用户滑动到 B ，ViewPager 能正确处理第一层的菜单。显示 B 的时候同时预加载 A、C 两个 Fragment，而菜单里只显示 B 的菜单项。第二层就有问题了， BA 是第二层当前的 Fragment，它的菜单项也能显示出来，这没问题。但是多出来 AA 和 CA 便是问题了，ViewPager 预加载了 A，A 里面的 ViewPager 把 AA 当成是当前 Fragment，把它的菜单项也显示出来了。CA 也是同样道理。
+以下图嵌套的 ViewPager 为例，它是一个两层嵌套的 ViewPager，可以看到不在当前页显示的 Fragment 它的菜单项也显示出来了。用户滑动到 B ，ViewPager 能正确处理第一层的菜单，显示 B 的时候同时预加载 A、C 两个 Fragment，而菜单里只显示 B 的菜单项。到第二层就有问题了， BA 是第二层当前的 Fragment，它的菜单项也能显示出来，这没问题。但却多出来 AA 和 CA，这是因为 ViewPager 预加载了 A，A 里面的 ViewPager 把 AA 当成是当前 Fragment，把它的菜单项也显示出来了。CA 也是同样道理。
 
 ![](b_aa_ba_ca.png)
 
@@ -26,14 +26,14 @@ tag:
         mCurrentPrimaryItem = fragment;
     }
 
-AA、CA 的显示就很好理解了，因为它们各自是 A 和 C 的主项（primary item）。
+AA、CA 的显示就很好理解了，因为它们各自是 A 和 C 的主项（primary item），所以都调用了 `setMenuVisibility(true)`。
 
-要修复这个问题，一开始想到的是覆盖父 Fragment setMenuVisibility方法，把值传递到当前子 Fragment
+要修复这个问题，一开始想到的是覆盖父 fragment 的 `setMenuVisibility` 方法，把值传递到当前子 fragment
 
     @Override public void setMenuVisibility(boolean menuVisible) {
         if (isAdded() && getChildFragmentManager().getFragments() != null) {
           Fragment f = getChildFragmentManager().findFragmentByTag(
-              "android:switcher:" + mPager.getId() + ":" + mPager.getCurrentItem());
+              "android:switcher:" + mPager.getId() + ":" + mPager.getCurrentItem());// 不支持 FragmentStatePagerAdapter
           if (f != null) {
             f.setMenuVisibility(menuVisible);
           }
@@ -41,9 +41,11 @@ AA、CA 的显示就很好理解了，因为它们各自是 A 和 C 的主项（
         super.setMenuVisibility(menuVisible);
       }
 
-这样从 A 滑到 B 时，AA 能隐藏了。但仍然不能解决问题，从 A 滑到 B 时离屏加载 C，并设置 C 的 MenuVisibility 为 false。FragmentPagerAdapter 几次 setMenuVisibility 都在 finishUpdate 之前，所以此时 C 还未添加到 Activity，CA 更不存在。等到 CA 加载时，已经不分触发 C 的 MenuVisibility 了。
+这样从 A 滑到 B 时，AA 能隐藏了。但仍然不能解决问题，从 A 滑到 B 时离屏加载 C，并设置 C 的 MenuVisibility 为 false。FragmentPagerAdapter 几次 setMenuVisibility 都在 finishUpdate 之前，所以此时 C 还未添加到 Activity，CA 更不存在。等到 CA 加载时，已经不会再触发 C 的 MenuVisibility 了。
 
-考虑自定义 FragmentPagerAdapter，setPrimaryItem 将 menuVisibility 同步父 Fragment 的状态，mParent 是适配器构造函数传入的 ViewPager 宿主 Fragment。
+![](b_ba_ca.png)
+
+考虑自定义 FragmentPagerAdapter，主项（primary item）的 fragment 的 menuVisibility 同步父 Fragment 的状态，`mParent` 是适配器构造函数传入的 ViewPager 宿主 Fragment。
 
     @Override public void setPrimaryItem(ViewGroup container, int position, Object object) {
       super.setPrimaryItem(container, position, object);
@@ -52,9 +54,9 @@ AA、CA 的显示就很好理解了，因为它们各自是 A 和 C 的主项（
 
 这样的问题是，从 A 滑到 B 时，只是根 ViewPager 的当前主项（primary item）发生变化，A 适配器和 B 适配器的主项不会发生变化，所以 setPrimaryItem 不会被触发，AA 的菜单仍然可见，而 BA 的菜单则仍然不可见。
 
-幸运的是把需要修改两个地方合并起来，这样就覆盖了各个状态了。但未免过于繁琐，把问题重新整理一遍
+幸运的是把修改两个地方合并起来，这样就覆盖了各种可能了。但未免过于繁琐，把问题重新整理一遍，建立模型，才是优雅的解决方法。
 
-1. 给适配器（Adapter）引入是否可视（visible)属性，不再是碎片（Fragment）是主项（primary item）就显示菜单，只有当前适配器是可视的才可以显示菜单。
+1. 给适配器（Adapter）引入是否可视（visible)属性，不再主项（primary item） Fragment 就显示菜单，只有当前适配器是可视的情况下才可以显示菜单。
 2. 是否可视的递归定义：父适配器（管理宿主碎片的 Adapter）是可视的 ，且宿主碎片是主项，适配器才是可视的。
 3. 父适配器的可视状态和宿主碎片主项状态发生改变，要传递到其子适配器。
 4. 子适配器初始化要正确初始化他的可视状态。
@@ -110,5 +112,7 @@ AA、CA 的显示就很好理解了，因为它们各自是 A 和 C 的主项（
        }
      }
 
-剩下的便没什么，鉴于 PagerAdapter 有两个, FragmentPagerAdapter 和 FragmentStatePagerAdapter。所以适配器的设计便用代理模式比较合适。具体的代码见：HierarchyFragmentPagerAdapter
+剩下的便没什么，鉴于 PagerAdapter 有两个, FragmentPagerAdapter 和 FragmentStatePagerAdapter。所以适配器的设计便用代理模式比较合适。具体的代码见：[HierarchyFragmentPagerAdapter](https://github.com/douo/android-demo/blob/master/app/src/main/java/info/dourok/android/demo/pager/HierarchyFragmentPagerAdapter.java)
+
+![](b_ba_baa_baaa.png)
 
