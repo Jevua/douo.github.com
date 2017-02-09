@@ -80,12 +80,13 @@ network :
     url: http://weibo.com/u/2809197792
     name: 微博
 
+permalink: /:year/:month/:day/:title.html
+disqus_id: doousblog
 
-
-
-defaults:
+defaults:  #  可设置各个路径下默认的 layout 模板
   -
     scope:
       path: "" # an empty string here means all files in the project
     values:
       layout: "post"
+

@@ -13,7 +13,7 @@ layout: default
 <article>
     {{ content }}
 </article>
-<hr class="tag-hr">
+
 {% for tag in page.tags %}
 <span class="tag mdl-chip">
     <a href="/tags#{{ tag }}-ref">
@@ -23,8 +23,11 @@ layout: default
     </a>
 </span>
 {% endfor %}
+<hr class="tag-hr">
+{% include disqus.html %}
 <button id="scroll-top" class="mdl-cell--hide-phone mdl-cell--hide-tablet mdl-button mdl-js-button mdl-js-ripple-effect">
     <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-up"></use>
     </svg>
 </div>
+
