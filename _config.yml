@@ -48,9 +48,9 @@ nav :
   - title: otaku
     url: /categories#otaku-ref
     describe: 兴趣
-  - title: archives
-    url: /archives
-    describe: 文章归档
+  - title: about
+    url: /about
+    describe: 关于
 
 links:
   - title: MAGICALBOY
@@ -89,4 +89,20 @@ defaults:  #  可设置各个路径下默认的 layout 模板
       path: "" # an empty string here means all files in the project
     values:
       layout: "post"
+  -
+    scope:
+      path: "resumes"
+      type: "pages"
+    values:
+      layout: "resume"
+
+collections:
+  notes:
+    output: true
+    to_tree: true
+  resumes:
+    output: true
+    to_tree: true
+
+
 
