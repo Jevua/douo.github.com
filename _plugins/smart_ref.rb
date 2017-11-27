@@ -66,7 +66,7 @@ module Jekyll
 
       def convert(content)
         dir_parts = [@doc.site.in_source_dir(media_name)]
-        puts @doc.data['title']
+        # puts @doc.data['title']
         if not @doc.is_a?(Jekyll::Page)
           dir_parts << @doc.collection.label
           remain = @doc.data['draft'] ? @doc.path.sub(@doc.site.in_source_dir("_drafts"),"") :
@@ -125,7 +125,7 @@ module Jekyll
           url
         else
           dst = File.join(media_dir,url)
-          puts dst
+          # puts dst
           # if not File.exist?(dst)
           #   move_to_dst(media_dir,url)
           # end

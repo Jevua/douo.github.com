@@ -1,17 +1,19 @@
 # encoding: utf-8
 
 # 将 ruhoh 的 posts 复制到 jekyll 的 _drafts 下，这个生成器将标题转换为 jekyll 规范并复制到新目录
+require 'pp'
 module Ruhoh
   class Generator < Jekyll::Generator
     def generate(site)
-      puts site.tags
       @@site = site
-      site.categories.each { |key,vals|
-        puts key
-      }
+#      site.categories.each { |key,vals|
+#        puts key
+      #      }
       # to_jekyll_title(site)
       # remove_media_url(site)
     end
+
+
 
     def remove_media_url(site)
 
