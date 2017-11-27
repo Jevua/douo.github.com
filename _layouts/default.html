@@ -8,13 +8,10 @@
                     <span class="site-name mdl-layout-title"><a href="{{ site.url }}" class="mdl-color-text--grey-800">{{ site.title }}</a></span>
                     <!-- Add spacer, to align navigation to the right -->
                     <div class="mdl-layout-spacer"></div>
-                    <!-- Navigation -->
+                    <!-- Navigation 123 -->
                     <nav class="mdl-navigation">
-                        {% assign sorted = site.pages | sort:"title" %}
-                        {% for page in sorted %}
-                        {% if page.title != null %}
-                        <a class="mdl-navigation__link mdl-color-text--grey-800" href="{{ page.url }}">{{ page.title }}</a>
-                        {% endif %}
+                        {% for data in site.nav %}
+                        <a class="mdl-navigation__link mdl-color-text--grey-800" href="{{ data.url }}">{{ data.describe }}</a>
                         {% endfor %}
                     </nav>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
