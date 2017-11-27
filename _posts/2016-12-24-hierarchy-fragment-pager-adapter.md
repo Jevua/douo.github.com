@@ -1,5 +1,5 @@
 ---
-title: 'ViewPager 嵌套导致 Fragment 菜单错乱解决'
+title: '解决 ViewPager 嵌套导致的 Fragment 菜单错乱'
 date: '2016-12-24'
 description:
 tag: 
@@ -7,7 +7,7 @@ tag:
 - ViewPager
 ---
 
-以下图嵌套的 ViewPager 为例，它是一个两层嵌套的 ViewPager，可以看到不在当前页显示的 Fragment 它的菜单项也显示出来了。用户滑动到 B ，ViewPager 能正确处理第一层的菜单，显示 B 的时候同时预加载 A、C 两个 Fragment，而菜单里只显示 B 的菜单项。到第二层就有问题了， BA 是第二层当前的 Fragment，它的菜单项也能显示出来，这没问题。但却多出来 AA 和 CA，这是因为 ViewPager 预加载了 A，A 里面的 ViewPager 把 AA 当成是当前 Fragment，把它的菜单项也显示出来了。CA 也是同样道理。
+以下图嵌套的 ViewPager 为例，它是一个两层嵌套的 ViewPager，也就是说 ViewPager 里面是 Fragment ，每个 Fragment 里面又是一个 ViewPager。在下面的例子中，每个 Fragment 都有一个相同名字的菜单项，可以看到不在当前页显示的 Fragment 它的菜单项也显示出来了。用户滑动到 B ，ViewPager 能正确处理第一层的菜单，显示 B 的时候同时预加载 A、C 两个 Fragment，而菜单里只显示 B 的菜单项。到第二层就有问题了， BA 是第二层当前的 Fragment，它的菜单项也能显示出来，这没问题。但却多出来 AA 和 CA，这是因为 ViewPager 预加载了 A，A 里面的 ViewPager 把 AA 当成是当前 Fragment，把它的菜单项也显示出来了。CA 也是同样道理。
 
 ![](b_aa_ba_ca.png)
 
@@ -54,11 +54,11 @@ AA、CA 的显示就很好理解了，因为它们各自是 A 和 C 的主项（
 
 这样的问题是，从 A 滑到 B 时，只是根 ViewPager 的当前主项（primary item）发生变化，A 适配器和 B 适配器的主项不会发生变化，所以 setPrimaryItem 不会被触发，AA 的菜单仍然可见，而 BA 的菜单则仍然不可见。
 
-幸运的是把修改两个地方合并起来，这样就覆盖了各种可能了。但未免过于繁琐，把问题重新整理一遍，建立模型，才是优雅的解决方法。
+幸运的是把修改两个地方合并起来，这样就覆盖了各种可能了。但未免过于繁琐，把问题重新整理一遍，建立模型，才是优雅的解决方法：
 
-1. 给适配器（Adapter）引入是否可视（visible)属性，不再主项（primary item） Fragment 就显示菜单，只有当前适配器是可视的情况下才可以显示菜单。
-2. 是否可视的递归定义：父适配器（管理宿主碎片的 Adapter）是可视的 ，且宿主碎片是主项，适配器才是可视的。
-3. 父适配器的可视状态和宿主碎片主项状态发生改变，要传递到其子适配器。
+1. 给适配器（Adapter）引入是否可视（visible)属性，不再是主项（primary item）的 Fragment 就显示菜单，而是只有当前适配器是可视的情况下才可以显示菜单。
+2. 是否可视的递归定义：父适配器（管理**宿主 Fragment** 的 Adapter）是可视的 ，且**宿主 Fragment** 是主项，适配器才是可视的。
+3. 父适配器的可视状态和**宿主 Fragment** 主项状态发生改变，要传递到其子适配器。
 4. 子适配器初始化要正确初始化他的可视状态。
 
 这样就能设计一个新的 PagerAdapter，把棘手的问题都放在 PagerAdapter 来做。
@@ -112,7 +112,7 @@ AA、CA 的显示就很好理解了，因为它们各自是 A 和 C 的主项（
        }
      }
 
-剩下的便没什么，鉴于 PagerAdapter 有两个, FragmentPagerAdapter 和 FragmentStatePagerAdapter。所以适配器的设计便用代理模式比较合适。具体的代码见：[HierarchyFragmentPagerAdapter](https://github.com/douo/android-demo/blob/master/app/src/main/java/info/dourok/android/demo/pager/HierarchyFragmentPagerAdapter.java)
+剩下的便没什么，鉴于 PagerAdapter 有两个, FragmentPagerAdapter 和 FragmentStatePagerAdapter。所以适配器的设计便用代理模式比较合适，实现起来比想象中的简洁，用起来也简单，只需将实际的 PagerAdapter 外面包一层 `HierarchyFragmentPagerAdapter` 就行，具体的代码见：[HierarchyFragmentPagerAdapter](https://github.com/douo/android-demo/blob/master/app/src/main/java/info/dourok/android/demo/pager/HierarchyFragmentPagerAdapter.java)
 
 ![](b_ba_baa_baaa.png)
 
