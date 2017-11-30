@@ -2,7 +2,9 @@
 title: '解决 ViewPager 嵌套导致的 Fragment 菜单错乱'
 date: '2016-12-24'
 description:
-tag: 
+categories: 
+- coder
+tags:
 - Android
 - ViewPager
 ---

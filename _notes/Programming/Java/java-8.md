@@ -1,0 +1,82 @@
+---
+title: Java 8
+date: '2016-09-05'
+description:
+type: draft ## 移除这个字段，笔记才会公开发布
+---
+
+### lambda
+
+- `(parameters) -> {}/exp`
+- `() -> {}/exp`
+- `p -> {}/exp`
+
+函数式接口
+
+没有函数类型
+
+lambda 表达式就是一个函数式接口，只有一个抽象方法的接口都是函数式接口。可以给接口加上注解`@FunctionalInterface`
+
+
+#### 方法引用
+
+    Arrays.sort(strings, String::compareToIgnoreCase)
+
+1. 对象::实例方法
+2. 类::静态方法
+3. 类::实例方法
+
+2的例子，`Math::pow`  等同于 `(x,y) -> {Math.pow(x,y)}`
+
+3的例子 `String::compareToIgnoreCase` 等同于 `(x,y) -> {x.compareToIgnoreCase(y)}` 
+
+#### 构造器引用
+
+构造对象 Class::new， java 会对类型进行推断
+
+int[]::new，等同于 new int[x]
+
+#### 变量作用域
+
+支持自由变量，lambda 就是闭包
+
+技术细节是自由变量会被复制到 lambda 的对象实例中
+
+**自由变量中的局部变量不能修改**， final 变量
+
+其实，内部匿名类就是闭包。
+
+lambda 表达式作用域等同于 block
+
+
+#### 默认方法
+
+java 8 允许接口拥有具体实现的方法，称为默认方法
+
+    interface Person{
+        long getId();
+        default String getName() {return "Name";}
+    }
+
+1. 父类会覆盖掉接口的同名同参默认方法
+2. 不同接口的同名同参默认方法实现者必须覆盖该方法以解决冲突
+
+实现类 `Person.super.getName` 可以访问到接口的默认方法
+
+接口也支持静态方法
+
+### Stream API
+
+1. 创建 Stream
+2. Stream -> Stream 的中间转换
+3. Stream -> 结果，终止操作
+
+
+对于非基本类型的聚合操作，最终返回接口， Stream 用 Optional<T> 来封装.Optional 对 null 值的处理比较友好。
+
+    opt.ifPresent(v -> process v)
+
+v 有值时才执行对 v 的处理。
+
+还可以 map，或者用默认值代替空值。
+

@@ -123,7 +123,7 @@ Sources"按钮失效。我试过了确实会这样（linux下）。解决方法�
 [![](1wp-content/uploads/2010/05/21.png "view_sources")](1wp-content/uploads/2010/05/21.png)
 
 另外，意外的是在debug下还能工作的挺好的。
-[![](1wp-content/uploads/2010/05/android_tab.png "debug_view")](1wp-content/uploads/2010/05/android_tab.png)
+[![](wp-content/uploads/2010/05/android_tab.png "debug_view")](1wp-content/uploads/2010/05/android_tab.png)
 
 [NBANDROID-71](http://kenai.com/jira/browse/NBANDROID-71)基本可以算解决了。
 
