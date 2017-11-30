@@ -15,8 +15,7 @@ widgets :
     enable : true
 ---
 
-{{! 关闭掉mustache的默认分隔符，因为要罗列mustache的代码}}
-{{=<% %>=}}
+{% raw %}
 
 ### ruhoh ###
 
@@ -114,8 +113,7 @@ ruhoh 的扩展设计也不完美，或者我是不能明白，分为 widgets，
 [demo]: http://mustache.github.com/#demo
 [我的笔记]: /notes/coding/mustache
 
-<%={{ }}=%>
-{{! 切换回默认的分隔符，免得出现奇怪的问题}} 
+{% endraw %}
 
 ### Markdown ###
 

@@ -6,8 +6,7 @@ tags:
 ---
 
 
-{{! 关闭掉mustache的默认分隔符，因为要罗列mustache的代码}}
-{{=<% %>=}}
+{% raw %}
 
 一个Logic Less（不知道怎么翻译，目的大概是把逻辑还给代码，让模板保持简洁。见[stackoverflow][]）的模板语言，所以同样以语言无关为目标的 ruhoh 采用了它作为模板语言。参考它的 [demo][] 可以大致了解它的特性
 
@@ -108,5 +107,4 @@ http://stackoverflow.com/questions/12520783/recursive-mustache-partial-in-ruby
 `{{<}}` 与 `{{>}}` 一样？
 
 
-<%={{ }}=%>
-{{! 切换回默认的分隔符，免得出现奇怪的问题}} 
+{% endraw %}
