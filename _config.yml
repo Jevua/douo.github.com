@@ -21,7 +21,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://dourok.info" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: dourok
 github_username:  douo
-
+disqus_id: doousblog
 
 # Build settings
 markdown: kramdown
@@ -40,15 +40,17 @@ defaults:
   -
     scope: # 表示影响范围
       path: "" # an empty string here means all files in the project
-      # type: "posts" # 表示受影响的类型 pages, posts, drafts 或者任何自定义集合
+      type: "posts" # 表示受影响的类型 pages, posts, drafts 或者任何自定义集合
     values: # 具体的默认值
       layout: "post"
+      permalink: "/:year/:month/:day/:title/"
   -
     scope:
       path: ""
       type: "notes" # 
     values:
-      layout: "note"
+#      layout: "note"
+      permalink: "/:collection/:path/"
 
   - 
     scope:
@@ -57,6 +59,8 @@ defaults:
     values:
       layout: "resume"
 
+
+# 自定义的以 '_' 开头的目录或文件，不声明为 collection 会自动被忽略
 collections:
   notes:
     output: true
@@ -111,5 +115,4 @@ network :
     url: http://weibo.com/u/2809197792
     name: 微博
 
-permalink: /:year/:month/:day/:title.html
-disqus_id: doousblog
+# show_drafts: true
