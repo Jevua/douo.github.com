@@ -38,51 +38,6 @@ module Moon
   class ResourceGenerator < Jekyll::Generator
     RESOURCE_DIR = "_res"
 
-    attr_accessor :site
-    # dir - dir 目录下的文件将作为 static file 读取
-    # top - 是否是资源根目录，只有根目录下的目录才会被当成 collection 处理
-    def read(dir, top=true)
-      base = site.in_source_dir(dir)
-
-      # _ 开头的文件或者目录会被忽略
-      dot = Dir.chdir(base) { filter_entries(Dir.entries("."), base) }
-      dot_dirs = dot.select { |file| File.directory?(@site.in_source_dir(base, file)) }
-      dot_files = (dot - dot_dirs)
-      retrieve_resource_files(dir, dot_files)
-      if top
-        retrieve_top_dir(base, dot_dirs)
-      else
-        dot_dirs.each{ |dir| read(dir, false)}
-      end
-    end
-
-    def retrieve_resource_files(dir,files)
-      files.each do |file|
-        site.static_files << Resource.new(site, site.source, dir, file, File.join(dir,file))
-      end
-    end
-
-    def retrieve_top_dir(base, dirs)
-      dirs.each do |dir|
-        if site.collections[dir]
-          retrieve_collection_resource(base, dir, site.collections[dir])
-        else
-          read(dir, false)
-        end
-      end
-    end
-
-    def retrieve_collection_resource(base, dir, collection)
-      collection.docs.each do |doc|
-        doc_dir = File.join(base, dir, doc.cleaned_relative_path)
-        if File.exist?(doc_dir)
-          Dir.chdir(site.in_source_dir(doc_dir)) do
-            retrieve_doc_resource(doc_dir, ".", doc)
-          end
-        end
-      end
-    end
-
     # base doc resource 目录的绝对路径比如 ：_res/posts/2013-10-22-the-pain-of-note-2
     # dir 当前遍历的目录
     # doc 当前 doc 对象
@@ -106,10 +61,6 @@ module Moon
       end
     end
 
-    def filter_entries(entries, base_directory = nil)
-      Jekyll::EntryFilter.new(site, base_directory).filter(entries)
-    end
-
     # 将 _post/date-name.md 转为 posts/date-name
     def doc_resource_path(base, doc)
       File.join(base, doc.collection.label, doc.cleaned_relative_path)
@@ -119,7 +70,6 @@ module Moon
       self.site = site
       require 'pp'
       # site.posts.docs.each{ |doc|  pp doc.url}
-      #read(RESOURCE_DIR)
       res_dir = RESOURCE_DIR
       base = site.in_source_dir(res_dir)
       site.collections
