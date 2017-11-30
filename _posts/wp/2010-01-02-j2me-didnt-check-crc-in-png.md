@@ -14,10 +14,10 @@ guid: http://dourok.info/?p=764
 ---
 先看下面一张图片先
 
-![](wp-content/uploads/2010/01/D.png.png "D")
+![](D.png.jpg "D")
 
 这是一张用PhotoShop生成的png图片.下面是它的16位数据
-![](wp-content/uploads/2010/01/d1.jpg "D")
+![](d1.jpg "D")
 
 上图选择的地方,就是主要要改的调色板数据块(PLTE
 chunk),关于PNG的规格在[http://dev.gameres.com/Program/Visual/Other/PNGFormat.htm](http://dev.gameres.com/Program/Visual/Other/PNGFormat.htm)这里有说明,中文的.所谓调色板数据块就是存放PNG所用的颜色种类.
@@ -33,7 +33,7 @@ FF FF 00 FF
 62 F5
 FE.改到图片里面,用ACDSee打开可依旧提示」原始数据格式无法识别」.我就纳闷了.为什么网友写的程序可以正常显示图片呢?难道J2ME没有校检CRC码.于是我索性把程序中更新CRC的代码给注释掉.发现程序真的正常运行.很大打击因为花了很多时间在检查自己的代码上面.
 
-![](http://www.dourok.info/wp-content/uploads/2010/01/d2.jpg "D")
+![](d2.jpg "D")
 
 如上图. 虽然觉得很奇怪不过,想想也对.J2ME的程序本来就资源紧张.对于仅用来显示的图片不校检CRC可以省下一些时间.所以J2ME不校检CRC的做法是可以理解的.但我更奇怪的是很多程序里面都有更新CRC码.甚至都生成错.比如上图的程序.
 
@@ -41,17 +41,17 @@ startPos就是数据块数据的开始位置.-8就包含了长度和数据块类
 
 后来我在[http://www.w3.org/TR/PNG/\#5Chunk-layout](http://www.w3.org/TR/PNG/#5Chunk-layout)才发现正确的CRC是用数据块类型码+数据块数据来生成的.这里是png格式的详细规范,有兴趣的童鞋可以看看.
 
-![](http://www.dourok.info/wp-content/uploads/2010/01/d3.jpg "D")
+![](d3.jpg "D")
+
 终于成功,改成绿色相应的CRC码是C6 E6 2E 0C
 
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27
-28 29 30 31 32 33 34 35 36 37 38 39
 
-//生成CRC码public int creatCRC(byte[] data ,int start, int length){
-
+```java
+//生成CRC码
+public int creatCRC(byte[] data ,int start, int length){
 long crc=0xFFFFFFFFL;
 
-for(int i=start;i&gt;8));
+for(int i=start;i>8));
 
 }
 
@@ -71,18 +71,18 @@ crcTable=new long[256];
 
 long crc;
 
-for(int i=0;i&lt;256;i++){
+for(int i=0;i<256;i++){
 
 crc=(long)i;
 
-for(int j=0;j&lt;8;j++){ if((crc0x1)==1) crc=poly\^(crc&gt;&gt;1);
+for(int j=0;j<8;j++){ if((crc0x1)==1) crc=poly\^(crc>>1);
 
-else crc&gt;&gt;=1;
+else crc>>=1;
 
 } crcTable[i]=crc;
 
 } }
-
+```
 ——————————————狡猾的分割线——————————————————
 
 这其实是篇一年多前的文章,发出来试试看[codecolorer](http://kpumuk.info/projects/wordpress-plugins/codecolorer/)插件的效果,结果如上所示,还不错.
