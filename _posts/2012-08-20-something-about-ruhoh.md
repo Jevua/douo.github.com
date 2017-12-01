@@ -179,9 +179,9 @@ rsync -a --delete-after $SITE_DIR $DEPLOY_DIR >>  $LOG
 
 Mathjax的使用非常方便，直接在頁面嵌入腳本就行，然後通過一個 widgets 來載入 mathjax 的腳本。就可以展示公式了。关键是如何定义插入公式的语法，刚好 plusjade 扩展一下转换器插件实现了这个語法：[mathjax.rb](https://gist.github.com/2699636)。
 
-```mathjax
+$$
 e^{i\pi} + 1 = 0
-```
+$$
 
 我考虑是否要为页面加入一个Mathjax开关，因为大部分博文都无需用到Mathjax。另外，Mathjax 好像会不定时的出现一些布局错乱的问题。
 

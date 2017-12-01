@@ -61,31 +61,31 @@ int main(){
 
 磁道的位数大小 b 正比于磁道的周长，磁道的数量 t 取决于可用的盘面半径。磁盘的容量 C = b*t
 
-```mathjax
+$$
 b=2\pi xr;\\
 t=r-xr=r(1-x);\\
 C=bt=2\pi r^2(x-x^2);\\
 C'=-2\pi r^2(1-2x);\\
 C'=0 可解得 x=\frac{1}{2}.\\
 
-```
+$$
 
 ##### 6.24
 
-```mathjax
+$$
 T_{access}=T_{avgseek}+T_{avg rotation}+T_{avg transfer}\\
 T_{avg rotation} = \frac{1}{RPM}\times \frac{60 secs}{1 min}\\
 T_{avg transfer} = \frac{1}{RPM}\times\frac{1}{平均扇区数/磁道}\times\frac{60 secs}{1 min}\\
 T_{access}=T_{avg seek}+\frac{1}{RPM}\times \frac{60 secs}{1 min}\times(1+\frac{1}{平均扇区数/磁道})\\
 T_{access}=3ms+\frac{1}{12000ms}\times \frac{60 secs}{1 min}\times(1+\frac{1}{500})\\
 T_{access}=5.51ms
-```
+$$
 
 ##### 6.25
 
-```mathjax
+$$
 3mb=3*1000*1kb=6000sector\\
 每条磁道 500 个扇区总共需要 12 条磁道\\
 T_{best}=T_{avg seek}+T_{avg rotation}+12\times T_{max rotation}\\
 T_{rand}=6000\times(T_{avg seek}+T_{avg rotation}+T_{avg transfer})\\
-```
+$$

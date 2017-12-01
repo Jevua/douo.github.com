@@ -84,9 +84,9 @@ Aldebaran 毕宿五
 
 时角（Hour Angel，HA），本地恒星时与星星赤经的距离（星星到子午圈的距离）。
 
-```mathjax
+$$
 HA_{obj} = LST - RA_{obj}
-```
+$$
 
 模拟器:http://astro.unl.edu/naap/motion2/animations/ce_hc.html
 

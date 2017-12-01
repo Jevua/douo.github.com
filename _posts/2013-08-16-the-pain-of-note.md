@@ -11,10 +11,8 @@ tags:
 
 
 
-{{> jqplot }}
-
-
-
+{% include jqplot.html %}
+<script type="text/javascript" src="note_system_review.js"></script>
 
 下图是一年内所建笔记的统计图。
 
