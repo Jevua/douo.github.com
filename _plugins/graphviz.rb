@@ -6,15 +6,12 @@ module Moon
     class GraphvizBlock < Liquid::Block
       require 'pp'
       def initialize(tag_name, markup, tokens)
-        pp "initialize"
         super
       end
 
       def render(context)
-        s = "<div class=\"graphviz\" data-graph=\"#{CGI.escapeHTML(super)}\">
+        "<div class=\"graphviz\" data-graph=\"#{CGI.escapeHTML(super)}\">
         </div>"
-        puts s
-        s
       end
     end
   end
