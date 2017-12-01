@@ -36,7 +36,15 @@ exclude:
 excerpt_separator: "已禁用，见 _config.yml"
 
 # 设置默认的 yml 头部数据
-defaults:  
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      # 默认不启用附加功能
+      math: false # 是否引入 _includes/mathjax.html
+      graphviz: false # 是否引入 _includes/graphviz.html
+
   -
     scope: # 表示影响范围
       path: "" # an empty string here means all files in the project
@@ -49,7 +57,7 @@ defaults:
       path: ""
       type: "notes" # 
     values:
-#      layout: "note"
+      layout: "post"
       permalink: "/:collection/:path/"
 
   - 

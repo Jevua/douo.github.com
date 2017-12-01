@@ -16,10 +16,11 @@ module Ruhoh
   class Generator < Jekyll::Generator
 
     MEDIA_URLS_MATCHER = %r(\{\{\s*urls\.media\s*\}\}\/([^ "\)]+))
-
+    MATH_BLOCK_MATCHER = %r(^\b*```mathjax$\n([^```]+)\b*```)m
+    MATH_INLINE_MATCHER = %r(`\$([^$`]+)\$`)
     def generate(site)
       # convert_post(site)
-      convert_media_url(site)
+      # convert_content(site)
       # convert_notes_index(site)
     end
 
@@ -47,37 +48,74 @@ module Ruhoh
       File.join(base, doc.collection.label, doc.cleaned_relative_path)
     end
 
+
     # 移除 ruhoh 的 urls.media 标签
     # 并将文章相关的资源文件移动到 _res 目录相应的文章目录下
-    def convert_media_url(site)
+    def convert_media_url(site, doc, content)
       base = site.in_source_dir("_res")
+      res_dir = doc_resource_path(base, doc)
+      # 移除 mustache 标签 {{urls.media}}
+      content.gsub(MEDIA_URLS_MATCHER) do
+        res_file = Regexp.last_match[1]
+        ruhoh_media = File.join("media",res_file)
+        # pp ruhoh_media
+        if(File.exist?(ruhoh_media))
+          FileUtils::mkdir_p(File.dirname(File.join(res_dir, res_file)))
+          FileUtils::mv(ruhoh_media,File.join(res_dir, res_file))
+        end
+        res_file
+      end
+    end
+
+    def convert_content(site)
       site.collections.each{ |key,collection|
         # pp collection
         collection.docs.each{ |doc|
+          # pp doc.path
           content = File.read(doc.path)
-          res_dir = doc_resource_path(base, doc)
-          # 移除 mustache 标签 {{urls.media}}
-          content.gsub!(MEDIA_URLS_MATCHER) do
-            res_file = Regexp.last_match[1]
-            ruhoh_media = File.join("media",res_file)
-            # pp ruhoh_media
-            if(File.exist?(ruhoh_media))
-              FileUtils::mkdir_p(File.dirname(File.join(res_dir, res_file)))
-              FileUtils::mv(ruhoh_media,File.join(res_dir, res_file))
-            end
-            res_file
-          end
+          content = convert_media_url(site, doc, content)
+          content = convert_math(site, doc, content)
           File.open(doc.path,'w'){ |file| file.write(content)}
         }
       }
     end
 
+    # 将 ruhoh 的 math 语法转换为 kramdown 语法
+    def convert_math(site, doc, content)
+      content.gsub(MATH_BLOCK_MATCHER){
+        latex = "$$\n#{Regexp.last_match[1]}$$"
+        latex
+      }.gsub(MATH_INLINE_MATCHER){
+        latex = "$$ #{Regexp.last_match[1]} $$"
+        # pp latex
+        latex
+      }
+    end
+
     # TODO 将 ruhoh 作为父节点内容的文件转换为子文件，命名为总览等
-    # 比如 Android/index.md 或 Android/android.md 
+    # 比如 Android/index.md 或 Android/android.md
     def convert_notes_index(site)
       site.collections['notes'].files.each do |f|
         pp f.name
       end
     end
+  end
+end
+
+
+# 将 ruhoh
+# widgets :
+#   math:
+#     enable : true
+# 转换为
+# math : true
+#
+Jekyll::Hooks.register :documents, :pre_render do |doc|
+  if doc.data['widgets']
+    doc.data['widgets'].each{ |k,v|
+      if v['enable']
+        doc.data[k] = true
+      end
+    }
   end
 end

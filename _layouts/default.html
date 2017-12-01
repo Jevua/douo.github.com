@@ -36,5 +36,15 @@
             </main>
         </div>
         {% include google_prettify.html %}
+
+        {% if page.graphviz %}
+        {% include graphviz.html %}
+        {% endif %}
+
+        {% if page.mathjax %}
+        {% include mathjax.html %}
+        {% endif %}
+
     </body>
+
 </html>
