@@ -124,3 +124,6 @@ network :
     name: 微博
 
 # show_drafts: true
+
+sass:
+    sass_dir: _sass
