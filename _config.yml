@@ -58,7 +58,7 @@ defaults:
       type: "notes" # 
     values:
       layout: "note"
-      permalink: "/:collection/:path/:title/"
+      permalink: "/:collection/:path/"
 
   - 
     scope:
@@ -127,3 +127,14 @@ network :
 
 sass:
     sass_dir: _sass
+
+
+notes :
+   order:
+       - Programming
+       - Computer
+       - Tools
+       - Study
+       - Reading
+       - Uncategory
+       - Quick

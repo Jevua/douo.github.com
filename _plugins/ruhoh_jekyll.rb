@@ -92,11 +92,22 @@ module Ruhoh
       }
     end
 
-    # TODO 将 ruhoh 作为父节点内容的文件转换为子文件，命名为总览等
-    # 比如 Android/index.md 或 Android/android.md
+    # TODO 将 ruhoh 作为父节点内容的文件转换为 meta 文件
+    # 比如将 Android/android.md 转为 Android/index.md
+    # 配合 tree_generator 刚好 jekyll 能识别出标题
     def convert_notes_index(site)
       site.collections['notes'].files.each do |f|
-        pp f.name
+        pp f.path # 打印非法的笔记文件
+      end
+
+      site.collections['notes'].docs.each do |doc|
+        #if doc.basename.start_with?('index') or
+          # 找出 xx/xxx/Android/android.md 的 doc
+        if doc.cleaned_relative_path.split("/").inject({:pre=>nil,:result=>false}){|acc, e|
+             {:pre => e, :result => acc[:pre] && e.casecmp(acc[:pre]).zero?}
+           }[:result]
+          FileUtils.mv(doc.path,File.join(File.dirname(doc.path),"index.md"))
+        end
       end
     end
   end

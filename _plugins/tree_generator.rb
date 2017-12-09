@@ -1,4 +1,5 @@
 # coding: utf-8
+require "pp"
 module Moon
   class Node
     attr_accessor :name, :level, :data, :parent
@@ -56,7 +57,8 @@ module Moon
     end
 
     def order (y)
-      order = @site['notes']["order"]
+      # FIXME
+      order = @site.config['notes']["order"]
       if order.index(name)
         if order.index(y.name)
           order.index(y.name) <=> order.index(name) 
@@ -69,7 +71,8 @@ module Moon
     end
 
     def <=> (y)
-      if level == 1
+      # FIXME HACK 优化排序
+      if level == 2
         order(y)
       elsif !is_leaf and y.is_leaf
         1
@@ -87,6 +90,7 @@ module Moon
     def simple_data
       data = {'title' => @data ? @data['title'] : name}
       data['url'] = @data.url if @data
+      data['level'] = @level
       data['children'] = @children.map{|c| c.simple_data} if @children
       data
     end
@@ -117,7 +121,7 @@ module Moon
     #  根据目录添加到树中
     #
     def add(data)
-      @root ||= Node.new(@site)
+      @root ||= Moon::Node.new(@site)
       p = @root
       link = data.relative_path.split(File::SEPARATOR)
       link.each{|n|
@@ -133,24 +137,15 @@ module Moon
       }
       p.data = data
     end
-
-    # TODO
-    def tree_delete(pointer)
-      puts 'node_delete'
-      puts pointer
-    end
-  end
-
-  class JSONPage < Jekyll::Page
   end
 
   # 如果 collection 的 metadata  to_tree 为 true
   # 那么插件将在 collection 目标目录下生成一个 tree.json 文件
-  # 
-  class NotesGenerator < Jekyll::Generator
+  #
+  #
+  class TreeGenerator < Jekyll::Generator
 
     def generate(site)
-
       site.collections.each do |_,collection|
         next unless collection.metadata['to_tree']
         full_path = "#{site.dest}/#{collection.label}/"
@@ -161,10 +156,7 @@ module Moon
           tree.add(doc)
         }
 
-        pp collection.metadata
-        pp full_path
-
-        file = Moon::JSONPage.new(site, site.dest, collection.label, 'tree.json')
+        file = PageWithoutAFile.new(site, site.dest, collection.label, 'tree.json')
         file.content = tree.to_json
         file.data["layout"] = nil
         file.data["sitemap"] = false
