@@ -125,8 +125,8 @@ ul.sidenav.sidenav-fixed {
   }
 
   @for $i from 1 through 4 {
-	    .ul-h#{$i} {
-          padding-left: 8px * $i;
+	    .level-h#{$i} {
+          padding-left: 30px + 8px * $i;
 	    }
   }
 
