@@ -28,6 +28,7 @@ markdown: kramdown
 # theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-babel # babel-source 快两年没更新，用的版本是 5.8.35
 exclude:
   - Gemfile
   - Gemfile.lock
@@ -54,11 +55,10 @@ defaults:
       permalink: "/:year/:month/:day/:title/"
   -
     scope:
-      path: ""
       type: "notes" # 
     values:
-      layout: "post"
-      permalink: "/:collection/:path/"
+      layout: "note"
+      permalink: "/:collection/:path/:title/"
 
   - 
     scope:
