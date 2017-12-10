@@ -10,7 +10,6 @@ const note = {
 	      let isActive  // 用于找到激活的菜单项
         if(item.children){
             li.addClass('bold')
-
             let header = $(`<a class="collapsible-header waves-effect waves-teal">${item.title}</a>`)
 
 	          header.addClass(`level-h${level}`);
@@ -54,7 +53,43 @@ const note = {
             $('.collapsible').collapsible();
         }
     }
-}()
+
+    }(),
+    toc : function(){
+        function findHeader(content){
+            return content.find("h1,h2,h3,h4,h5").map((_,header) => {
+                $(header).addClass("section scrollspy")
+                return {
+                    id    : header.id,
+                    title : header.innerText,
+                    level : ~~header.tagName[1]
+                }
+            })
+        }
+        function calcPushpin(){
+            let toc = $(".section.table-of-contents")
+            let wheight = $(window).height()
+            let tocTop = $('nav').height()
+            // Floating-Fixed table of contents
+            // 只有 toc 小于 window 高度才启用 pushpin
+            if(wheight > toc.height()){
+                toc.pushpin({
+                    top: tocTop
+                });
+            }
+        }
+        return {
+            render: function(){
+                let headers = findHeader($(".content"))
+                let toc = $(".section.table-of-contents")
+                toc.empty()
+                headers.each(
+                    (_,h) => toc.append(`<li class="header-${h.level}"><a href="#${h.id}">${h.title}</li>`))
+                $(".section.scrollspy").scrollSpy()
+                calcPushpin()
+            }
+        }
+    }()
 }
 
 
@@ -67,6 +102,7 @@ $(document).ready(() =>{
     })
 
     $('.sidenav').sidenav();
+    note.toc.render()
 })
 
 
@@ -84,12 +120,4 @@ if (is_touch_device()) {
     $('#nav-mobile').css({ overflow: 'auto'});
 }
 
-// Floating-Fixed table of contents
-setTimeout(function() {
-    if ($('nav').length) {
-        $('.toc-wrapper').pushpin({
-            top: $('nav').height(),
-        });
-    }
-}, 100);
 
