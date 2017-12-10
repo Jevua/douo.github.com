@@ -81,6 +81,9 @@ module Ruhoh
     end
 
     # 将 ruhoh 的 math 语法转换为 kramdown 语法
+    # TODO 在 kramdown 中 | 符号在 inline math 中的 bug
+    # https://github.com/gettalong/kramdown/pull/23
+    # 要用 \vert 代替 |
     def convert_math(site, doc, content)
       content.gsub(MATH_BLOCK_MATCHER){
         latex = "$$\n#{Regexp.last_match[1]}$$"

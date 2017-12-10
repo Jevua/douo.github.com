@@ -1,4 +1,4 @@
-$flash:  unquote("rgb(#{$color-primary})");
+$flash:  unquote("rgb(#{primary-color})");
 /* '' */
 @-moz-keyframes glowheader {
   from,to {

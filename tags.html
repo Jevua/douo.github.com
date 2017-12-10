@@ -2,32 +2,36 @@
 title: 标签
 date: '2010-04-20'
 permalink: /tags/
-layout: page
+layout: default
 ---
 
-<h2>{{ page.title }}</h2>
-
-<script>
-var tags = [{% for tag in site.tags %}{name: "{{ tag | first }}",size: {{ tag | last | size }}},{% endfor %}];
-</script>
-<script defer src="/assets/d3.js"></script>
-<script defer src="/assets/d3.layout.cloud.js"></script>
-<script defer src="/assets/tagscloud.js"></script>
-
-<div id="tagscloud" class="mdl-color--white mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+<div class="container over-ribbon subtitle">
+    <h2>{{ page.title }}</h2>
+</div>
+<div class="tagscloud card-panel" id="tagscloud">
+    <div class="progress">
+        <div class="indeterminate"></div>
+    </div>
 </div>
 
 <!-- Posts by Tag -->
-<div class="content mdl-color--white mdl-shadow--4dp mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
-<div>
-    {% for tag in site.tags %}
-    {% capture name %}{{ tag | first }}{% endcapture %}
-    <h2 id="{{ name }}-ref">{{ name }}</h2>
-    <ul>
-        {% for post in site.tags[name] %}{% if post.title != null %}
-        {% include post-list post=post %}
-    {% endif %}{% endfor %}
-    </ul>
-    {% endfor %}
+<div class="content card-panel">
+        {% for tag in site.tags %}
+        {% capture name %}{{ tag | first }}{% endcapture %}
+        <h2 class="category-title" id="{{ name }}-ref">{{ name }}</h2>
+        <ul>
+            {% for post in site.tags[name] %}{% if post.title != null %}
+            {% include post-list post=post %}
+            {% endif %}{% endfor %}
+        </ul>
+        {% endfor %}
 </div>
-</div>
+
+<script>
+ //先处理好标签云的高度，确保滚动正确
+ $('#tagscloud').height($('#tagscloud').width()/1.6);
+ var tags = [{% for tag in site.tags %}{name: "{{ tag | first }}",size: {{ tag | last | size }}},{% endfor %}];
+</script>
+<script src="/assets/javascripts/libs/d3.js"></script>
+<script src="/assets/javascripts/libs/d3.layout.cloud.js"></script>
+<script defer async="async" src="/assets/javascripts/tagscloud.js"></script>

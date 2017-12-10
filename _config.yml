@@ -53,19 +53,21 @@ defaults:
     values: # 具体的默认值
       layout: "post"
       permalink: "/:year/:month/:day/:title/"
+      collection_title: "DouO's Blog"
   -
     scope:
       type: "notes" # 
     values:
       layout: "note"
       permalink: "/:collection/:path/"
-
+      collection_title: "DouO's Note"
   - 
     scope:
       path: "resumes"
       type: "pages"
     values:
       layout: "resume"
+
 
 
 # 自定义的以 '_' 开头的目录或文件，不声明为 collection 会自动被忽略
@@ -91,6 +93,9 @@ nav :
   - title: otaku
     url: /categories#otaku-ref
     describe: 兴趣
+  - title: tags
+    url: /tags
+    describe: 标签
   - title: about
     url: /about
     describe: 关于

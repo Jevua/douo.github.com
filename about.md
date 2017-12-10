@@ -2,6 +2,7 @@
 title: 关于
 date: '2010-04-20'
 permalink: /about/
+layout: page
 ---
 
 乱点技能树的 Android 程序员。
@@ -40,6 +41,6 @@ permalink: /about/
   [腾讯微博]: http://t.qq.com/fukctengx
   
   [mail_gen]: http://services.nexodyne.com/email/index.php
-  [mail_img]: /media/mail.png
+  [mail_img]: /assets/images/mail.png
 
 

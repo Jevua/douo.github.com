@@ -53,9 +53,12 @@ var waitForFinalEvent = (function() {
     }
 
     function generate() {
+        $('#tagscloud .progress').show();
+
         // 每次生成重新获取 tagscloud 的宽度
         w = $('#tagscloud').width();
         h = w / 1.6;
+        $('#tagscloud').height(h);
         svg.attr("width", w).attr("height", h);
         vis.attr("width", w).attr("height", h).attr("transform", "translate(" + [w >> 1, h >> 1] + ")");
         layout.stop().size([w, h]).words(tags.map(function(d) {
@@ -123,6 +126,10 @@ var waitForFinalEvent = (function() {
             .delay(1000)
             .duration(750)
             .attr("transform", "translate(" + [w >> 1, h >> 1] + ")scale(" + scale + ")");
+
+        // 移除 progress
+        console.log("hide");
+        $('#tagscloud .progress').hide();
     }
     cloud.init = init;
     cloud.generate = generate;
