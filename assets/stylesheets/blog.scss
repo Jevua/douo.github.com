@@ -92,7 +92,7 @@ $text-color-primary: #515151 !default;
         padding: 56px;
     }
     padding: 1em;
-    margin-bottom: 80px;
+    margin-bottom: 32px;
   table {
       margin-bottom: 16px;
   }
@@ -103,8 +103,6 @@ $text-color-primary: #515151 !default;
       @extend .responsive-img;
   }
 }
-
-
 
 #scroll-top{
     display: block;
@@ -127,11 +125,15 @@ $text-color-primary: #515151 !default;
 }
 // 避免污染 google pretty 的 tag 标签
 :not(code) {
-    tag {
+    .tag {
         @extend .new;
         @extend .badge;
         @extend .grey;
     }
+}
+
+.post-pager{
+    margin-bottom: 32px;
 }
 
 .post-list {

@@ -13,13 +13,21 @@ layout: default
     <article>
         {{ content }}
     </article>
-    <div>
+    <div class="tag-container" >
         {% for tag in page.tags %}
         <a href="/tags#{{ tag }}-ref">
             <span class="tag" data-badge-caption="{{tag}}"></span>
         </a>
         {% endfor %}
     </div>
+</div>
+<div class="post-pager">
+    {% if page.previous%}
+    <a href="{{page.previous.url}}">上一篇：{{ page.previous.title }}</a>
+    {% endif %}
+    {% if page.next%}
+    <a href="{{page.next.url}}" style="float:right;" >下一篇：{{ page.next.title }}</a>
+    {% endif %}
 </div>
 {% include disqus.html %}
 
@@ -33,6 +41,3 @@ layout: default
 <div class="col hide-on-small-only m1 l2 toc-wrapper">
     <ul class="section table-of-contents">
     </ul>
-
-
-
