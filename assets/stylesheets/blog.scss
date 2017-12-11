@@ -1,11 +1,13 @@
 ---
 ---
 @charset "UTF-8";
+
+$primary-color: #234b5d;
+
 @import "moon";
 
 @import "moon/fab";
 @import "moon/share";
-
 
 @media #{$large-and-up} {
     a.brand-logo {
@@ -152,7 +154,7 @@ $text-color-primary: #515151 !default;
 footer {
     a {
         font-size: 13px;
-        color: color("grey", "darken-3");
+        color: #aaaaaa;
     }
     .footer-nav {
         padding-top: 8px;

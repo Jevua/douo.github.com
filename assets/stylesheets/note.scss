@@ -1,6 +1,9 @@
 ---
 ---
 @charset "UTF-8";
+
+$primary-color: #387895;
+
 @import "moon";
 
 $border-color: rgba(0,0,0,.14);
@@ -171,7 +174,7 @@ a.sidenav-trigger.top-nav {
   top: 0;
   float: none;
   margin-left: 1.5rem;
-  color: color("materialize-red", "lighten-3");
+  color: $primary-color-light;
   font-size: 36px;
   z-index: 2;
 
