@@ -125,11 +125,13 @@ $text-color-primary: #515151 !default;
 .category-otaku {
     @extend .green;
 }
-
-.tag {
-    @extend .new;
-    @extend .badge;
-    @extend .grey;
+// 避免污染 google pretty 的 tag 标签
+:not(code) {
+    tag {
+        @extend .new;
+        @extend .badge;
+        @extend .grey;
+    }
 }
 
 .post-list {
