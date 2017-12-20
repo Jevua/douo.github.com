@@ -165,6 +165,11 @@ nav.top-nav {
     padding-top: 26px;
   }
 }
+
+.no-padding {
+    margin-bottom: 45px;
+}
+
 a.sidenav-trigger.top-nav {
   position: absolute;
   text-align: center;
@@ -214,6 +219,16 @@ a.sidenav-trigger.top-nav {
   .top-nav > .container {
     width: 100%;
   }
+}
+
+.nav-tab{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 45px;
+    width: 299px;
+    z-index: 1000;
+    border-top: 1px solid rgba(0,0,0,0.14);
 }
 
 /*********************

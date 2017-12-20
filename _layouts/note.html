@@ -16,16 +16,33 @@ layout: base
             <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
             <ul id="nav-mobile" class="sidenav sidenav-fixed">
                 <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
-                    <object id="front-page-logo" type="image/svg+xml" data="/assets/images/materialize.svg">Your browser does not support SVG</object></a></li>
+                    <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+                </a></li>
                 <li class="search">
                     <div class="search-wrapper">
                         <input id="search" placeholder="Search"><i class="material-icons">search</i>
                         <div class="search-results"></div>
                     </div>
                 </li>
-                <li class="no-padding" id="nav">
+                <li class="no-padding">
+                    <div id="blog-nav">
+                        <ul>
+                            {% for data in site.nav %}
+                            <li><a href="{{ data.url }}">{{ data.describe }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div id="note-nav"></div>
                 </li>
             </ul>
+            <div class="nav-tab">
+                <div class="row">
+                <ul class="tabs">
+                    <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+                    <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+                </ul>
+                </div>
+            </div>
         </header>
         <!-- Page Layout here -->
         <main><div class="container">

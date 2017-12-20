@@ -43,7 +43,7 @@ const note = {
         render: function(data) {
             $('#nav-loading-indicator').removeClass("active").hide()
             data = data.children[0];
-            var nav = $("#nav")
+            var nav = $("#note-nav")
             nav.empty()
             parent =$("<ul class=\"collapsible\"></ul>")
             for(var i=0; i<data.children.length; i++){
@@ -98,7 +98,22 @@ $(document).ready(() =>{
         url: "/notes/tree.json",
         dataType: 'json'
     }).done((data) => {
-        note.navigator.render(data)
+        var instance = new M.Tabs(document.getElementsByClassName("tabs")[0],
+                                  {onShow: function(e){
+                                      if(e.id == "note-nav"){
+                                          if(!e.hasChildNodes()){
+                                              note.navigator.render(data)
+                                          }
+                                          $("#front-page-logo").attr("data", "/assets/images/materialize.svg")
+                                      }else{
+                                          $("#front-page-logo").attr("data", "/assets/images/blog.svg")
+                                      }
+                                  }});
+        if(window.location.pathname.startsWith("/notes")){
+            instance.select("note-nav")
+        }else{
+            instance.select("blog-nav")
+        }
     })
     note.toc.render()
 })
