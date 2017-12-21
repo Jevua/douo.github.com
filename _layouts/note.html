@@ -17,7 +17,21 @@ layout: base
             <ul id="nav-mobile" class="sidenav sidenav-fixed">
                 <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
                     <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
-                </a></li>
+                </a>
+                    <div class="social">
+                        <ul>
+                            {% for data in site.network %}
+                            <li>
+                                <a href="{{ data.url}}" title="{{ data.name }}">
+                                    <svg class="icon" aria-hidden="true">
+                                        <use xlink:href="#icon-{{ data.id }}"></use>
+                                    </svg>
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </li>
                 <li class="search">
                     <div class="search-wrapper">
                         <input id="search" placeholder="Search"><i class="material-icons">search</i>
@@ -49,9 +63,11 @@ layout: base
             <div class="row">
                 <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> {{ content }}</div>
                 <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
-                            <ul class="section table-of-contents">
-                            </ul>
+                    <ul class="section table-of-contents">
+                    </ul>
                 </div>
             </div>
         </div>
         </main>
+
+        {% include footer.html %}

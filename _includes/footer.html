@@ -1,31 +1,7 @@
 <footer class="page-footer">
     <div class="container">
         <div class="row">
-            <div class="col l6 s12">
-                <div class="social">
-            <ul>
-            {% for data in site.network %}
-            <li>
-            <a href="{{ data.url}}" title="{{ data.name }}">
-            <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-{{ data.id }}"></use>
-            </svg>
-            </a>
-            </li>
-            {% endfor %}
-            </ul>
-                </div>
-            </div>
-            <div class="col l6 s12">
-                <div class="footer-nav">
-                    {% for data in site.nav %}
-                    <a href="{{ data.url }}">{{ data.describe }}</a>
-                    {% endfor %}
-                </div>
-        </div>
-        </div>
-        <div class="row">
-            <div class="col l6 s12">
+            <div class="col s12 m6 offset-m1">
                 <h5 class="white-text">友情链接</h5>
                 <ul class="mdl-mega-footer__link-list">
                     {% for link in site.links %}
@@ -33,6 +9,13 @@
                     {% endfor%}
                 </ul>
             </div>
+            <div class="col s12 m5">
+                <div class="footer-nav">
+                    {% for data in site.nav %}
+                    <a href="{{ data.url }}">{{ data.describe }}</a>
+                    {% endfor %}
+                </div>
+        </div>
         </div>
     </div>
     <div class="footer-copyright">
