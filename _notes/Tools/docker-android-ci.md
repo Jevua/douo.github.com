@@ -161,3 +161,24 @@ ble-not-set)
 https://stackoverflow.com/questions/30366905/difference-between-app-debug-apk-and-app-debug-unaligned-apk/33886306
 
 多分支
+
+
+### Cache
+
+
+在每个 jobs 之间共享文件，可以跨 pipeline。在每个 job 开始的时候，恢复 cache。在 完成 job，上传 artifacts 之前上传。
+
+下面的配置，在不同 pipeline 相同 job 之间共享 cache，`$CI_JOB_NAME` 指的是当前 job 的名称：
+
+        # Define list of files that should be cached between subsequent runs
+        cache:
+          key: "$CI_JOB_NAME" # To enable per-stage caching
+          untracked: true # Cache all Git untracked files
+          
+### Job
+
+在 job 名称前加一个 `.` 可以停用该 job
+
+    .hidden_job:
+      script:
+        - run test

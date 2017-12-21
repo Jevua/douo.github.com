@@ -7,7 +7,7 @@ type: draft ## 移除这个字段，笔记才会公开发布
 
 ### 存储类型
 
-见 [Storage | Android Open Source Project](https://source.android.com/devices/storage/index.html)，将存储器分为两种类型。
+见 [Storage \| Android Open Source Project](https://source.android.com/devices/storage/index.html)，将存储器分为两种类型。
 
 - 传统存储，包括模拟存储器（emulated storage）和可移除存储器（portable storage），这也称为外置存储。
 - Adoptable Storage， 6.0 引入的新的存储模式，将外置存储格式化并加密存储数据，其能当作内部存储使用

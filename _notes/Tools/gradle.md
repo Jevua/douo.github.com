@@ -4,29 +4,100 @@ date: '2015-04-28'
 description:
 tags:
 - gradle
+- groovy
 ---
 
 
 
 
-### Gradle
+## Gradle
 
-Gradle 提供一个 DSL 来描述构建，这个构建语言基于 groovy。
+Gradle 提供一个 DSL 来描述构建，这个构建语言基于 groovy。Gradle 有两种基本元素 projects & tasks。
 
-Gradle 有两种基本元素 projects & tasks
+### Groovy
 
-project represent a thing to be built or a thing to be done
 
-比如部署应用到生产环境
 
-每个项目由一或多个任务组成。 task represent some atomic piece of work
+### 项目（Project）
+
+一个可构建的东西称为项目，每个项目由一或多个任务组成。[Project](https://docs.gradle.org/current/javadoc/org/gradle/api/Project.html) 接口也是 build.gradle 接口最外层的上下文。
 
 - Any method you call in your build script which is not defined in the build script, is delegated to the Project object.
 - Any property you access in your build script, which is not defined in the build script, is delegated to the Project object.
 
+gradle 利用 groovy 语言的特性实现 DSL 比如：
+
+    task hello {
+       println "Hello World"
+    }
+
+实际上等同于调用 Project 的 task 方法：
+
+    task("hello",{println "Hello World"})
+
+利用了 groovy 的三个特性
+
+1. 方法调用在无歧义的时候，可以省略括号
+2. 最后一个参数是闭包可以放在方法括号后面，类似ruby
+3. 闭包内的变量和方法解析，可以通过 delegate 类，实现动态绑定。[Groovy closures](http://groovy.codehaus.org/Closures)
+4. 编译时元编程，groovy 支持自定义 AST 解析，gradle 可以分析出 `hello` 是字符串
+
+#### Groovy
+
+Groovy 的闭包有 `thisObject`、`owner`、`delegate` 三个属性，
+
+
+    task groovy << {
+         println "it:${it.getClass()}" // org.gradle.api.DefaultTask_Decorated
+         println "thisObject:${thisObject.getClass()}" // build_49px60ctt3pjghny7qw5o4r2x
+         println "owner:${owner.getClass()}"  //build_49px60ctt3pjghny7qw5o4r2x
+         println "delegate:${delegate.getClass()}" // org.gradle.api.DefaultTask_Decorated
+    }
+    
+    println "${this.getClass()}"  // build_49px60ctt3pjghny7qw5o4r2x
+    
+
+- thisObject 就是这个脚本的上下文，等同于最外层脚本的 this。
+- owner 指向 closure 外层的上下文，这里 closure 的外层就是最外层脚本。如果当期闭包在另外一个闭包里面，那么 onwer 就会指向外层的闭包
+- delegate 默认情况下和 owner 一样，但是它是可以修改的，gradle 把他修改成指向 it。
+
+Gradle 的 DSL 常用这种方式来实现：
+
+    task configClosure << {
+        person {
+            personName "张三"
+            personAge 20
+            dumpPerson()
+        }
+    }
+       
+    class Person {
+        String personName
+        int personAge
+       
+        def dumpPerson(){
+            println "name is ${personName},age is ${personAge}"
+        }
+    }
+       
+    def person(Closure<Person> closure){
+        Person p = new Person();
+        closure.delegate = p
+        //委托模式优先
+        closure.setResolveStrategy(Closure.DELEGATE_FIRST);
+        closure(p)
+    }
+    
+Groovy 搜索变量的顺序是，自身>thisObject(存疑)>owner>delegate
+
+不过可以通过 setResolveStrategy 来改变这个顺序。
+
 ### 任务
 
-声明一个任务，`task hello`、`task(hello)`、`task("hello")`. **这里有个疑问，hello 还不是一个变量，为什么不用用引号括起来，可能是某些不懂的 groovy 特性。**
+
+[Task (Gradle API 4.4)](https://docs.gradle.org/current/javadoc/org/gradle/api/Task.html)
+
+声明一个任务，`task hello`、`task(hello)`、`task("hello")`.
 
 任务可以像是一个闭包序列，
 
@@ -35,16 +106,33 @@ project represent a thing to be built or a thing to be done
             println 'Hello world!'
         }
     }
-
-    task hello << {
+    # <<  等同于 leftShift 方法，在 Task 类已被标记为过期
+    task hello << { 
             println 'Hello world!'
         }
 
+也可以配置其他数据
 
+task hello {
+     group "Udacity"
+     description "This is my first Gradle task"
+     doLast {
+            println 'Hello World'
+     }
+}
 
 执行 `gradle -q hello`， `-q` 表示静默输出。
 
 	Hello world!
+    
+gradle 还支持动态任务
+
+    4.times {
+    	task "task$counter" << {
+    		println "I'm task number $counter"
+    	}
+    
+    }    
 
 #### 任务依赖
 
@@ -65,28 +153,11 @@ project represent a thing to be built or a thing to be done
 
 上面可以在 intro 定义完后再修改任务，这也是 gradle 所支持的。
 
-#### 动态任务
+- dependsOn，B 依赖于 A，运行 B 的时候 Gradle 会先运行 A
+- finalizeBy，B finalizeBy A，A 会在 B **运行后**运行
+- shouldRunAfter，B shouldRunAfter A，如果 A 和 B 同时运行， Gradle 会先运行 A 再运行 B
 
-gradle 还支持动态任务
-
-    4.times {
-    	task "task$counter" << {
-    		println "I'm task number $counter"
-    	}
-    
-    }
-
-#### Task 里定义额外的属性
-
-task myTask {
-    ext.myProperty = "myValue"
-}
-
-task printTaskProperties << {
-    println myTask.myProperty
-}
-
-ext 是 `org.gradle.api.internal.plugins.DefaultExtraPropertiesExtension` 的实例，要在闭包里面访问 Task 本身可用 `it` 这个 groovy 通用变量。
+另外还有 `mustRunAfter`，比起它 shouldRunAfter 更没有强制性一些，比如 B 依赖 A，A 依赖 C，C 应该在 B 之后执行。这时 shouldRunAfter 不会生效。
 
 #### 默认任务
 
@@ -95,6 +166,93 @@ ext 是 `org.gradle.api.internal.plugins.DefaultExtraPropertiesExtension` 的实
 默认任务可这样声明
 
 	defaultTasks 'clean', 'run'
+    
+#### Task 原理
+
+Task 可以认为是一个 [Action](https://docs.gradle.org/current/javadoc/org/gradle/api/Action.html) 对象序列
+
+#### 增量构建
+
+见 [up_to_date_checks](https://docs.gradle.org/current/userguide/more_about_tasks.html#sec:up_to_date_checks)
+
+#### Typed Task
+
+Gradle 提供不少任务类型，用于执行各种常见任务
+
+
+#### 增量构建
+
+如何判断是否 UPDATE-TO-DATE
+
+
+
+### Property
+
+
+#### 参数化构建
+
+##### CLI
+
+-P 也可以声明属性
+
+##### gradle.properties
+
+可以声明属性
+
+##### ext
+
+ext{
+  name value
+}
+
+
+
+#### Task 里定义额外的属性
+
+    task myTask {
+        ext.myProperty = "myValue"
+    }
+
+    task printTaskProperties << {
+        println myTask.myProperty
+    }
+
+ext 是 `org.gradle.api.internal.plugins.DefaultExtraPropertiesExtension` 的实例，要在闭包里面访问 Task 本身可用 `it` 这个 groovy 通用变量。
+
+### 生命周期
+
+Gradle build 有三个阶段
+
+1. 初始化（Initialization），定位并加载 setting.gradle ，决定当前项目是 single 还是 multiproject。决定哪些项目需要参与这次构建。为每个参与的项目初始化 Project 对象
+2. 配置（Configuration）
+3. 执行（Execution）
+
+settings.gradle
+
+	println 'This is executed during the initialization phase.'
+
+build.gradle
+
+    println 'This is executed during the configuration phase.'
+    
+    task configured {
+        println 'This is also executed during the configuration phase.'
+    }
+    
+    task test << {
+        println 'This is executed during the execution phase.'
+    }
+    
+    task testBoth {
+        doFirst {
+          println 'This is executed first during the execution phase.'
+        }
+        doLast {
+          println 'This is executed last during the execution phase.'
+        }
+        println 'This is executed during the configuration phase as well.'
+    }
+
 
 ### Java Plugin
 
@@ -169,6 +327,18 @@ ext 是 `org.gradle.api.internal.plugins.DefaultExtraPropertiesExtension` 的实
 
 #### Dependency Configuration
 
+依赖是由多个配置（Configuration）组成的，比如
+
+dependencies {
+   配置名 依赖记号
+   // 依赖记号指的是 'group:name:version'
+   也可以用 map 风格
+   compile group: 'group', name: 'name', version : 'version'   
+}
+
+
+
+
     dependencies {
         compile fileTree(dir: 'libs', include: ['*.jar'])
         compile 'com.android.support:support-v4:22.1.1'
@@ -204,41 +374,6 @@ ext 是 `org.gradle.api.internal.plugins.DefaultExtraPropertiesExtension` 的实
 #### 依赖传递
 
 http://a123159521.iteye.com/blog/774322
-
-### 生命周期
-
-Gradle build 有三个阶段
-
-1. 初始化（Initialization），定位并加载 setting.gradle ，决定当前项目是 single 还是 multiproject。决定哪些项目需要参与这次构建。为每个参与的项目初始化 Project 对象
-2. 配置（Configuration）
-3. 执行（Execution）
-
-settings.gradle
-
-	println 'This is executed during the initialization phase.'
-
-build.gradle
-
-    println 'This is executed during the configuration phase.'
-    
-    task configured {
-        println 'This is also executed during the configuration phase.'
-    }
-    
-    task test << {
-        println 'This is executed during the execution phase.'
-    }
-    
-    task testBoth {
-        doFirst {
-          println 'This is executed first during the execution phase.'
-        }
-        doLast {
-          println 'This is executed last during the execution phase.'
-        }
-        println 'This is executed during the configuration phase as well.'
-    }
-
 
 
 ### Android Plugin
@@ -349,6 +484,20 @@ flavor 名称不能与 BuildType 名称相同
 
 Build Type + Product Flavor = Build Variant
 
+### Android Plugin
+
+[Android DSL](https://google.github.io/android-gradle-dsl/current/)
+
+#### Build variants
+
+
+#### live collections
+
+applicationVariants.all
+
+
+
+
 ### Android Studio
 
 Android Studio 项目有两种 `build.gradle` ，
@@ -437,6 +586,31 @@ GRADLE_USER_HOME 一般位于 `{user.dir}/.gradle`，比较奇怪的是似乎每
 
 
 
+#### multidex
+
+参考官方文档：[配置方法数超过 64K 的应用 \| Android Studio](https://developer.android.com/studio/build/multidex.html)，不过文档有个坑，文档建议用用不同产品风味（productFlavors）来配置不同的 minSdkVersion ，实现提高开发时构建效率。不过这个建议已经过时了，IDE 内置帮我做了这个处理：
+
+
+> In the past, our documentation recommended creating a dev product flavor with has a minSdkVersion of 21, in order to enable multidexing to speed up builds significantly during development.  That workaround is no longer necessary, and it has some serious downsides, such as breaking API access checking (since the true minSdkVersion is no longer known.)  In recent versions of the IDE and the Gradle plugin, the IDE automatically passes the API level of the connected device used for deployment, and if that device is at least API 21, then multidexing is automatically turned on, meaning that you get the same speed benefits as the dev product flavor but without the downsides.
+
+
+### 实用链接
+
+
+- DSL 文档：[Gradle DSL Version 4.1](https://docs.gradle.org/current/dsl/index.html)
+- [Gradle User Guide Version 4.1](https://docs.gradle.org/current/userguide/userguide.html)
+- 源码 [gradle/gradle: Adaptable, fast automation for all](https://github.com/gradle/gradle)
+- [Android Plugin 2.3.0 DSL Reference](https://google.github.io/android-gradle-dsl/current/)
+
+
+### api & implementation
+
+[The Java Library Plugin - Gradle User Guide Version 4.0.2](https://docs.gradle.org/current/userguide/java_library_plugin.html)
+
+LibB 声明对 LibA 的依赖为 `api`，LibA 也会暴露给 LibB 的消费者。如果 App 依赖 LibB，那么 App 也能使用 LibA 的 Api。 LibA 发生变更也会导致 App 需要重新编译。
+
+相对的，LibB 声明对 LibA 的依赖为 `implementation`，那么 App 不能使用 LibA 的 Api，LibA 的变更也不会影响到 App。
+
 
 ### 加速 Gradle
 
@@ -502,3 +676,31 @@ Android Studio 在设置 `Build, Execution, Deployment > Compiler` 中可开启�
 
 
 rootProjectDir/buildSrc/src/main/groovy directory
+
+
+
+### 实践
+
+#### Gradle 自定义打包apk文件名格式
+
+    android {
+        applicationVariants.all { variant ->
+            if (variant.name.toLowerCase().contains("release")) {
+              variant.outputs.all {
+                outputFileName = "${defaultConfig.applicationId}_${defaultConfig.versionName}.apk"
+              }
+            }
+          }
+    }
+
+### log
+
+gradle 默认只显示 Lifecycle 以上的日志
+
+`println` 的日记等级是 QUIET
+
+
+--stacktrace 可以用 -s 代替
+
+### Plugin
+
