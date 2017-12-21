@@ -94,12 +94,23 @@ const note = {
 
 
 $(document).ready(() =>{
+    var elem = document.querySelector('.sidenav');
+    var instance = new M.Sidenav(elem, {
+        onOpenEnd: ()=>{
+            $("#nav-tab").removeClass("hide-on-med-and-down")
+        },
+        onCloseStart:()=>{
+            $("#nav-tab").addClass("hide-on-med-and-down")
+        }
+    });
+
+
     $.ajax({
         url: "/notes/tree.json",
         dataType: 'json'
     }).done((data) => {
         var instance = new M.Tabs(document.getElementsByClassName("tabs")[0],
-                                  {onShow: function(e){
+                                  {onShow: (e) => {
                                       if(e.id == "note-nav"){
                                           if(!e.hasChildNodes()){
                                               note.navigator.render(data)

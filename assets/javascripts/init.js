@@ -44,10 +44,6 @@ const moon = {}
 }(jQuery);
 
 
-$(document).ready(() =>{
-    $('.sidenav').sidenav();
-})
-
 // Detect touch screen and enable scrollbar if necessary
 function is_touch_device() {
     try {
