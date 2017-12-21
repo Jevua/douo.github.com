@@ -276,8 +276,7 @@ a.sidenav-trigger.top-nav {
 }
 
 @media #{$medium-and-up} {
-  main > .container,
-  .top-nav > .container {
+.container {
     width: 100%;
   }
 }
