@@ -22,11 +22,7 @@
         <meta name="theme-color" content="#5d4d7a">
 
         <link rel="stylesheet" href="/assets/stylesheets/material_icon.css">
-        {% if page.layout == "note" %}
-        <link rel="stylesheet" href="/assets/stylesheets/{{ page.layout }}.css">
-        {% else %}
-        <link rel="stylesheet" href="/assets/stylesheets/blog.css">
-        {% endif %}
+        <link rel="stylesheet" href="/assets/stylesheets/note.css">
 
 
         <script src="/assets/javascripts/libs/jquery-3.1.1.min.js"></script>
@@ -49,11 +45,7 @@
         <!--JavaScript at end of body for optimized loading-->
         <script src="/assets/javascripts/libs/materialize.js"></script>
         <script src="/assets/javascripts/init.js"></script>
-        {% if page.layout == "note" %}
-        <script defer async="async" src="/assets/javascripts/{{ page.layout }}.js"></script>
-        {% else %}
-        <script defer async="async" src="/assets/javascripts/blog.js"></script>
-        {% endif %}
+        <script defer async="async" src="/assets/javascripts/note.js"></script>
 </body>
 
 </html>
