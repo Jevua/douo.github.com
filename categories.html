@@ -2,14 +2,10 @@
 title: 分类
 date: '2010-04-20'
 permalink: /categories/
-layout: default
+layout: note
 ---
 
-<div class="container over-ribbon subtitle">
-    <h2>{{ page.title }}</h2>
-</div>
 <!-- Posts by Categories -->
-<div class="content card-panel">
     <div>
         {% comment %}将分类名转换为字符串，分类是 { name: posts[]} 这样的结构{% endcomment %}
         {% capture get_items %}
@@ -28,4 +24,4 @@ layout: default
         </ul>
         {% endfor %}
     </div>
-</div>
+

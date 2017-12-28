@@ -2,20 +2,16 @@
 title: 标签
 date: '2010-04-20'
 permalink: /tags/
-layout: default
+layout: note
 ---
 
-<div class="container over-ribbon subtitle">
-    <h2>{{ page.title }}</h2>
-</div>
-<div class="tagscloud card-panel" id="tagscloud">
+<div class="tagscloud" id="tagscloud">
     <div class="progress">
         <div class="indeterminate"></div>
     </div>
 </div>
 
 <!-- Posts by Tag -->
-<div class="content card-panel">
         {% for tag in site.tags %}
         {% capture name %}{{ tag | first }}{% endcapture %}
         <h2 class="category-title" id="{{ name }}-ref">{{ name }}</h2>
@@ -25,7 +21,6 @@ layout: default
             {% endif %}{% endfor %}
         </ul>
         {% endfor %}
-</div>
 
 <script>
  //先处理好标签云的高度，确保滚动正确
