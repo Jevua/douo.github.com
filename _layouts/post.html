@@ -1,15 +1,9 @@
 ---
-layout: default
+layout: note
 ---
 
-<div class="container over-ribbon subtitle">
-    <h2>{{ page.title }}</h2>
-    <h3>{{ page.date | date: "%Y-%m-%d" }}</h3>
-    {% for category in page.categories %}<h3><a href="/categories#{{ category }}-ref" class="category btn-flat">{{category}}</a></h3>
-    {% endfor %}
-</div>
 
-<div class="content card-panel">
+
     <article>
         {{ content }}
     </article>
@@ -20,7 +14,7 @@ layout: default
         </a>
         {% endfor %}
     </div>
-</div>
+
 <div class="post-pager">
     {% if page.previous%}
     <a href="{{page.previous.url}}">上一篇：{{ page.previous.title }}</a>
@@ -31,13 +25,6 @@ layout: default
 </div>
 {% include disqus.html %}
 
-<!-- <button id="scroll-top" class="waves-effect waves-light btn grey lighten-2 grey-text text-darken-2">
-     <i class="material-icons"></i>
-     </button> -->
-
 <a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
 
-</div>
-<div class="col hide-on-small-only m1 l2 toc-wrapper">
-    <ul class="section table-of-contents">
-    </ul>
+

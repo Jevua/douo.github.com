@@ -104,6 +104,10 @@ $(document).ready(() =>{
         }
     });
 
+    $("#textfill").textfill({
+        debug:true,
+        widthOnly:true
+    })
 
     $.ajax({
         url: "/notes/tree.json",
