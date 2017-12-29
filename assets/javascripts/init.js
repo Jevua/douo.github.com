@@ -75,12 +75,15 @@ $(function() {
     });
 
     function fireDown(){
+        console.log("fireDown")
         $("#fab").addClass("scale-out")
     }
     function fireUp(){
+        console.log("fireUp")
         $("#fab").removeClass("scale-out")
     }
 });
 $(function(){
     $("#fab").click(moon.scrollToTop);
 })
+

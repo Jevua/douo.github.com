@@ -44,7 +44,7 @@ td, th {
 
 .header {
     color: $primary-color;
-  font-weight: 300;
+    font-weight: 300;
 }
 
 header, main, footer {
@@ -203,7 +203,8 @@ ul.sidenav.sidenav-fixed {
     顶部标题栏及菜单按钮
 ****************************/
 nav.top-nav {
-  height: 137px;
+    height: auto;
+    min-height: 137px;
   box-shadow: none;
   border-bottom: 1px solid $border-color;
   background-color: transparent;
@@ -327,14 +328,6 @@ a.sidenav-trigger.top-nav {
 }
 .category-otaku {
     @extend .green;
-}
-// 避免污染 google pretty 的 tag 标签
-:not(code) {
-    .tag {
-        @extend .new;
-        @extend .badge;
-        @extend .grey;
-    }
 }
 
 .post-pager{
