@@ -33,6 +33,7 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - jekyll-moon
+  - vendor
 
 # 禁用 Jekyll 生成摘要
 excerpt_separator: "已禁用，见 _config.yml"
