@@ -30,6 +30,8 @@ const note = {
             li.append(header).append(body)
 	      }else{
             isActive = item.url == window.location.pathname
+            console.log("item:"+item.url)
+            console.log("window:"+window.location.pathname)
             if(isActive){
                 li.addClass('active')
             }
