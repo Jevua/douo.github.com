@@ -1,0 +1,6 @@
+---
+title: {{ title }}
+{% if categories %}categories: {{ categories }}{% endif %}
+{% if tags %}tags:{% for tag in tags %}
+- {{ tag }}{% endfor %}{% endif %}
+---

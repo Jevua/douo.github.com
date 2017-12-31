@@ -1,5 +1,5 @@
 PATH
-  remote: ~/Works/jekyll-moon
+  remote: ./jekyll-moon
   specs:
     jekyll-moon (0.1.0)
 
