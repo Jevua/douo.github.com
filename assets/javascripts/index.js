@@ -29,9 +29,7 @@ const note = {
             $(body).append(ul)
             li.append(header).append(body)
 	      }else{
-            isActive = item.url == window.location.pathname
-            console.log("item:"+item.url)
-            console.log("window:"+window.location.pathname)
+            isActive = item.url.toUpperCase() == window.location.pathname.toUpperCase()
             if(isActive){
                 li.addClass('active')
             }
