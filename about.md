@@ -2,7 +2,7 @@
 title: 关于
 date: '2010-04-20'
 permalink: /about/
-layout: page
+layout: note
 ---
 
 乱点技能树的 Android 程序员。
