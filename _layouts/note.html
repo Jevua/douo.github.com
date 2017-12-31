@@ -1,73 +1,27 @@
 ---
-layout: base
+layout: default
 ---
-        <header>
-            <nav class="top-nav">
-                <div class="container">
-                    <div class="nav-wrapper">
-                        <div class="row">
-                            <div class="col s12 m10 offset-m1">
-                                <h1 class="header">{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-            <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
-            <ul id="nav-mobile" class="sidenav sidenav-fixed">
-                <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
-                    <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
-                </a>
-                    <div class="social">
-                        <ul>
-                            {% for data in site.network %}
-                            <li>
-                                <a href="{{ data.url}}" title="{{ data.name }}">
-                                    <svg class="icon" aria-hidden="true">
-                                        <use xlink:href="#icon-{{ data.id }}"></use>
-                                    </svg>
-                                </a>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </li>
-                <li class="search">
-                    <div class="search-wrapper">
-                        <input id="search" placeholder="Search"><i class="material-icons">search</i>
-                        <div class="search-results"></div>
-                    </div>
-                </li>
-                <li class="no-padding">
-                    <div id="blog-nav">
-                        <ul>
-                            {% for data in site.nav %}
-                            <li><a href="{{ data.url }}">{{ data.describe }}</a></li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    <div id="note-nav"></div>
-                </li>
-            </ul>
-            <div id="nav-tab" class="hide-on-med-and-down">
-                <div class="row">
-                <ul class="tabs">
-                    <li class="tab col s6"><a href="#blog-nav">博客</a></li>
-                    <li class="tab col s6"><a href="#note-nav">笔记</a></li>
-                </ul>
-                </div>
-            </div>
-        </header>
-        <!-- Page Layout here -->
-        <main><div class="container">
-            <div class="row">
-                <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> {{ content }}</div>
-                <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
-                    <ul class="section table-of-contents">
-                    </ul>
-                </div>
-            </div>
-        </div>
-        </main>
+<div class="post-meta">
+    <span class="post-date">{{ page.date | date: "%Y-%m-%d" }}</span>
+    {% for category in page.categories %}<span><a href="/categories#{{ category }}-ref" class="category category-{{ category }} waves-effect waves-light">{{category}}</a></span>
+    {% endfor %}
+</div>
 
-        {% include footer.html %}
+<article>
+    {{ content }}
+</article>
+<div class="tag-container" >
+    {% for tag in page.tags %}
+    <div class="chip">
+        <a href="/tags#{{ tag }}-ref">
+            {{ tag }}
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+{% include disqus.html %}
+
+<a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
+
+

@@ -27,6 +27,7 @@ body {
   line-height: 1.6;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden; //移除某些情况下的横向滚动条
 }
 
 nav {
@@ -316,8 +317,9 @@ a.sidenav-trigger.top-nav {
 }
 
 .category {
-    @extend .waves-effect;
     @extend .white-text;
+    @extend .btn-flat;
+    margin-top: 0.5em;
 }
 
 .category-coder {
@@ -332,6 +334,16 @@ a.sidenav-trigger.top-nav {
 
 .post-pager{
     margin-bottom: 32px;
+}
+.post-meta {
+    display: flex;
+    padding: 1em;
+    flex-direction: column;
+    float: right;
+    align-items: center;
+}
+.post-date{
+    color: grey;
 }
 
 .post-list {

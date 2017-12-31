@@ -2,7 +2,7 @@
 title: 关于
 date: '2010-04-20'
 permalink: /about/
-layout: note
+layout: page
 ---
 
 乱点技能树的 Android 程序员。
@@ -44,3 +44,4 @@ layout: note
   [mail_img]: /assets/images/mail.png
 
 
+{% include disqus.html %}

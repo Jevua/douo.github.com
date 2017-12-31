@@ -67,14 +67,18 @@ const note = {
             })
         }
         function calcPushpin(){
+            console.log("calcPushpin")
             let toc = $(".section.table-of-contents")
             let wheight = $(window).height()
             let tocTop = $('nav').height()
+            let footerOffset = $('footer').first().offset().top
+            let bottomOffset = footerOffset - toc.height()
             // Floating-Fixed table of contents
             // 只有 toc 小于 window 高度才启用 pushpin
             if(wheight > toc.height()){
                 toc.pushpin({
-                    top: tocTop
+                    top: tocTop,
+                    bottom: bottomOffset
                 });
             }
         }
@@ -114,8 +118,10 @@ $(document).ready(() =>{
                                           if(!e.hasChildNodes()){
                                               note.navigator.render(data)
                                           }
+                                          $("#logo-container").attr("href","/notes")
                                           $("#front-page-logo").attr("data", "/assets/images/materialize.svg")
                                       }else{
+                                          $("#logo-container").attr("href","/")
                                           $("#front-page-logo").attr("data", "/assets/images/blog.svg")
                                       }
                                   }});

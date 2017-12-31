@@ -1,31 +1,73 @@
 ---
 layout: base
 ---
-
 <header>
-    <nav>
-        <div class="nav-wrapper">
-            <a href="{{ site.url }}" class="brand-logo">{{ site.title }}</a>
-            <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-            <ul id="nav-mobile"  class="right hide-on-med-and-down">
-                {% for data in site.nav %}
-                <li><a href="{{ data.url }}">{{ data.describe }}</a></li>
-                {% endfor %}
-            </ul>
-            <ul class="sidenav" id="mobile-nav">
-                {% for data in site.nav %}
-                <li><a href="{{ data.url }}">{{ data.describe }}</a></li>
-                {% endfor %}
-            </ul>
-        </div>
-    </nav>
-</header>
-<main>
-    <div class="ribbon"></div>
-        <div class="row">
-            <div class="col s12 l8 m10 offset-m1 offset-l2">
-                {{ content }}
+    <nav class="top-nav">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="row">
+                    <div class="col s12 m10 offset-m1">
+                        <h1 class="header">{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</h1>
+                    </div>
+                </div>
             </div>
         </div>
-    {% include footer.html %}
+    </nav>
+    <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+    <ul id="nav-mobile" class="sidenav sidenav-fixed">
+        <li class="logo"><a id="logo-container" href="/notes" class="brand-logo">
+            <object id="front-page-logo" type="image/svg+xml">Your browser does not support SVG</object>
+        </a>
+        <div class="social">
+            <ul>
+                {% for data in site.network %}
+                <li>
+                    <a href="{{ data.url}}" title="{{ data.name }}">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-{{ data.id }}"></use>
+                        </svg>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        </li>
+        <li class="search">
+            <div class="search-wrapper">
+                <input id="search" placeholder="Search"><i class="material-icons">search</i>
+                <div class="search-results"></div>
+            </div>
+        </li>
+        <li class="no-padding">
+            <div id="blog-nav">
+                <ul>
+                    {% for data in site.nav %}
+                    <li><a href="{{ data.url }}">{{ data.describe }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div id="note-nav"></div>
+        </li>
+    </ul>
+    <div id="nav-tab" class="hide-on-med-and-down">
+        <div class="row">
+            <ul class="tabs">
+                <li class="tab col s6"><a href="#blog-nav">博客</a></li>
+                <li class="tab col s6"><a href="#note-nav">笔记</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+<!-- Page Layout here -->
+<main><div class="container">
+    <div class="row">
+        <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> {{ content }}</div>
+        <div class="col hide-on-small-only m3 xl3 offset-xl1 toc-wrapper">
+            <ul class="section table-of-contents">
+            </ul>
+        </div>
+    </div>
+</div>
 </main>
+
+{% include footer.html %}
