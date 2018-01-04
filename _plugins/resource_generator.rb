@@ -72,7 +72,7 @@ module Moon
     end
 
     def generate(site)
-      require 'pp'
+      # require 'pp'
       # site.posts.docs.each{ |doc|  pp doc.url}
       res_dir = RESOURCE_DIR
       base = site.in_source_dir(res_dir)

@@ -22,18 +22,6 @@ module Ruhoh
       # convert_post(site)
       # convert_content(site)
       # convert_notes_index(site)
-
-      require 'rubygems'
-      require 'rmmseg'
-
-      RMMSeg::Dictionary.load_dictionaries
-      text = "将 ruhoh posts 的文件复制到 jekyll 的 _drafts 下，这个生成器将标题转换为 jekyll 规范并复制到新目录"
-      algor = RMMSeg::Algorithm.new(text)
-      loop do
-        tok = algor.next_token
-        break if tok.nil?
-        puts "#{tok.text} [#{tok.start}..#{tok.end}]"
-      end
     end
 
     # 需要先启用 show_drafts: true

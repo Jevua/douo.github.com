@@ -64,7 +64,6 @@ $(function() {
     var layout = $(window);
     var oldScroll = 0;
     var THREDSHOLD = 100;
-    console.log("before scroll")
     $( layout ).scroll(function() {
         let current = $(layout).scrollTop();
         let dif = current - oldScroll;
