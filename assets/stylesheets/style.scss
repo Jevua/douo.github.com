@@ -266,6 +266,9 @@ a.sidenav-trigger.top-nav {
 @media #{$medium-and-up} {
 .container {
     width: 100%;
+    article {
+        padding-top: 0.5em;
+    }
   }
 }
 
