@@ -4,8 +4,8 @@ date: '2018-01-02'
 description:
 graphviz: true
 tags:
-- Jekyll
-- Ruhoh
+- jekyll
+- ruhoh
 - lunr
 ---
 
