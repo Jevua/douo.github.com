@@ -157,4 +157,4 @@ Jekyll 的持续集成可参考官方文档 [Travis CI \| jekyll](https://jekyll
 
 ### 支持 HTTPS 的免费主机
 
-到这里基本实现了 `push` 后自动构建并部署到 https://douo.github.com 由 GitHub 来免费托管，也可以绑定自己的域名，一切看起来都很美好。但要为自己的域名添加免费 HTTPS 支持就没那么容易。幸好 [Netlify](https://www.netlify.com/) 恰能提供这样的服务，并支持绑定免费的 [Let's Encrypt - Free SSL/TLS Certificates](https://letsencrypt.org/) 证书，具体可参考：[GitHub Page 博客自定义域名添加 HTTPS 支持](https://jaeger.itscoder.com/web/2017/08/30/github-page-https)
+到这里基本实现了 `push` 后自动构建并部署到 https://douo.github.com 由 GitHub 来免费托管，也可以绑定自己的域名2，一切看起来都很美好。但要为自己的域名添加免费 HTTPS 支持就没那么容易。幸好 [Netlify](https://www.netlify.com/) 恰能提供这样的服务，并支持绑定免费的 [Let's Encrypt - Free SSL/TLS Certificates](https://letsencrypt.org/) 证书，具体可参考：[GitHub Page 博客自定义域名添加 HTTPS 支持](https://jaeger.itscoder.com/web/2017/08/30/github-page-https)。
