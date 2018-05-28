@@ -24,7 +24,7 @@ github_username:  douo
 disqus_id: doousblog
 
 # Build settings
-markdown: kramdown
+markdown: KramdownFix # kramdown
 # theme: minima
 plugins:
   - jekyll-feed

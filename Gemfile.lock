@@ -1,5 +1,5 @@
 PATH
-  remote: ./jekyll-moon
+  remote: jekyll-moon
   specs:
     jekyll-moon (0.1.0)
 
@@ -14,7 +14,7 @@ GEM
       execjs (~> 2.0)
     colorator (1.1.0)
     execjs (2.7.0)
-    ffi (1.9.18)
+    ffi (1.9.23)
     forwardable-extended (2.6.0)
     jekyll (3.6.2)
       addressable (~> 2.4)
@@ -29,29 +29,35 @@ GEM
       safe_yaml (~> 1.0)
     jekyll-babel (1.1.0)
       babel-transpiler
-    jekyll-feed (0.8.0)
+    jekyll-feed (0.9.3)
       jekyll (~> 3.3)
-    jekyll-sass-converter (1.5.0)
+    jekyll-sass-converter (1.5.2)
       sass (~> 3.4)
-    jekyll-watch (1.5.0)
-      listen (~> 3.0, < 3.1)
+    jekyll-seo-tag (2.5.0)
+      jekyll (~> 3.3)
+    jekyll-watch (1.5.1)
+      listen (~> 3.0)
     kramdown (1.16.2)
     liquid (4.0.0)
-    listen (3.0.8)
+    listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
+      ruby_dep (~> 1.2)
     mercenary (0.3.6)
-    minima (2.1.0)
-      jekyll (~> 3.3)
-    pathutil (0.16.0)
+    minima (2.5.0)
+      jekyll (~> 3.5)
+      jekyll-feed (~> 0.9)
+      jekyll-seo-tag (~> 2.1)
+    pathutil (0.16.1)
       forwardable-extended (~> 2.6)
-    public_suffix (3.0.1)
-    rb-fsevent (0.10.2)
+    public_suffix (3.0.2)
+    rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
     rouge (2.2.1)
+    ruby_dep (1.5.0)
     safe_yaml (1.0.4)
-    sass (3.5.3)
+    sass (3.5.6)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -68,7 +74,7 @@ DEPENDENCIES
   minima (~> 2.0)
 
 RUBY VERSION
-   ruby 2.2.5p319
+   ruby 2.6.0p-1
 
 BUNDLED WITH
-   1.13.7
+   1.16.2

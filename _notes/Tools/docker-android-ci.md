@@ -182,3 +182,10 @@ https://stackoverflow.com/questions/30366905/difference-between-app-debug-apk-an
     .hidden_job:
       script:
         - run test
+
+
+### Pipeline
+
+#### Jacoco
+
+#### Component 测试

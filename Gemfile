@@ -1,4 +1,5 @@
 source "https://rubygems.org"
+
 ruby RUBY_VERSION
 
 # Hello! This is where you manage which Jekyll version is used to run.
@@ -24,5 +25,3 @@ group :jekyll_plugins do
   gem 'jekyll-moon', '0.1.0', :path => './jekyll-moon'
   gem 'jekyll-babel'
 end
-
-

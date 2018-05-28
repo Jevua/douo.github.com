@@ -153,7 +153,7 @@ GitHub 虽然支持 Jekyll，但我加了不少 Jekyll 插件，想直接用 Git
       on:
         branch: develop
         
-Jekyll 的持续集成可参考官方文档 [Travis CI \| jekyll](https://jekyllrb.com/docs/continuous-integration/travis-ci/)
+Jekyll 的持续集成可参考官方文档 [Travis CI | jekyll](https://jekyllrb.com/docs/continuous-integration/travis-ci/)
 
 ### 支持 HTTPS 的免费主机
 

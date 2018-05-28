@@ -443,17 +443,19 @@ By default, 2 instances are created, a debug and a release one.
      proguardFiles	 N/A (set only)	 N/A (set only)
 
 
-BuildType 还可以有自己的 SourceSet，默认是
+BuildType 还可以有自己的源集（SourceSet），默认是
 
 	src/<buildtypename>/  //所以 BuildType 不能是 main 或 androidTest
 
-新的 sourceSet 可以
+新的源集可以
 
 - The manifest is merged into the app manifest
 - The code acts as just another source folder
 - The resources are overlayed over the main resources, replacing existing values.
 
 每个 BuildType 都会生成相应的任务，如 `assemble<BuildTypeName>`
+
+获取源集与 java 不同，不能直接访问 sourceSets，需要在 android 的闭包内，或者通过 `android.sourceSets` 访问。
 
 
 #### Dependecies
