@@ -2,5 +2,7 @@
 set -e # halt script on error
 
 bundle exec jekyll build
-ls .
+ls -l .
+ls -l _site
+pwd
 # bundle exec htmlproofer ./_site --disable-external
