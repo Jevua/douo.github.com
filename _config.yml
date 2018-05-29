@@ -1,18 +1,4 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
-
 # Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
 title: "DouO's Blog"
 email: dourokinga@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
@@ -28,13 +14,27 @@ markdown: KramdownFix # kramdown
 # theme: minima
 plugins:
   - jekyll-feed
-  - jekyll-babel # babel-source 快两年没更新，用的版本是 5.8.35
+
+# Make sure the `_pages/` is processed
+include:
+  - _pages
+
+# Make sure the `_site/assets/` is not trashed (webpack output)
+keep_files:
+  - assets
+
+# Exclude from processing (not moved to `_site/`)
 exclude:
   - Gemfile
   - Gemfile.lock
-  - jekyll-moon
-  - vendor
-
+  - node_modules
+  - package.json
+  - CNAME
+  - LICENSE
+  - README.md
+  - webpack.config.js
+  - "*.lock"
+  - "*.log"
 # 禁用 Jekyll 生成摘要
 excerpt_separator: "已禁用，见 _config.yml"
 

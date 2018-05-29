@@ -2,21 +2,21 @@
 <!DOCTYPE html>
 <html lang="zh-Hant-CN" class="borderbox" >
    {% include head.html %}
-    <body>
-        {{ content }}
-        {% include google_prettify.html %}
+  <body>
+    {{ content }}
+    {% include google_prettify.html %}
 
-        {% if page.graphviz %}
-        {% include graphviz.html %}
-        {% endif %}
+    {% if page.graphviz %}
+    {% include graphviz.html %}
+    {% endif %}
 
-        {% if page.math %}
-        {% include mathjax.html %}
-        {% endif %}
-        <!--JavaScript at end of body for optimized loading-->
-        <script src="/assets/javascripts/libs/materialize.js"></script>
-        <script src="/assets/javascripts/init.js"></script>
-        <script defer async="async" src="/assets/javascripts/index.js"></script>
+    {% if page.math %}
+    {% include mathjax.html %}
+    {% endif %}
+    <!--JavaScript at end of body for optimized loading-->
+    <script src="/assets/javascripts/libs/materialize.js"></script>
+    <script src="/assets/javascripts/init.js"></script>
+    <script defer async="async" src="/assets/main.js"></script>
 </body>
 
 </html>

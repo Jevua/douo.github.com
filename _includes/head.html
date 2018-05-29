@@ -1,29 +1,29 @@
 {% comment %} 全站通用头部 {% endcomment %}
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>
-        {% if page.title %}{{ page.title }} | {%if page.collection_title %}{{ page.collection_title }}{%else%}{{site.title}}{%endif%}{% else %}{{ site.title }}{% endif %}</title>
-    <meta name="description" content="{% if page.description %}{{ page.description | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    {% if page.title %}{{ page.title }} | {%if page.collection_title %}{{ page.collection_title }}{%else%}{{site.title}}{%endif%}{% else %}{{ site.title }}{% endif %}</title>
+  <meta name="description" content="{% if page.description %}{{ page.description | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
-    <!-- Windows 8 Tile Icons -->
-    <meta name="application-name" content="{{site.username}} Blog">
-    <meta name="msapplication-TileColor" content="#5d4d7a">
-    <meta name="msapplication-square70x70logo" content="smalltile.png" />
-    <meta name="msapplication-square150x150logo" content="mediumtile.png" />
-    <meta name="msapplication-wide310x150logo" content="widetile.png" />
-    <meta name="msapplication-square310x310logo" content="largetile.png" />
-    <!-- Android Lolipop Theme Color -->
-    <meta name="theme-color" content="#5d4d7a">
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+  <!-- Windows 8 Tile Icons -->
+  <meta name="application-name" content="{{site.username}} Blog">
+  <meta name="msapplication-TileColor" content="#5d4d7a">
+  <meta name="msapplication-square70x70logo" content="smalltile.png" />
+  <meta name="msapplication-square150x150logo" content="mediumtile.png" />
+  <meta name="msapplication-wide310x150logo" content="widetile.png" />
+  <meta name="msapplication-square310x310logo" content="largetile.png" />
+  <!-- Android Lolipop Theme Color -->
+  <meta name="theme-color" content="#5d4d7a">
 
-    <link rel="stylesheet" href="/assets/stylesheets/material_icon.css">
-    <link rel="stylesheet" href="/assets/stylesheets/style.css">
+  <link rel="stylesheet" href="/assets/stylesheets/material_icon.css">
+  <link rel="stylesheet" href="/assets/main.css">
 
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="/assets/javascripts/libs/iconfont.js"></script>
-    <script src="https://unpkg.com/lunr/lunr.js"></script>
-    <script src="/assets/javascripts/search.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="/assets/javascripts/libs/iconfont.js"></script>
+  <script src="https://unpkg.com/lunr/lunr.js"></script>
+  <script src="/assets/javascripts/search.js"></script>
 </head>

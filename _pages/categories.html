@@ -1,0 +1,27 @@
+---
+title: 分类
+date: '2010-04-20'
+permalink: /categories/
+layout: page
+---
+
+<!-- Posts by Categories -->
+  <div>
+    {% comment %}将分类名转换为字符串，分类是 { name: posts[]} 这样的结构{% endcomment %}
+    {% capture get_items %}
+    {% for cat in site.categories %}
+    {{ cat | first }}
+    {% endfor %}
+    {% endcapture %}
+    {% comment %} 将字符串转换回分类名列表，然后排序 {% endcomment %}
+    {% assign sorted = get_items | split:' ' |  sort %}
+    {% for name in sorted %}
+    <h2  class="category-title" id="{{ name }}-ref">{{ name }}</h2>
+    <ul>
+      {% for post in site.categories[name] %}{% if post.title != null %}
+      {% include post-list post=post %}
+      {% endif %}{% endfor %}
+    </ul>
+    {% endfor %}
+  </div>
+
