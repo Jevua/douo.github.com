@@ -25,6 +25,7 @@ keep_files:
 
 # Exclude from processing (not moved to `_site/`)
 exclude:
+  - vendor
   - Gemfile
   - Gemfile.lock
   - node_modules

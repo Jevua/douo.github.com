@@ -2,4 +2,5 @@
 set -e # halt script on error
 npm install
 npm run build
+ls
 # bundle exec htmlproofer ./_site --disable-external
