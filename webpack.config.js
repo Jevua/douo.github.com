@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const postcssImport = require('postcss-import');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const pkg = require('./package.json');
 
 const isDebug = process.env.NODE_ENV !== 'production';
@@ -30,7 +31,13 @@ module.exports = {
     path: path.resolve(__dirname, '_site/assets'),
     filename: '[name].js?[hash]'
   },
-
+  optimization: {
+    minimizer: isDebug?[]:[
+      // we specify a custom UglifyJsPlugin here to get source maps in production
+      new UglifyJsPlugin({
+      })
+    ]
+  },
   plugins: [
     // Define free variables
     // https://webpack.js.org/plugins/define-plugin/
@@ -41,16 +48,9 @@ module.exports = {
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
-      filename: isDebug ? '[name].css' : '[name].[hash].css',
-      chunkFilename: isDebug ? '[id].css' : '[id].[hash].css',
+      filename: '[name].css' ,
+      chunkFilename: '[id].css'
     }),
-
-    ...(isDebug ? [] : [
-      // Minimize all JavaScript output of chunks
-      // https://webpack.js.org/plugins/uglifyjs-webpack-plugin/
-      new webpack.optimize.UglifyJsPlugin(),
-    ]),
-
     // Adds a banner to the top of each generated chunk
     // https://webpack.js.org/plugins/banner-plugin/
     new webpack.BannerPlugin({
