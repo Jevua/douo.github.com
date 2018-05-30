@@ -1,8 +1,8 @@
 @charset "UTF-8";
 
 @import "moon/type";
+@import "../../node_modules/materialize-css/sass/materialize";
 
-@import "materialize";
 /* 代码高亮 */
 @import "libs/google_prettify/moon";
 /* 社会化图标分享 */

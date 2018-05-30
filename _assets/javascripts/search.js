@@ -1,18 +1,25 @@
-(function($) {
-  $.ajax({
-    url: '/index.json',
-    dataType: 'json'
-  }).done(data => {
-    window.index = lunr(function() {
+import lunr from 'lunr';
+import $ from 'jquery';
+
+export default class Search {
+  setup() {
+    $.ajax({
+      url: '/index.json',
+      dataType: 'json'
+    }).done(this.render);
+  }
+
+  render(data) {
+    function config() {
       this.field('token');
       this.field('tags');
       this.ref('ref');
       this.pipeline.reset();
-      hash = {};
-      for (let i = 0; i < data.length; i++) {
-        hash[data[i].ref] = data[i];
-        this.add(data[i]);
-      }
+      const hash = {};
+      data.forEach(item => {
+        hash[item.ref] = item;
+        this.add(item);
+      });
       // icon click
       $('ul#nav-mobile li.search .search-wrapper i.material-icons').click(
         () => {
@@ -29,34 +36,32 @@
         }
       );
 
-      const renderResults = function(results) {
+      function renderResults(results) {
         const resultsContainer = $('.search-results');
         resultsContainer.empty();
-        Array.prototype.forEach.call(results, result => {
-          const resultDiv = $(`<a href="${result[0]}">${result[1]}</a>`);
+        results.forEach(result => {
+          const resultDiv = $(`<a href="${result[0]}">${result[1]}</a>1`);
           resultsContainer.append(resultDiv);
         });
-      };
+      }
 
-      const debounce = function(fn) {
+      function debounce(fn) {
         let timeout;
-        return function() {
-          let args = Array.prototype.slice.call(arguments),
-            ctx = this;
-
+        return function _fn(...args) {
+          const ctx = this;
           clearTimeout(timeout);
           timeout = setTimeout(() => {
             fn.apply(ctx, args);
           }, 100);
         };
-      };
+      }
 
-      $('input#search').focus(function() {
+      $('input#search').focus(function fn() {
         $(this)
           .parent()
           .addClass('focused');
       });
-      $('input#search').blur(function() {
+      $('input#search').blur(function fn() {
         if (!$(this).val()) {
           $(this)
             .parent()
@@ -66,14 +71,12 @@
 
       $('input#search').on(
         'keyup',
-        debounce(function(e) {
+        debounce(function fn(e) {
           if ($(this).val() < 2) {
             renderResults([]);
             return;
           }
-
           if (e.which === 38 || e.which === 40 || e.keyCode === 13) return;
-
           const query = $(this).val();
           const results = window.index
             .search(query)
@@ -85,7 +88,7 @@
 
       $('input#search').on(
         'keydown',
-        debounce(function(e) {
+        debounce(function fn(e) {
           // Escape.
           if (e.keyCode === 27) {
             $(this).val('');
@@ -139,6 +142,7 @@
           e.preventDefault();
         })
       );
-    });
-  });
-})(jQuery);
+    }
+    window.index = lunr(config);
+  }
+}

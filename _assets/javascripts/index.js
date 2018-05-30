@@ -1,115 +1,121 @@
-/* require=jquery.js
- * require=materialize.js
+import $ from 'jquery';
+import M from 'materialize-css';
+import Note from './note';
+import Search from './search';
+import Toc from './toc';
+import Pretty from './pretty';
+
+// Detect touch screen and enable scrollbar if necessary
+function isTouchDevice() {
+  try {
+    document.createEvent('TouchEvent');
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+/**
+ *
+ * @param {*} hash
+ * @param {*} scrollDuration
+ * @param {*} flashDuration
  */
-const note = {
-  navigator: (function() {
-    function renderItem(parent, item, level = 0) {
-      const li = $('<li></li>'); // 当前项
-      let isActive; // 用于找到激活的菜单项
-      if (item.children) {
-        li.addClass('bold');
-        const header = $(
-          `<a class="collapsible-header waves-effect waves-teal">${
-            item.title
-          }</a>`
-        );
+function scrollTo(
+  scrollContainer,
+  hash,
+  scrollDuration = 500,
+  flashDuration = 700
+) {
+  if (hash.startsWith('#')) {
+    hash = hash.substring(1);
+  }
+  const target = $(document.getElementById(hash));
+  const container = scrollContainer;
 
-        header.addClass(`level-h${level}`);
-        const body = $('<div class="collapsible-body"></div>');
-        const ul = $('<ul></ul>');
-        let grandchild = false;
-        for (let i = 0; i < item.children.length; i++) {
-          grandchild |= !(item.children[i].children === 'undefined');
-          isActive |= renderItem(ul, item.children[i], level + 1);
-        }
-        if (grandchild) {
-          ul.addClass('collapsible');
-        }
-        if (isActive) {
-          li.addClass('active');
-        }
-        $(body).append(ul);
-        li.append(header).append(body);
-      } else {
-        isActive =
-          item.url.toUpperCase() == window.location.pathname.toUpperCase();
-        if (isActive) {
-          li.addClass('active');
-        }
-        li.append(
-          `<a class="level-h${level}" href="${item.url}">${item.title}</a>`
-        );
-      }
-      parent.append(li);
-      return isActive;
-    }
-
-    return {
-      render(data) {
-        $('#nav-loading-indicator')
-          .removeClass('active')
-          .hide();
-        data = data.children[0];
-        const nav = $('#note-nav');
-        nav.empty();
-        parent = $('<ul class="collapsible"></ul>');
-        for (let i = 0; i < data.children.length; i++) {
-          renderItem(parent, data.children[i]);
-        }
-        nav.append(parent);
-        $('.collapsible').collapsible();
-      }
-    };
-  })(),
-  toc: (function() {
-    function findHeader(content) {
-      return content.find('h1,h2,h3,h4,h5').map((_, header) => {
-        $(header).addClass('section scrollspy');
-        return {
-          id: header.id,
-          title: header.innerText,
-          level: ~~header.tagName[1]
-        };
-      });
-    }
-    function calcPushpin() {
-      console.log('calcPushpin');
-      const toc = $('.section.table-of-contents');
-      const wheight = $(window).height();
-      const tocTop = $('nav').height();
-      const footerOffset = $('footer')
-        .first()
-        .offset().top;
-      const bottomOffset = footerOffset - toc.height();
-      // Floating-Fixed table of contents
-      // 只有 toc 小于 window 高度才启用 pushpin
-      if (wheight > toc.height()) {
-        toc.pushpin({
-          top: tocTop,
-          bottom: bottomOffset
+  // 为 toc 添加滚动动画
+  container.animate(
+    {
+      scrollTop: target.offset().top + container.scrollTop()
+    },
+    scrollDuration,
+    () => {
+      // 滚动完成，闪动 header
+      target
+        .addClass('glowheader')
+        .delay(flashDuration)
+        .queue(function() {
+          $(this)
+            .removeClass('glowheader')
+            .dequeue();
         });
-      }
     }
-    return {
-      render() {
-        const headers = findHeader($('.content'));
-        const toc = $('.section.table-of-contents');
-        toc.empty();
-        headers.each((_, h) =>
-          toc.append(
-            `<li class="header-${h.level}"><a href="#${h.id}">${h.title}</li>`
-          )
-        );
-        $('.section.scrollspy').scrollSpy();
-        calcPushpin();
-      }
-    };
-  })()
-};
+  );
+}
+
+function scrollToTop(
+  scrollContainer,
+  scrollDuration = 500,
+  flashDuration = 700
+) {
+  scrollContainer.animate(
+    {
+      scrollTop: 0
+    },
+    scrollDuration
+  );
+}
+
+function initScoll() {
+  const scrollContainer = $('html, body');
+  window.scrollTo = (hash, scrollDuration, flashDuration) =>
+    scrollTo(scrollContainer, hash, scrollDuration, flashDuration);
+  window.scrollToTop = (scrollDuration, flashDuration) =>
+    scrollToTop(scrollContainer, scrollDuration, flashDuration);
+  $(() => {
+    $('#scroll-top').click(scrollToTop);
+  });
+}
+
+function initFab() {
+  const layout = $(window);
+  let oldScroll = 0;
+  const THREDSHOLD = 100;
+
+  function fireDown() {
+    $('#fab').addClass('scale-out');
+  }
+
+  function fireUp() {
+    $('#fab').removeClass('scale-out');
+  }
+
+  $(layout).scroll(() => {
+    const current = $(layout).scrollTop();
+    const dif = current - oldScroll;
+    if (Math.abs(dif) > THREDSHOLD) {
+      dif > 0 ? fireDown() : fireUp();
+      oldScroll = current;
+    }
+  });
+
+  $(() => {
+    $('#fab').click(scrollToTop);
+  });
+}
 
 $(document).ready(() => {
-  const elem = document.querySelector('.sidenav');
-  const instance = new M.Sidenav(elem, {
+  initScoll();
+  initFab();
+  M.AutoInit();
+  if (isTouchDevice()) {
+    $('#nav-mobile').css({
+      overflow: 'auto'
+    });
+  }
+
+  const elems = document.querySelectorAll('.sidenav');
+  M.Sidenav.init(elems, {
     onOpenEnd: () => {
       $('#nav-tab').removeClass('hide-on-med-and-down');
     },
@@ -118,29 +124,11 @@ $(document).ready(() => {
     }
   });
 
-  $.ajax({
-    url: '/notes/tree.json',
-    dataType: 'json'
-  }).done(data => {
-    const instance = new M.Tabs(document.getElementsByClassName('tabs')[0], {
-      onShow: e => {
-        if (e.id == 'note-nav') {
-          if (!e.hasChildNodes()) {
-            note.navigator.render(data);
-          }
-          $('#logo-container').attr('href', '/notes');
-          $('#front-page-logo').attr('data', '/assets/images/materialize.svg');
-        } else {
-          $('#logo-container').attr('href', '/');
-          $('#front-page-logo').attr('data', '/assets/images/blog.svg');
-        }
-      }
-    });
-    if (window.location.pathname.startsWith('/notes')) {
-      instance.select('note-nav');
-    } else {
-      instance.select('blog-nav');
-    }
-  });
-  note.toc.render();
+  const search = new Search();
+  const toc = new Toc();
+  const note = new Note();
+  search.setup();
+  toc.setup();
+  note.setup();
+  Pretty.setup();
 });

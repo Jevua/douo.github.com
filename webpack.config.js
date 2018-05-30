@@ -22,7 +22,7 @@ module.exports = {
 
   // Entry points for our main js file
   // https://webpack.js.org/configuration/entry-context/#entry
-  entry: './_assets/entry.js',
+  entry: {main: './_assets/entry.js',tags: './_assets/javascripts/tagscloud.js'},
 
   // How and where it should output our bundles
   // https://webpack.js.org/configuration/output/
@@ -115,6 +115,7 @@ module.exports = {
       loader: 'file-loader',
       options: {
         emitFile: false,
+        //context: path.resolve(__dirname, "./_assets"),
         name: 'assets/[name].[ext]?[hash]'
       }
     }]

@@ -117,10 +117,10 @@ network :
   - id: github
     url: https://github.com/douo
     name: Github
-  - id: stackoverflow
+  - id: stack-overflow
     url: https://stackoverflow.com/users/851344/douo
     name: StackOverflow
-  - id: googleplus
+  - id: google-plus
     url: https://plus.google.com/102537448648560113422
     name: Google Plus
   - id: instagram

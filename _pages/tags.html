@@ -5,28 +5,22 @@ permalink: /tags/
 layout: page
 ---
 
+<div id="test"></div>
 <div class="tagscloud" id="tagscloud">
-    <div class="progress">
-        <div class="indeterminate"></div>
-    </div>
+  <div class="progress">
+    <div class="indeterminate"></div>
+  </div>
 </div>
 
 <!-- Posts by Tag -->
-        {% for tag in site.tags %}
-        {% capture name %}{{ tag | first }}{% endcapture %}
-        <h2 class="category-title" id="{{ name }}-ref">{{ name }}</h2>
-        <ul>
-            {% for post in site.tags[name] %}{% if post.title != null %}
-            {% include post-list post=post %}
-            {% endif %}{% endfor %}
-        </ul>
-        {% endfor %}
+    {% for tag in site.tags %}
+    {% capture name %}{{ tag | first }}{% endcapture %}
+    <h2 class="category-title" id="{{ name }}-ref">{{ name }}</h2>
+    <ul>
+      {% for post in site.tags[name] %}{% if post.title != null %}
+      {% include post-list post=post %}
+      {% endif %}{% endfor %}
+    </ul>
+    {% endfor %}
 
-<script>
- //先处理好标签云的高度，确保滚动正确
- $('#tagscloud').height($('#tagscloud').width()/1.6);
- var tags = [{% for tag in site.tags %}{name: "{{ tag | first }}",size: {{ tag | last | size }}},{% endfor %}];
-</script>
-<script src="/assets/javascripts/libs/d3.js"></script>
-<script src="/assets/javascripts/libs/d3.layout.cloud.js"></script>
-<script defer async="async" src="/assets/javascripts/tagscloud.js"></script>
+<script defer async="async" src="/assets/tags.js"></script>
