@@ -90,7 +90,7 @@ export default class Note {
         const parent = $('<ul class="collapsible"></ul>');
         data.children.forEach(child => renderItem(parent, child));
         nav.append(parent);
-        $('.collapsible').collapsible();
+        M.Collapsible.init(document.querySelectorAll('.collapsible'));
       }
     };
   }

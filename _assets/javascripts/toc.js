@@ -30,10 +30,10 @@ export default class Toc {
       // Floating-Fixed table of contents
       // 只有 toc 小于 window 高度才启用 pushpin
       if (wheight > toc.height()) {
-        toc.pushpin({
+        M.Pushpin.init(document.querySelectorAll('.section.table-of-contents'),{
           top: tocTop,
           bottom: bottomOffset
-        });
+        })
       }
     }
 
