@@ -6,6 +6,7 @@ export default class Toc {
     this.initToc();
     this.toc.render();
   }
+
   initToc() {
     function findHeader(content) {
       return content.find('h1,h2,h3,h4,h5').map((_, header) => {
@@ -30,10 +31,13 @@ export default class Toc {
       // Floating-Fixed table of contents
       // 只有 toc 小于 window 高度才启用 pushpin
       if (wheight > toc.height()) {
-        M.Pushpin.init(document.querySelectorAll('.section.table-of-contents'),{
-          top: tocTop,
-          bottom: bottomOffset
-        })
+        M.Pushpin.init(
+          document.querySelectorAll('.section.table-of-contents'),
+          {
+            top: tocTop,
+            bottom: bottomOffset
+          }
+        );
       }
     }
 
@@ -51,5 +55,37 @@ export default class Toc {
         calcPushpin();
       }
     };
+
+    function hide() {
+      $('.content').attr(
+        'class',
+        'content col s12 m10 offset-m1 xl10 offset-xl1'
+      );
+      $('.toc-wrapper').hide();
+    }
+
+    function show() {
+      $('.content').attr(
+        'class',
+        'content col s12 m8 offset-m1 xl7 offset-xl1'
+      );
+      $('.toc-wrapper').show();
+    }
+
+    $('#toc-toggle').click(() => {
+      if ($('.toc-wrapper').is(':visible')) {
+        hide();
+      } else {
+        show();
+      }
+    });
+    $('#toc-toggle').hover(
+      () => {
+        $('#toc-toggle').css({ opacity: '1' });
+      },
+      () => {
+        $('#toc-toggle').css({ opacity: '0.1' });
+      }
+    );
   }
 }

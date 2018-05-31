@@ -75,6 +75,8 @@ defaults:
 
 # 自定义的以 '_' 开头的目录或文件，不声明为 collection 会自动被忽略
 collections:
+  resumes:
+    output: false
   notes:
     output: true
     to_tree: true

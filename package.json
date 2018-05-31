@@ -1,12 +1,12 @@
 {
-  "name": "clenemt.com",
+  "name": "writing",
   "version": "0.0.1",
-  "description": "Source code for clenemt.com",
-  "email": "clement.moron@gmail.com",
-  "url": "http://www.clenemt.com/",
+  "description": "Source code for Writing",
+  "email": "dourokinga@gmail.com",
+  "url": "https://dourok.info/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/clenemt/clenemt.com.git"
+    "url": "https://github.com/douo/douo.github.com.git"
   },
   "license": "MIT",
   "main": "assets/js/entry.js",

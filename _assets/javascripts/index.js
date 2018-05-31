@@ -114,7 +114,7 @@ $(document).ready(() => {
     });
   }
 
-  const elems = document.querySelectorAll('.sidenav');
+  const elems = document.querySelectorAll('.sidenav')[0];
   M.Sidenav.init(elems, {
     onOpenEnd: () => {
       $('#nav-tab').removeClass('hide-on-med-and-down');

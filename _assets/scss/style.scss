@@ -386,6 +386,12 @@ ul.table-of-contents {
   }
 }
 
+#toc-toggle {
+    position: fixed;
+    margin-top: 15%;
+    margin-left: 1%;
+    opacity: 0.1;
+}
 
 // Mobile page styling
 
