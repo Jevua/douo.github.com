@@ -54,7 +54,8 @@ export default class Note {
         let grandchild = false;
         item.children.forEach(child => {
           grandchild = grandchild || !(child.children === 'undefined');
-          isActive = isActive || renderItem(ul, child, level + 1);
+          const childActive = renderItem(ul, child, level + 1);
+          isActive = isActive || childActive
         });
 
         if (grandchild) {
