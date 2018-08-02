@@ -1,6 +1,11 @@
 ---
 title: 读《清晰架构》
 date: '2018-07-08'
+categories:
+- coder
+tags:
+- 架构
+- 软件工程
 widgets :
   math :
     enable : true
