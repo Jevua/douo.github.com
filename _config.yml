@@ -14,7 +14,8 @@ markdown: KramdownFix # kramdown
 # theme: minima
 plugins:
   - jekyll-feed
-
+feed:
+  path: rss.xml
 # Make sure the `_pages/` is processed
 include:
   - _pages
@@ -115,7 +116,7 @@ links:
 
 network :
   - id: feed
-    url: /feed.xml
+    url: /rss.xml
     name: 订阅
   - id: github
     url: https://github.com/douo
