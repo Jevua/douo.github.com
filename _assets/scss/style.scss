@@ -297,6 +297,11 @@ a.sidenav-trigger.top-nav {
     p,ul,a,li {
         font-size: $base-font-size;
     }
+    ul {
+       & > li {
+            list-style-type: initial;
+        }
+    }
     border-radius: 2px;
     @media #{$medium-and-up}{
         padding: 56px;

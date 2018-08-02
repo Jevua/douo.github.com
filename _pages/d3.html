@@ -1,0 +1,27 @@
+---
+title: D3 Demo
+date: '2018-06-05'
+permalink: /d3/
+layout: page
+---
+
+<input type="text" id="text-input" value="5000">
+<!-- An explanation... -->
+<div id="text-explain">...takes numbers between 1 and 10k</div>
+<div id="d3"></div>
+<style>
+.chart rect {
+  fill: steelblue;
+}
+.hiddenCanvas { display: none; }
+.chart text {
+  fill: white;
+  font: 10px sans-serif;
+  text-anchor: end;
+}
+
+</style>
+<script>
+  window.d3Demo.renderCanvas()
+
+</script>

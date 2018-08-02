@@ -19,7 +19,7 @@ description:
 ### 工作经历
 
 #### 2017.12 — 至今 | 汕头市同行网络科技有限公司 | 移动部技术负责人
- - 负责移动端（Android、iOS、RN）架构的研究和搭建
+ - 负责移动端架构的研究和搭建
  - 搭建持续集成环境，制定代码规范和开发方法论
  - 为团队开发一些自动化工具（使用 Ruby 实现）
  - 参与需求评审，项目规划与排期，技术选型 
@@ -47,17 +47,29 @@ description:
 ### 项目经验
 
 #### 2017.12 - 至今 | 7M 即时比分
-对公司线上 App 7M 即时比分进行研究，分析现有版本存在的问题，以其为样本进行移动端架构设计研究，输出一套易用、高伸缩性、易于测试的基础代码。
+对公司线上 App 7M 即时比分进行研究，分析现有版本存在的问题，以其为样本进行移动端架构设计研究。
 
-- 使用 Clean Architecture 指导移动端架构设计 
-- 调研各个UI架构的优缺点及应用场景
 - 分析 7M 项目，提取可用模块
+- 为项目部署持续集成方案，可在提交代码后自动跑单元测试和UI测试
+- 引入 ISSUE 驱动开发方法论
+- 使用 Clean Architecture 指导移动端架构
+- 在 iOS 开发中推行 Clean Swift 架构
+
+#### 2018.4 - 至今 | 我是体育经纪人
+基于足球社交的 UGC 社区，使用 React Native 进行开发
+
+- 对项目进行重构，RN 0.44 升级到 0.55
+- 接口规范的设计和实现
+- 使用 StyleAttributePreprocessor 处理 RN 中的多屏幕尺寸显示问题
+
 
 #### 2017.08 - 至今 | ActivityBuilder
 ActivityBuilder 是一个基于注解的库，使用 Builder 模式让 Activity 间的沟通更方便。可以用一行代码来传递参数、设置结构回调、启动 Activity。
 
  - 使用注解处理器和 JavaPoet 进行代码生成
  - 利用 Headless Fragment 用 lambda 表达式代替 onActivityResult
+ - 研究了 Java8 和 Android 实现 lambda 表达式的原理
+ - 研究了 invokedynamic 指令
  - 使用 spock 和 truth 对注解处理器进行测试
 
 #### 2017.07 - 2017.09 | 移动办公 App
