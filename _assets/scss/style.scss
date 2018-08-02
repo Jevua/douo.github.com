@@ -299,7 +299,10 @@ a.sidenav-trigger.top-nav {
     }
     ul {
        & > li {
-            list-style-type: initial;
+            list-style-type: disc;
+        }
+       .post-list {
+            list-style-type: none;
         }
     }
     border-radius: 2px;
