@@ -344,3 +344,12 @@ RxPermissions 需要一个当前 Activity 的引用。可以作为依赖声明�
 Fragment 复用问题
 
 
+### Kotlin
+
+kotlin 和 dagger2 配合起来不太舒服
+
+1. 需要显示声明 constructor，`@Inject constructor(...)`
+2. 静态 Module 很麻烦 https://stackoverflow.com/questions/44894218/dagger-2-static-provider-methods-in-kotlin
+
+
+https://github.com/google/dagger/issues/900
