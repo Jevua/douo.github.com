@@ -31,7 +31,7 @@ exclude:
   - Gemfile.lock
   - node_modules
   - package.json
-  - CNAME
+  - package-lock.json
   - LICENSE
   - README.md
   - webpack.config.js
