@@ -294,6 +294,14 @@ a.sidenav-trigger.top-nav {
 }
 
 .content {
+    code {
+        padding: 0.2em 0.4em;
+        margin: 0;
+        font-size: 85%;
+        background-color: rgba(27,31,35,0.05);
+        border-radius: 3px
+    }
+
     p,ul,a,li {
         font-size: $base-font-size;
     }
@@ -319,6 +327,14 @@ a.sidenav-trigger.top-nav {
   }
   img {
       @extend .responsive-img;
+  }
+  .img-title{
+    text-align: center;
+    span {
+        color: grey;
+        font-size: 13px;
+        border-bottom: 1px solid #ccc;
+    }
   }
 }
 
@@ -519,13 +535,7 @@ footer {
 $grey-color:       #828282 !default;
 $grey-color-light: lighten($grey-color, 40%) !default;
 
-code[class*="highlighter-rouge"] {
-    font-size: $base-font-size;
-    border: 1px solid $grey-color-light;
-    border-radius: 3px;
-    background-color: #eef;
-    padding: 1px 5px;
-}
+
 
 .icon {
     width: 20px; height: 20px;

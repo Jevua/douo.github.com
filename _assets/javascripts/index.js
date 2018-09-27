@@ -104,7 +104,16 @@ function initFab() {
   });
 }
 
+function processArticleImg() {
+  $('article img').each((a, b) => {
+    if (b.title) {
+      $(b).after(`<div class="img-title"><span>${b.title}<span></div>`);
+    }
+  });
+}
+
 $(document).ready(() => {
+  processArticleImg();
   initScoll();
   initFab();
   M.AutoInit();
