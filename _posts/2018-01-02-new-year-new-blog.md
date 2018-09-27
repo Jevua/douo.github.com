@@ -158,3 +158,11 @@ Jekyll 的持续集成可参考官方文档 [Travis CI | jekyll](https://jekyllr
 ### 支持 HTTPS 的免费主机
 
 到这里基本实现了 `push` 后自动构建并部署到 https://douo.github.com 由 GitHub 来免费托管，也可以绑定自己的域名2，一切看起来都很美好。但要为自己的域名添加免费 HTTPS 支持就没那么容易。幸好 [Netlify](https://www.netlify.com/) 恰能提供这样的服务，并支持绑定免费的 [Let's Encrypt - Free SSL/TLS Certificates](https://letsencrypt.org/) 证书，具体可参考：[GitHub Page 博客自定义域名添加 HTTPS 支持](https://jaeger.itscoder.com/web/2017/08/30/github-page-https)。
+
+### 更新
+
+- 2018年05月29日，引入 webpack 管理前端资源，使用 [clenemt][] 的配置。
+- 2018年09月27日，github 已经支持[自定义域名 https][]，所以从 netlify 迁回 github 了，netlify 速度实在太慢。
+
+[clenemt]: https://github.com/clenemt/clenemt.com.git
+[自定义域名 https]: https://blog.github.com/2018-05-01-github-pages-custom-domains-https/
