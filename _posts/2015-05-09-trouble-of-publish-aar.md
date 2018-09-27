@@ -2,6 +2,7 @@
 title: Android 项目打包到 JCenter 的坑
 date: '2015-05-09'
 description:
+categories: coder
 tags:
 - android
 - gradle
