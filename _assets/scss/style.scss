@@ -1,3 +1,4 @@
+
 @charset "UTF-8";
 
 
@@ -380,6 +381,11 @@ a.sidenav-trigger.top-nav {
 
 .layout.is-small-screen .content {
   padding: 40px 28px;
+}
+.chip{
+    a {
+        font-size: 13px;
+    }
 }
 
 // Tables

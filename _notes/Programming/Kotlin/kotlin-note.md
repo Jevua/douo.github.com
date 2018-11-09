@@ -1,5 +1,5 @@
 ---
-title: 2018年06月14日杂记
+title: Kotlin Note
 date: '2018-06-14'
 description:
 tags:
@@ -332,7 +332,7 @@ operator fun Point.plus(other: Point): Point {
 
 #### 相同判断
 
-`a==b` 等价于 `a?.equals(b) ?: (b == null)**
+`a==b` 等价于 `a?.equals(b) ?: (b == null)`
 
 `===`  identity equals。判断是否是相同对象，**不可被重载**
 
@@ -358,11 +358,23 @@ class Point(val x: Int, val y: Int) {
  
 ### 泛型
 
-Reified type parameters，
+未加限制的泛型默认是可为空的，等价于`Any?`
+
+#### Reified（具体化）
+
+Reified(具体的) type parameters，
 
      inline fun <reified T> isA(value: Any) = value is T
 
-内联函数可以在函数体类型变量进行检查，类型变量不会被擦除。
+可以在函数体类型变量进行检查，类型变量不会被擦除。可以进行如下操作。
+
+- In type checks and casts (is, !is, as, as?)
+- To use the Kotlin reflection APIs, as we’ll discuss in chapter 10 (::class) 
+- To get the corresponding java.lang.Class (::class.java)
+- As a type argument to call other functions
+
+`reified` 关键字只能用于内联函数
+
 
 ``` kotlin
 val items = listOf("one", 2, "three")
@@ -370,13 +382,45 @@ println(items.filterIsInstance<String>())
 [one, three]
 ```
 
-协变、逆变、不变
+#### 可变性
+
+非空类型是可空类型的子类型，`A` 是 `A?` 的子类型
+
+- 协变，A 是 B 的子类型，f(A) 是 f(B) 的子类型（满足里氏替换原则），则称 f() 是协变的。参数类似是协变的，在kotlin 用 `out` 修饰，表示类只会产出 `out` 类型的对象，而不能消费。
+- 逆变，
+- 不变
+
+      
+      interface Function1<in P, out R> {
+        operator fun invoke(p: P): R
+      }
+ 
+      val f = object : Function1<Number, String> {
+        override fun invoke(p: Number): String = p.toString()
+      }
+      //P 是逆变，Int 是 Number 的子类型，
+      //R 是协变，Any 是 String 的父类型
+      //所以 Function1<Int, Any> 是 Function1<Number, String> 的父类型，满足里氏替换。 
+      var f2 : Function1<Int, Any> = f
+ 
+declaration-site variance，在类定义的时候使用 `interface Function1<in P, out R>`。use-site variance，  java 的  `? extends` `? super`  每次使用类型变量的时候都可以声明，kotlin 可以在返回值声明 `out`，参数声明 `in`
+
+#### `<*>` Star projection
+
+>> star-projection syntax you can use to indicate that you have no information about a generic argument.
+
+>> MutableList<*> is a list that contains elements of a specific type, but you don’t know what type it is.
+
+以 Function1 为例 `Function1<*, *>` 被编译器认为是 `Function1<in Nothing,out Any?>`。
+如果不依赖特定的参数化类型的话，就可以使用`<*>`，可避免使用 use-site variance 
+
+    fun printFirst(list: List<*>) {
+        if (list.isNotEmpty()) {
+            println(list.first())
+        }
+    }
 
 
-- declaration-site variance，在类定义的时候使用 `interface Function1<in P, out R>`
-- use-site variance，  java 的  `? extends` `? super`  每次使用类型变量的时候都可以声明
-
-MutableList<*> is a list that contains elements of a specific type, but you don’t know what type it is.
 
 ### DSL
 
@@ -486,3 +530,5 @@ cancel，通过 isActive 去判断
 |ReceiveChannel|receiveOrNull|onReceiveOrNull|poll|
 |Mutex|lock|onLock|tryLock|
 |none|delay|onTimeout|none|
+
+
