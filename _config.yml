@@ -102,9 +102,16 @@ nav :
   - title: tags
     url: /tags
     describe: 标签
+  - title: log
+    url: /log
+    describe: 日志
+  - title: help
+    url: /help
+    describe: 帮助
   - title: about
     url: /about
     describe: 关于
+
 
 links:
   - title: MAGICALBOY

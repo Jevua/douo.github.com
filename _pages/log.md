@@ -1,19 +1,18 @@
 ---
 title: '站点日志'
 date: '2012-10-23'
+permalink: /log/
+layout: page
 description:
 ---
 
-这里只记录一些比较大的改动和想法，更详细的记录请查看[这里](https://github.com/douo/douo.ruhoh.com/commits/master)和[这里](https://github.com/douo/ruhoh.rb/commits/2.0plus)
+这里只记录一些比较大的改动和想法，更详细的记录请查看[这里](https://github.com/douo/douo.github.com/commits/develop)
 
 ### TODO
 
-
 #### 博客
 
-- Material Design
 - 使用 html 的简化模板 haml>slim(支持haml似乎更好)
-- 利用 staticfile.org 为 js/css 资源做加速，参考[Asset Pipeline][1]
 - 用 [swiftype][2] 做站内搜索，分为 posts 和 notes，设计 schema
 
 #### 筆記
@@ -22,15 +21,17 @@ description:
 - 反向链接
 - 看看能不能利用 Evernote api ，把笔记输出到 evernote 中
 
-#### Ruhoh
+[1]: https://swiftype.com/
 
-    ruhoh commit resources [message] #提交 resources 的变更到本地仓库 ex：  git add -A :/notes ; git commit -m 'update notes'
-    ruhoh sync  # 同步代码到远程仓库，未提交到本地仓库的则自动提交
-    ruhoh publish # 发布，需远程仓库hook支持
+### 2019-02-13
 
+支持 mermaid
 
-[1]: http://ruhoh.com/docs/2/asset-pipeline/
-[2]: https://swiftype.com/
+### 2018-01-02
+
+用 Jekyll 重新实现，见 [新年新博客](/2018/01/02/new-year-new-blog/)
+
+### 2015-04-10
 
 ### 2015-04-10
 
