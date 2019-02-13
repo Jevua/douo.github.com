@@ -4,6 +4,16 @@ import Note from './note';
 import Search from './search';
 import Toc from './toc';
 import Pretty from './pretty';
+import mermaid from 'mermaid';
+
+mermaid.initialize({
+//    theme: 'forest',
+    gantt: { axisFormatter: [
+        ['%Y-%m-%d', (d) => {
+            return d.getDay() === 1
+        }]
+    ] }
+})
 
 // Detect touch screen and enable scrollbar if necessary
 function isTouchDevice() {
@@ -113,6 +123,7 @@ function processArticleImg() {
 }
 
 $(document).ready(() => {
+//  mermaid.initialize();
   processArticleImg();
   initScoll();
   initFab();

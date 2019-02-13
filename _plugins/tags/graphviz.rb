@@ -4,7 +4,6 @@ module Moon
   module Tags
     # TODO 增加直接加载文件，参考 include tag
     class GraphvizBlock < Liquid::Block
-      require 'pp'
       def initialize(tag_name, markup, tokens)
         super
       end
