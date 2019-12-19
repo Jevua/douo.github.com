@@ -10,6 +10,18 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/cache@v1
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+                    ${{ runner.os }}-node-
+    - uses: actions/cache@v1
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+                    ${{ runner.os }}-gem-
     - uses: actions/setup-node@v1
       with:
         node-version: '8.11.1'
@@ -25,7 +37,7 @@ jobs:
     - uses: actions/setup-ruby@v1
       with:
         ruby-version: '2.x' 
-    - run: bundle install
+    - run: bundle config path vendor/bundle
     - name: Build
       run: npm run build
     - name: Upload
