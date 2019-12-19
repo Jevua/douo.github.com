@@ -29,14 +29,13 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '8.11.1'
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '8.11.1'
     - run: npm install
     - uses: actions/setup-ruby@v1
       with:
-        ruby-version: '2.x' 
-    - run: bundle config path vendor/bundle
+        ruby-version: '2.3.3' 
+    - run: |
+         bundle config path vendor/bundle
+         bundle install
     - name: Build
       run: npm run build
     - name: Upload
