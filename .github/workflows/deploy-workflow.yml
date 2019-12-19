@@ -1,0 +1,25 @@
+name: Deloy
+
+# 提交到 develop 才会触发
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+    - name: Build
+      run:
+        - npm install
+        - npm run build
+    - name: Upload
+      uses: actions/upload-artifact@v1
+      with:
+        name: site
+        path: _site
