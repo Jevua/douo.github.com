@@ -358,11 +358,35 @@ Used for symbols.It’s not subject to expression substitution or escape sequenc
 
 
 
-
 ### 其他资料 ###
 
 总结的非常好的 slide
 
 http://saito.im/slide/ruby-new.html
 
+## 生态
 
+### gem
+
+[Ruby 基础 - RubyGem，如何开发一个自己的 Gem · Ruby China](https://ruby-china.org/topics/26292)
+
+默认 gems:
+
+- did_you_mean
+- minitest
+- net-telnet
+- power_assert
+- rake
+- rdoc
+- test-unit
+- xmlrpc
+
+### rake
+
+[GitHub - ruby/rake: A make-like build utility for Ruby. https://github.com/ruby/rake](https://github.com/ruby/rake)
+
+
+### 库
+
+1. `load` 无论是否加载过，都会重新加载
+2. `require` 
