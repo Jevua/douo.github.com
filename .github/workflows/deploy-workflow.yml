@@ -25,6 +25,7 @@ jobs:
     - uses: actions/setup-ruby@v1
       with:
         ruby-version: '2.x' 
+    - run: bundle install
     - name: Build
       run: npm run build
     - name: Upload
