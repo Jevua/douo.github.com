@@ -38,8 +38,9 @@ jobs:
          bundle install
     - name: Build
       run: npm run build
-    - name: Upload
-      uses: actions/upload-artifact@v1
-      with:
-        name: site
-        path: _site
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v2
+      env:
+        PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+        PUBLISH_BRANCH: master
+        PUBLISH_DIR: ./_site
