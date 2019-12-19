@@ -10,6 +10,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
     - uses: actions/cache@v1
       with:
         path: ~/.npm
@@ -25,11 +29,6 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '8.11.1'
-    - run: npm install
-    - name: Checkout
-      uses: actions/checkout@v1
-      with:
-        fetch-depth: 1
     - uses: actions/setup-node@v1
       with:
         node-version: '8.11.1'
