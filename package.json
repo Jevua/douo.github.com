@@ -47,7 +47,7 @@
     "imports-loader": "^0.8.0",
     "lint-staged": "^7.3.0",
     "mini-css-extract-plugin": "^0.4.5",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "postcss": "^6.0.23",
     "postcss-import": "^11.0.0",
     "postcss-loader": "^2.1.6",
@@ -69,8 +69,9 @@
     "d3-scale-chromatic": "^1.5.0",
     "jquery": "^3.4.1",
     "lunr": "^2.3.8",
+    "masonry-layout": "^4.2.2",
     "materialize-css": "^1.0.0",
     "mermaid": "^8.4.4",
-    "npm": "^6.13.4"
+    "npm": "^6.13.6"
   }
 }

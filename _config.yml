@@ -60,25 +60,32 @@ defaults:
       collection_title: "DouO's Blog"
   -
     scope:
-      type: "notes" # 
+      type: "notes" #
     values:
       layout: "note"
       permalink: "/:collection/:path/"
       collection_title: "DouO's Note"
-  - 
+  -
     scope:
       path: "resumes"
       type: "pages"
     values:
       layout: "resume"
-
-
+  -
+    scope:
+      path: "diary"
+      type: "diary"
+    values:
+      layout: "diary"
 
 # 自定义的以 '_' 开头的目录或文件，不声明为 collection 会自动被忽略
 collections:
   resumes:
     output: false
   notes:
+    output: true
+    to_tree: true
+  diary:
     output: true
     to_tree: true
 

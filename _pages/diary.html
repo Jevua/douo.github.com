@@ -1,0 +1,21 @@
+---
+title: Diary
+permalink: /diary/
+layout: diary
+---
+
+<div class="grid" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }'>
+    {{ site }}
+    {% for post in site.diary  %}
+    <div class="grid-item card blue-grey darken-1">
+      <div class="card-content white-text">
+        <span class="card-title">{{ post.date }}</span>
+        <article>{{ post.content }}</article>
+      </div>
+      <div class="card-action">
+        <a href="{{ post.url}}"> Jump </a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>

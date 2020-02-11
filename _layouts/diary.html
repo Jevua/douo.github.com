@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: base
 ---
 <div class="post-meta">
     <span class="post-date">{{ page.date | date: "%Y-%m-%d" }}</span>
@@ -10,16 +10,5 @@ layout: default
 <article>
     {{ content }}
 </article>
-<div class="tag-container" >
-    {% for tag in page.tags %}
-    <div class="chip">
-        <a href="/tags#{{ tag }}-ref">
-            {{ tag }}
-        </a>
-    </div>
-    {% endfor %}
-</div>
-
-{% include disqus.html %}
 
 <a class="btn-floating btn-large waves-effect waves-light scale-transition fab" id="fab"><i class="material-icons">keyboard_arrow_up</i></a>
