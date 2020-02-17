@@ -34,6 +34,7 @@ jobs:
       with:
         ruby-version: '2.6'
     - run: |
+         gem install bundle
          bundle update --bundler
          bundle update
          bundle config path vendor/bundle
