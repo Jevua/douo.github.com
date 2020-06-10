@@ -146,7 +146,7 @@
   <div class="row">
 
     <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
-    <span class="post-date">2017-11-08</span>
+    <span class="post-date">2016-11-08</span>
     
 </div>
 
@@ -160,7 +160,7 @@ exec(success, error, service, action, args);
 <p><code>exec</code> 计算 callbackId，并把回调存放在全局的回调表里：</p>
 
 <pre><code>var callbackId = service + cordova.callbackId++
-if (success || fail) 
+if (success || fail)
 cordova.callbacks[callbackId] = {success:success, fail:fail};
 </code></pre>
 
@@ -255,6 +255,12 @@ webView.addJavascriptInterface(exposedJsApi, "_cordovaNative");
 <p>每次原生产生一个新事件便通过，callback 触发 js 这边的分发事件方法。</p>
 
 <p>当移除最后一个监听器的时候，便通知原生这边释放资源。</p>
+
+<p>fun callback(json){</p>
+
+<p>}</p>
+
+<p>(“event”,callback)</p>
 
 </article>
 <div class="tag-container" >

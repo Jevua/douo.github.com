@@ -511,6 +511,15 @@ config 'example' 'test'
   <li><a href="https://www.cnblogs.com/gnuhpc/p/3293643.html">【OpenWRT之旅】LuCI探究 - gnuhpc - 博客园</a></li>
 </ul>
 
+<p>另外还有 ucitrack 值得注意一下：</p>
+
+<blockquote>
+  <p>The ucitrack mechanism simply maps config file names to init scripts or custom commands.
+It is solely used by LuCI for reloading the correct services when a given config file was changed by the ui.</p>
+
+  <p>You can find the entire implementation in the /sbin/luci-reload script. Thats the only part using /etc/config/ucitrack and it is only invoked by LuCI.</p>
+</blockquote>
+
 <h3 id="init">init</h3>
 
 <p>uci 配置好后，由 /etc/init.d/ 里的脚本来，转换为实际程序需要的配置，并启动服务：</p>
@@ -731,6 +740,153 @@ https://github.com/xtaci/kcptun/issues/167</p>
 
 <p>一开始不能通过 luci 来启动服务，只能通过 /etc/init.d/kcptun 来启动。后面又可以了，忘记是不是需要手动 enable 一下。</p>
 
+<h4 id="smartdns">smartdns</h4>
+
+<p>dns 里面的门道还是挺多的，比如 dns 欺骗，用可信的 dns 查询域名返回的结果仍然会被篡改，所有敏感使用 DoT、DoH 是必须的。面对 dns 服务器被墙，dns 请求走翻墙线路也是必须的。翻墙后的 dns 请求国内网站又会返回错误的 cdn 地址。chinadns 就是这个场景的解决方案。</p>
+
+<p>还有 dns 劫持（Hijack），则是在 dns 服务器上做手脚，对于翻墙来说影响不大，出门在外用不可信的 wifi 需要小心 。</p>
+
+<p>自建 dns 服务器还要小心 dns 毒化（poisioning），实际上也是 dns 欺骗，上游服务器返回错误的ip 污染了自建服务器的 cache。smartdns 在这方面还要作一些折腾。 TODO</p>
+
+<p><code>/etc/config/smartdns</code> 配置如下:</p>
+
+<pre><code>config smartdns
+	option server_name 'smartdns'
+	option port '6053'
+	option tcp_server '1'
+	option ipv6_server '1'
+	option dualstack_ip_selection '0'
+	option prefetch_domain '1'
+	option serve_expired '0'
+	option redirect 'dnsmasq-upstream'
+	option cache_size '2048'
+	option rr_ttl_min '300'
+	option rr_ttl_max '3600'
+	option seconddns_tcp_server '1'
+	option seconddns_no_rule_addr '0'
+	option seconddns_no_rule_nameserver '0'
+	option seconddns_no_rule_ipset '0'
+	option seconddns_no_rule_soa '0'
+	option force_aaaa_soa '0'
+	option coredump '0'
+	option seconddns_enabled '1'
+	option seconddns_port '7913'
+	option seconddns_server_group 'us'
+	option seconddns_no_speed_check '1'
+	option seconddns_no_dualstack_selection '1'
+	option seconddns_no_cache '1'
+	option enabled '1'
+	list old_redirect 'dnsmasq-upstream'
+	list old_port '6053'
+	list old_enabled '1'
+
+config server
+	option enabled '1'
+	option type 'udp'
+	option ip '114.114.114.114'
+	option port '53'
+	option name '114'
+
+config server
+	option enabled '1'
+	option type 'udp'
+	option ip '119.29.29.29'
+	option port '53'
+	option name 'DNSPOD #1'
+
+config server
+	option enabled '1'
+	option ip '8.8.8.8'
+	option port '853'
+	option type 'tls'
+	option server_group 'us'
+	option blacklist_ip '0'
+	option no_check_certificate '0'
+	option name 'Google DoT #1'
+
+config server
+	option enabled '1'
+	option ip '8.8.4.4'
+	option port '853'
+	option type 'tls'
+	option server_group 'us'
+	option blacklist_ip '0'
+	option no_check_certificate '0'
+	option name 'Google DoT #2'
+
+config server
+	option enabled '1'
+	option ip 'https://cloudflare-dns.com/dns-query'
+	option type 'https'
+	option name 'Cloudflare DoH'
+	option server_group 'us'
+	option blacklist_ip '0'
+	option no_check_certificate '0'
+
+config server
+	option enabled '1'
+	option ip 'https://dns.quad9.net/dns-query'
+	option type 'https'
+	option name 'Quad9 DoH'
+	option server_group 'us'
+	option blacklist_ip '0'
+	option no_check_certificate '0'
+
+config server
+	option enabled '1'
+	option name 'Quad9 DoT'
+	option ip '149.112.112.112'
+	option port '853'
+	option type 'tls'
+	option server_group 'us'
+	option blacklist_ip '0'
+	option no_check_certificate '0'
+
+config server
+	option enabled '1'
+	option type 'udp'
+	option name 'LN_UNICOM #1'
+	option ip '202.96.69.38'
+	option port '53'
+
+config server
+	option enabled '1'
+	option type 'udp'
+	option name 'USTC #1'
+	option ip '202.141.160.95'
+	option port '53'
+
+config server
+	option enabled '1'
+	option type 'udp'
+	option name 'QINGHUA #1'
+	option ip '166.111.8.28'
+	option port '53'
+
+config server
+	option enabled '1'
+	option type 'udp'
+	option ip '180.76.76.76'
+	option port '53'
+	option name 'Baidu'
+
+config server
+	option enabled '1'
+	option type 'udp'
+	option name 'ALI#1'
+	option ip '223.5.5.5'
+	option port '53'
+</code></pre>
+
+<p>6053 用于解析国内服务器，第二组服务器  7913 用于科学上网。配合 passwall 的 DNS Mode:<code>Use local port 7913 as DNS</code>。通过<code>作为dnsmasq的上游</code>来启用，推测这种方式的兼容性应该较好，比如解锁网易云音乐或 passwall 都涉及对 dnsmasq 的依赖，见<code>/tmp/dnsmasq.d</code> 完全用 smartdns 替换，还需要折腾。</p>
+
+<p>之前使用了 frp 将 nas 的部分服务暴露到外网，根据不同域名通过 nginx 进行转发。如果在内网的话，可以直接将域名重绑定到实际的服务器，不用再绕一圈。通过<code>对特定域名IP地址指定</code>就可以实现这个需求。示例：</p>
+
+<pre><code>address /xxx.dourok.info/192.168.1.xxx
+</code></pre>
+
+<p>如果还保留 dnsmasq 服务，记得关闭 dnsmasq 的<code>重绑定保护(Rebind protection)</code>功能。</p>
+
 <h3 id="网络">网络</h3>
 
 <h4 id="ip">ip</h4>
@@ -784,6 +940,10 @@ sudo sysctl net.ipv4.tcp_available_congestion_control # 可用拥挤控制算法
 sudo sysctl -w net.ipv4.tcp_congestion_control = Bbr # 启用
 sudo sysctl -p
 </code></pre>
+
+<h4 id="zone">zone</h4>
+
+<p>zone 的概念和应用还有待理解 TODO</p>
 
 <h5 id="问题-1">问题</h5>
 
@@ -984,6 +1144,8 @@ uci set network.@rule[-1].lookup="lanvpn"
 
 <p>没有就手动添加，<code>192.168.0.3</code> 就是路由分配到的地址。</p>
 
+<p>需要禁用 DNS 功能，不然会将 192.168.0.1 作为 dns 服务器写入 <code>/tmp/resolv.conf.auto</code></p>
+
 <p>参考：</p>
 
 <ul>
@@ -992,9 +1154,7 @@ uci set network.@rule[-1].lookup="lanvpn"
 
 <h4 id="限制智能家电访问内网">限制智能家电访问内网</h4>
 
-<p>TODO</p>
-
-<p>####</p>
+<p>基本思路是通过 dhcp 配置，自动分配的 IP 段为 <code>192.168.1.64/26</code> 这样就可以不用 ipset 直接用 iptables 禁止这个 ip 段不能访问某些内网的敏感机器。</p>
 
 </article>
 <div class="tag-container" >
