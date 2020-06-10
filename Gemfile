@@ -22,4 +22,5 @@ group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.6"
   gem 'jekyll-moon', '0.1.0', :path => './jekyll-moon'
   gem 'jekyll-babel'
+  gem "jekyll-last-modified-at"
 end

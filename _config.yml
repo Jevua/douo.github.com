@@ -14,11 +14,17 @@ markdown: KramdownFix # kramdown
 # theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-last-modified-at
+
 feed:
   path: rss.xml
 # Make sure the `_pages/` is processed
 include:
   - _pages
+
+# Optional. The default date format, used if none is specified in the tag.
+last-modified-at:
+    date-format: '%y-%M-%d'
 
 # Make sure the `_site/assets/` is not trashed (webpack output)
 keep_files:
