@@ -25,7 +25,7 @@ description:
 
 ### 2019-02-13
 
-支持 mermaid
+支持 mermaid，图表表达复杂逻辑比文本更有力。标记语言比图片更易维护。
 
 ### 2018-01-02
 
@@ -57,7 +57,7 @@ description:
 
 写了一个脚本批量更新速记的结构，这是其中一个：
 
-    quick.each do |m| 
+    quick.each do |m|
       path = m.data['pointer']['realpath']
       name = File.basename path
       dir = File.dirname path
@@ -110,7 +110,7 @@ description:
 现在是
 
 	![-<>Alt text](/path/to/img.jpg "Optional title")
-	
+
 将 ALt text 的第一个字符作为标志，其中`-` => `无样式`，`<` => `pull-left`， `>` => `pull-right`。其他字符则当成 Alt text 的字符，显示默认样式 `display`。
 
 
@@ -148,5 +148,3 @@ notes与ruhoh系统的耦合，但仍然不能作为附加插件存在，在 `re
 ### 2012-11-16
 
 正式開始新站點的日誌記錄，重新實現了一個更有靈活性的TOC插件，為筆記系統添加了樣式，twitter-bootstrap 的經典結構。
-
-

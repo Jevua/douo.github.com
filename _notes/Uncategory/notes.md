@@ -70,7 +70,7 @@ type: draft
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" >
-    
+
         <fragment
 			android:id="@+id/content"
             android:layout_width="match_parent"
@@ -84,7 +84,7 @@ type: draft
             android:layout_height="wrap_content"
             android:layout_weight="0" />
     </LinearLayout>
-	
+
 然后，我把它记下了，以后需要用到这种布局。就来复制粘贴一份。
 
 后来，了解了 LinearLayout onMeasure 方法，明白了 LinearLayout 布局的过程。
@@ -100,7 +100,7 @@ type: draft
 
 以宽度为例，第一步，先测量各个控件的宽度，得到剩下的空间。第二步，把剩下的空间按照weight分配给各个组件。
 
- 
+
 
 #### 实际效果
 
@@ -166,6 +166,7 @@ Evernote？
 不支持应用加密
 不支持笔记本加密
 浏览与编辑一体
+
 Writing System
 
 优点
