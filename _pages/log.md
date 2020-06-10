@@ -23,6 +23,10 @@ description:
 
 [1]: https://swiftype.com/
 
+### 2020-06-10
+
+加入[jekyll-last-modified-at](https://github.com/gjtorikian/jekyll-last-modified-at) 页面显示最新修改时间（发布时间 tooltip）。然后做了个笔记的简单主页，显示最新发布、最新修改和 todo，通过 front matter 的 todo 属性来过滤。
+
 ### 2019-02-13
 
 支持 mermaid，图表表达复杂逻辑比文本更有力。标记语言比图片更易维护。
