@@ -60,13 +60,10 @@ class TagsCloud {
   }
 
   setup() {
-      console.log("setup")
-      console.log(d3)
-      console.log(d3.json)
     if (this.data) {
       this.generate(this.data);
     } else {
-        d3.json('/tags.json', (data => {
+      d3.json('/tags.json').then(data => {
         this.data = data;
         this.generate(data);
         let w = window.innerWidth;
@@ -78,7 +75,7 @@ class TagsCloud {
             this.generate(this.data);
           }
         });
-        }));
+      });
     }
   }
 
