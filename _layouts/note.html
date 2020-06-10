@@ -2,7 +2,7 @@
 layout: default
 ---
 <div class="post-meta">
-    <span class="post-date">{{ page.date | date: "%Y-%m-%d" }}</span>
+<span class="post-date tooltipped" data-tooltip="最后更新 {{ page.last_modified_at | date: '%y-%m-%d' }}">{{ page.date | date: "%Y-%m-%d" }}</span>
     {% for category in page.categories %}<span><a href="/categories#{{ category }}-ref" class="category category-{{ category }} waves-effect waves-light">{{category}}</a></span>
     {% endfor %}
 </div>
