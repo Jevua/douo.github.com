@@ -146,7 +146,7 @@
   <div class="row">
 
     <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
-    <span class="post-date">2013-01-05</span>
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2013-01-05</span>
     
 </div>
 
@@ -220,15 +220,15 @@
 
 <h4 id="插入">插入</h4>
 
-<pre><code class="language-lisp">(defun insert-code (beg end code)
-  (interactive (list (point) (mark) (read-string "what's language?")))
+<div class="language-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">insert-code</span> <span class="p">(</span><span class="nv">beg</span> <span class="nv">end</span> <span class="nv">code</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">interactive</span> <span class="p">(</span><span class="nb">list</span> <span class="p">(</span><span class="nv">point</span><span class="p">)</span> <span class="p">(</span><span class="nv">mark</span><span class="p">)</span> <span class="p">(</span><span class="nv">read-string</span> <span class="s">"what's language?"</span><span class="p">)))</span>
   
-  (goto-char (max beg end))
-  (insert (concat "&lt;/" "code&gt;"))
-  (goto-char (min beg end))
-  (insert "&lt;code " code "&gt;")
-  )
-</code></pre>
+  <span class="p">(</span><span class="nv">goto-char</span> <span class="p">(</span><span class="nb">max</span> <span class="nv">beg</span> <span class="nv">end</span><span class="p">))</span>
+  <span class="p">(</span><span class="nv">insert</span> <span class="p">(</span><span class="nv">concat</span> <span class="s">"&lt;/"</span> <span class="s">"code&gt;"</span><span class="p">))</span>
+  <span class="p">(</span><span class="nv">goto-char</span> <span class="p">(</span><span class="nb">min</span> <span class="nv">beg</span> <span class="nv">end</span><span class="p">))</span>
+  <span class="p">(</span><span class="nv">insert</span> <span class="s">"&lt;code "</span> <span class="nv">code</span> <span class="s">"&gt;"</span><span class="p">)</span>
+  <span class="p">)</span>
+</code></pre></div></div>
 
 <h3 id="2012-03-24">2012-03-24</h3>
 

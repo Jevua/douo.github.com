@@ -186,42 +186,42 @@ FE.改到图片里面,用ACDSee打开可依旧提示」原始数据格式无法�
 
 <p>终于成功,改成绿色相应的CRC码是C6 E6 2E 0C</p>
 
-<pre><code class="language-java">//生成CRC码
-public int creatCRC(byte[] data ,int start, int length){
-long crc=0xFFFFFFFFL;
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//生成CRC码</span>
+<span class="kd">public</span><span class="err"> </span><span class="kt">int</span><span class="err"> </span><span class="n">creatCRC</span><span class="o">(</span><span class="kt">byte</span><span class="o">[]</span><span class="err"> </span><span class="n">data</span> <span class="o">,</span><span class="kt">int</span><span class="err"> </span><span class="n">start</span><span class="o">,</span><span class="err"> </span><span class="kt">int</span><span class="err"> </span><span class="n">length</span><span class="o">){</span>
+<span class="kt">long</span><span class="err"> </span><span class="n">crc</span><span class="o">=</span><span class="mh">0xFFFFFFFF</span><span class="no">L</span><span class="o">;</span>
 
-for(int i=start;i&gt;8));
+<span class="k">for</span><span class="o">(</span><span class="kt">int</span><span class="err"> </span><span class="n">i</span><span class="o">=</span><span class="n">start</span><span class="o">;</span><span class="n">i</span><span class="o">&gt;</span><span class="mi">8</span><span class="o">));</span>
 
-}
+<span class="o">}</span>
 
-return (int)(crc\^0xFFFFFFFF);
+<span class="k">return</span><span class="err"> </span><span class="o">(</span><span class="kt">int</span><span class="o">)(</span><span class="n">crc</span><span class="err">\</span><span class="o">^</span><span class="mh">0xFFFFFFFF</span><span class="o">);</span>
 
-}
+<span class="o">}</span>
 
-static long poly=0xEDB88320L;
+<span class="kd">static</span><span class="err"> </span><span class="kt">long</span><span class="err"> </span><span class="n">poly</span><span class="o">=</span><span class="mh">0xEDB88320</span><span class="no">L</span><span class="o">;</span>
 
-//  建立CRC校验查找表
+<span class="c1">//  建立CRC校验查找表</span>
 
-long crcTable[];
+<span class="kt">long</span><span class="err"> </span><span class="n">crcTable</span><span class="o">[];</span>
 
-public void createTable(){
+<span class="kd">public</span><span class="err"> </span><span class="kt">void</span><span class="err"> </span><span class="n">createTable</span><span class="o">(){</span>
 
-crcTable=new long[256];
+<span class="n">crcTable</span><span class="o">=</span><span class="k">new</span><span class="err"> </span><span class="kt">long</span><span class="o">[</span><span class="mi">256</span><span class="o">];</span>
 
-long crc;
+<span class="kt">long</span><span class="err"> </span><span class="n">crc</span><span class="o">;</span>
 
-for(int i=0;i&lt;256;i++){
+<span class="k">for</span><span class="o">(</span><span class="kt">int</span><span class="err"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">256</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>
 
-crc=(long)i;
+<span class="n">crc</span><span class="o">=(</span><span class="kt">long</span><span class="o">)</span><span class="n">i</span><span class="o">;</span>
 
-for(int j=0;j&lt;8;j++){ if((crc0x1)==1) crc=poly\^(crc&gt;&gt;1);
+<span class="k">for</span><span class="o">(</span><span class="kt">int</span><span class="err"> </span><span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span><span class="n">j</span><span class="o">&lt;</span><span class="mi">8</span><span class="o">;</span><span class="n">j</span><span class="o">++){</span><span class="err"> </span><span class="k">if</span><span class="o">((</span><span class="n">crc0x1</span><span class="o">)==</span><span class="mi">1</span><span class="o">)</span><span class="err"> </span><span class="n">crc</span><span class="o">=</span><span class="n">poly</span><span class="err">\</span><span class="o">^(</span><span class="n">crc</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="o">);</span>
 
-else crc&gt;&gt;=1;
+<span class="k">else</span><span class="err"> </span><span class="n">crc</span><span class="o">&gt;&gt;=</span><span class="mi">1</span><span class="o">;</span>
 
-} crcTable[i]=crc;
+<span class="o">}</span> <span class="n">crcTable</span><span class="o">[</span><span class="n">i</span><span class="o">]=</span><span class="n">crc</span><span class="o">;</span>
 
-} }
-</code></pre>
+<span class="o">}</span> <span class="o">}</span>
+</code></pre></div></div>
 <p>——————————————狡猾的分割线——————————————————</p>
 
 <p>这其实是篇一年多前的文章,发出来试试看<a href="http://kpumuk.info/projects/wordpress-plugins/codecolorer/">codecolorer</a>插件的效果,结果如上所示,还不错.</p>

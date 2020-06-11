@@ -189,19 +189,19 @@ TRUE： XXX_SUPPORT = TRUE;</li>
 
 <p>比如说新建一个源文件dou.c，代码如下：</p>
 
-<pre><code class="language-c">#include "dou.h"
-int dou_max(int a , int b){
-return a&gt;b?a:b;
-}
-</code></pre>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include "dou.h"
+</span><span class="kt">int</span> <span class="nf">dou_max</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span> <span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">){</span>
+<span class="k">return</span> <span class="n">a</span><span class="o">&gt;</span><span class="n">b</span><span class="o">?</span><span class="n">a</span><span class="o">:</span><span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>接下来建立头文件dou.h,</p>
 
-<pre><code class="language-c">#ifndef _DOU_H
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#ifndef _DOU_H
 #define _DOU_H
-extern int dou_max(int a,int b);
-#endif
-</code></pre>
+</span><span class="k">extern</span> <span class="kt">int</span> <span class="nf">dou_max</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span><span class="kt">int</span> <span class="n">b</span><span class="p">);</span>
+<span class="cp">#endif
+</span></code></pre></div></div>
 
 <p>若要将程序打包成库发布，这里跟上面添加包含源码的第三方库一样，在MTK软件系统根目录下，新增一个dou目录，在创建inc和src文件夹，把dou.h放在dou，dou.c放在dou。接着在make目录下新增一个dou目录,再添加4个新文件，分别是，dou.def、dou.inc、dou.lis、dou.pth。</p>
 

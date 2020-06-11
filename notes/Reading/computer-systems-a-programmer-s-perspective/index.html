@@ -146,7 +146,7 @@
   <div class="row">
 
     <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
-    <span class="post-date">2016-01-03</span>
+<span class="post-date tooltipped" data-tooltip="最后更新 17-12-10">2016-01-03</span>
     
 </div>
 
@@ -166,17 +166,17 @@
 <h4 id="进制">进制</h4>
 
 <ul>
-  <li>10-&gt;16: <script type="math/tex">x=q_0\times16+r_0;q_0=q_1\times16+r_1...</script>直到 <script type="math/tex">q_{n} = 0</script>，<script type="math/tex">r_nr_{n-1}...r_0</script>就是所求的16进制。</li>
-  <li>16-&gt;10: 16进制数 H 序列为<script type="math/tex">h_nh_{n-1}..h_{1}h_0</script>，那么十进制 <script type="math/tex">n=16^n\times h_n+16^{n-1}\times h_{n-1}+...+h_0</script></li>
+  <li>10-&gt;16: \(x=q_0\times16+r_0;q_0=q_1\times16+r_1...\)直到 \(q_{n} = 0\)，\(r_nr_{n-1}...r_0\)就是所求的16进制。</li>
+  <li>16-&gt;10: 16进制数 H 序列为\(h_nh_{n-1}..h_{1}h_0\)，那么十进制 \(n=16^n\times h_n+16^{n-1}\times h_{n-1}+...+h_0\)</li>
   <li>2-&gt;10: 与 16 进制相似</li>
   <li>10-&gt;2: 与 16 进制相似</li>
 </ul>
 
-<p>16 与 2 的一个特例，若 <script type="math/tex">x=2^n</script>，n为非负整数。将 n 表示为 i+4j，x 的 16 进制表示为 0xa0..0(j个0)。因为 16 进制中一个 0 等于 2 进制中 4 个 0，所以 j 为 n/4 的商，i 为余数，所以 a 的值为1（i=0），2（i=1），4（i=2），8（i=3）。</p>
+<p>16 与 2 的一个特例，若 \(x=2^n\)，n为非负整数。将 n 表示为 i+4j，x 的 16 进制表示为 0xa0..0(j个0)。因为 16 进制中一个 0 等于 2 进制中 4 个 0，所以 j 为 n/4 的商，i 为余数，所以 a 的值为1（i=0），2（i=1），4（i=2），8（i=3）。</p>
 
 <h5 id="字长">字长</h5>
 
-<p>对于字长为 w 位的机器而言，虚拟地址的范围为 <script type="math/tex">0～2^{w}-1</script>，程序最多能访问 <script type="math/tex">2^{w}</script> 个字节。</p>
+<p>对于字长为 w 位的机器而言，虚拟地址的范围为 \(0～2^{w}-1\)，程序最多能访问 \(2^{w}\) 个字节。</p>
 
 <h5 id="大小端">大小端</h5>
 
@@ -226,10 +226,9 @@
 <h5 id="移位运算">移位运算</h5>
 
 <ul>
-  <li>逻辑左移，向左移位补零：  <script type="math/tex">% <![CDATA[
-[x_n-1,x_n-2,...,x_0] << k = [x_n-k-1,x_n-k-2,...,x_0,0,...,0] %]]></script></li>
-  <li>逻辑右移，向右移位补零：  <script type="math/tex">[x_n-1,x_n-2,...,x_0] >> k = [0,...,0,x_n-1,x_n-2,...,x_k]</script></li>
-  <li>算术右移，向右移位补最高符号位： <script type="math/tex">[x_n-1,x_n-2,...,x_0] >>> k = [x_n-1,...,x_n-1,x_n-1,x_n-2,...,x_k]</script></li>
+  <li>逻辑左移，向左移位补零：  \([x_n-1,x_n-2,...,x_0] &lt;&lt; k = [x_n-k-1,x_n-k-2,...,x_0,0,...,0]\)</li>
+  <li>逻辑右移，向右移位补零：  \([x_n-1,x_n-2,...,x_0] &gt;&gt; k = [0,...,0,x_n-1,x_n-2,...,x_k]\)</li>
+  <li>算术右移，向右移位补最高符号位： \([x_n-1,x_n-2,...,x_0] &gt;&gt;&gt; k = [x_n-1,...,x_n-1,x_n-1,x_n-2,...,x_k]\)</li>
 </ul>
 
 <p>C 中的位运算和移位是大小端无关的。<a href="https://stackoverflow.com/questions/7184789/does-bit-shift-depend-on-endianness">c - Does bit-shift depend on endianness? - Stack Overflow</a></p>
@@ -238,10 +237,9 @@
 
 <p><a href="http://csapp.cs.cmu.edu/3e/waside/waside-boolean.pdf">DATA:BOOL</a></p>
 
-<p>整域 <script type="math/tex">\mathbb{Z}</script> 是一个<a href="https://en.wikipedia.org/wiki/Ring_of_integers">整环</a>，加法，乘法，加法逆运算，0和1分别为加法单位元与乘法单位元</p>
+<p>整域 \(\mathbb{Z}\) 是一个<a href="https://en.wikipedia.org/wiki/Ring_of_integers">整环</a>，加法，乘法，加法逆运算，0和1分别为加法单位元与乘法单位元</p>
 
-<p>布尔代数，<script type="math/tex">% <![CDATA[
-<\{0, 1\}, \vert, \&, ˜, 0, 1> %]]></script>， 与整环的区别在于</p>
+<p>布尔代数，\(&lt;\{0, 1\}, \vert, \&amp;, ˜, 0, 1&gt;\)， 与整环的区别在于</p>
 
 <ol>
   <li>加法到乘法的分配律。</li>
@@ -252,87 +250,78 @@
   <li>摩根法则（DeMorgan’s laws）</li>
 </ol>
 
-<p><script type="math/tex">% <![CDATA[
-<\{0, 1\},  \hat{}, \&, I, 0, 1> %]]></script> 就是一个环，等同于整数模 2 环。I 是一个运算，令 I(a) = a，满足 a^I(a) = a^a =0。异或 ^ 是加法，&amp; 是乘法。</p>
+<p>\(&lt;\{0, 1\},  \hat{}, \&amp;, I, 0, 1&gt;\) 就是一个环，等同于整数模 2 环。I 是一个运算，令 I(a) = a，满足 a^I(a) = a^a =0。异或 ^ 是加法，&amp; 是乘法。</p>
 
-<p><script type="math/tex">% <![CDATA[
-<\{0, 1\}^w, \vert, \&, ˜, 0^w, 1^w> %]]></script> 是布尔代数</p>
+<p>\(&lt;\{0, 1\}^w, \vert, \&amp;, ˜, 0^w, 1^w&gt;\) 是布尔代数</p>
 
-<p><script type="math/tex">% <![CDATA[
-<\{0, 1\}^w,  \hat{}, \&, ˜, 0^w, 1^w> %]]></script> 布尔环</p>
+<p>\(&lt;\{0, 1\}^w,  \hat{}, \&amp;, ˜, 0^w, 1^w&gt;\) 布尔环</p>
 
-<p>集合 <script type="math/tex">% <![CDATA[
-<P(S), ∪, ∩, \overline{}, ∅, S> %]]></script> 也是布尔代数</p>
+<p>集合 \(&lt;P(S), ∪, ∩, \overline{}, ∅, S&gt;\) 也是布尔代数</p>
 
 <h4 id="整数">整数</h4>
 
-<p>用 <script type="math/tex">\vec x</script> 表示二进制序列</p>
+<p>用 \(\vec x\) 表示二进制序列</p>
 
 <p>无符号（unsigned）编码:</p>
 
-<script type="math/tex; mode=display">B2U_w(\vec x)=\sum_{i=0}^{w-1}x_i2^i</script>
+\[B2U_w(\vec x)=\sum_{i=0}^{w-1}x_i2^i\]
 
 <p>补码(two’s-complement)编码</p>
 
-<script type="math/tex; mode=display">B2T_w(\vec x)=-x_{w-1}2^{w-1}+\sum_{i=0}^{w-2}x_i2^i</script>
+\[B2T_w(\vec x)=-x_{w-1}2^{w-1}+\sum_{i=0}^{w-2}x_i2^i\]
 
 <p>有符号与无符号的转换</p>
 
-<script type="math/tex; mode=display">B2U_w(\vec x) - B2T_w(\vec x) = 2^wx_{w-1}\\
+\[B2U_w(\vec x) - B2T_w(\vec x) = 2^wx_{w-1}\\
 B2U_w(\vec x) = B2T_w(\vec x) + 2^wx_{w-1}\\
 \vec x = T2B_w(x)\\
-B2U_w(T2B_w(x)) = x + 2^wx_{w-1}\\</script>
+B2U_w(T2B_w(x)) = x + 2^wx_{w-1}\\\]
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{equation}
+\[\begin{equation}
     T2U_w(x)=
    \begin{cases}
-   x+2^w &{x<0}\\
-   x &{x\geq 0}
+   x+2^w &amp;{x&lt;0}\\
+   x &amp;{x\geq 0}
    \end{cases}
-  \end{equation} %]]></script>
+  \end{equation}\]
 
 <h5 id="位扩展">位扩展</h5>
 
-<p>用算术右移扩展后的数值仍与原数值相等。可由<script type="math/tex">B2T_{w+1}([x_{w-1},x_{w-1},...,x_0])=B2T_w([x_{w-1},...,x_0])</script>证得。</p>
+<p>用算术右移扩展后的数值仍与原数值相等。可由\(B2T_{w+1}([x_{w-1},x_{w-1},...,x_0])=B2T_w([x_{w-1},...,x_0])\)证得。</p>
 
 <h5 id="位截断">位截断</h5>
 
 <p>将 w 位截断为 k 位时，直接丢弃高 w-k 位。</p>
 
 <ul>
-  <li>无符号 <script type="math/tex">B2U_k([x_{k-1},...,x_0])=B2U_w([x_{w-1},...,x_0])mod 2^k</script></li>
-  <li>有符号 <script type="math/tex">B2T_k([x_{k-1},...,x_0])=U2T_k(B2U_w([x_{w-1},...,x_0])mod 2^k)</script></li>
+  <li>无符号 \(B2U_k([x_{k-1},...,x_0])=B2U_w([x_{w-1},...,x_0])mod 2^k\)</li>
+  <li>有符号 \(B2T_k([x_{k-1},...,x_0])=U2T_k(B2U_w([x_{w-1},...,x_0])mod 2^k)\)</li>
 </ul>
 
 <h4 id="整数运算">整数运算</h4>
 
-<p><script type="math/tex">+_w^u</script> 表示 w 上的无符号加法。</p>
+<p>\(+_w^u\) 表示 w 上的无符号加法。</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{equation}
+\[\begin{equation}
     x+_w^u y=
    \begin{cases}
-   x+y &{x+y<2^w}\\
-   x+y-2^w &{2^w \leq x+y < 2^{w+1}}
+   x+y &amp;{x+y&lt;2^w}\\
+   x+y-2^w &amp;{2^w \leq x+y &lt; 2^{w+1}}
    \end{cases}
-  \end{equation} %]]></script>
+  \end{equation}\]
 
-<p>因为 <script type="math/tex">% <![CDATA[
-x < 2^w,y<2^w; %]]></script>所以 <script type="math/tex">% <![CDATA[
-x+y-2^w < x < y %]]></script>，可由此法判断无符号加法是否产生溢出。</p>
+<p>因为 \(x &lt; 2^w,y&lt;2^w;\)所以 \(x+y-2^w &lt; x &lt; y\)，可由此法判断无符号加法是否产生溢出。</p>
 
 <p>补码加法</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{equation}
+\[\begin{equation}
     x+_w^t y=
    \begin{cases}
-   x+y-2^w &{2^{w-1}\leq x+y}\\
-   x+y &{2^{w-1} \leq x+y < 2^{w-1}}\\
-   x+y+2^w &{x+y < -2^{w-1}}
+   x+y-2^w &amp;{2^{w-1}\leq x+y}\\
+   x+y &amp;{2^{w-1} \leq x+y &lt; 2^{w-1}}\\
+   x+y+2^w &amp;{x+y &lt; -2^{w-1}}
    \end{cases}
-  \end{equation} %]]></script>
+  \end{equation}\]
 
 <p>补码溢出:</p>
 
@@ -353,13 +342,13 @@ int tadd_ok(int x,int y){
 
 <p><code>-x = ~x+1</code></p>
 
-<script type="math/tex; mode=display">B2T_w(\tilde{}\vec x)=(1-x_{w-1})2^{w-1}+\sum_{i=0}^{w-2}(1-x_i)2^i\\
+\[B2T_w(\tilde{}\vec x)=(1-x_{w-1})2^{w-1}+\sum_{i=0}^{w-2}(1-x_i)2^i\\
 B2T_w(\tilde{}\vec x)=(1-x_{w-1})2^{w-1}+\sum_{i=0}^{w-2}2^i+\sum_{i=0}^{w-2}x_i2^i\\
 B2T_w(\tilde{}\vec x)=2^{w-1}-x_{w-1}2^{w-1}+\sum_{i=0}^{w-2}2^i-\sum_{i=0}^{w-2}x_i2^i\\
 B2T_w(\tilde{}\vec x)=(-2^{w-1}+\sum_{i=0}^{w-2}2^i)-(-x_{w-1}2^{w-1}+\sum_{i=0}^{w-2}x_i2^i)\\
 B2T_w(\tilde{}\vec x)=(-2^{w-1}+2^{w-1}-1)-(-x_{w-1}2^{w-1}+\sum_{i=0}^{w-2}(x_i)2^i)\\
 B2T_w(\tilde{}\vec x)=-1-B2T_w(\vec x)\\
--B2T_w(\vec x)=B2T_w(\tilde{}\vec x)+1\\</script>
+-B2T_w(\vec x)=B2T_w(\tilde{}\vec x)+1\\\]
 
 <h4 id="乘法">乘法</h4>
 
@@ -461,7 +450,7 @@ B2T_w(\tilde{}\vec x)=-1-B2T_w(\vec x)\\
 
 <p>Imm（Eb，Ei，s），是通用的形式，其中 Imm 是立即数偏移，Eb 是基址寄存器，Ei 是变址寄存器，s 是一个比例因子(s 必须是 1、2、4、8)，这个地址可以计算为:</p>
 
-<script type="math/tex; mode=display">Imm + R[E_b] + R[E_i] * s</script>
+\[Imm + R[E_b] + R[E_i] * s\]
 
 <p>R[Eb] 表示寄存器 Eb 的值，Mb[Addr] 表示内存地址开始 b 个字节值的引用。</p>
 
@@ -836,8 +825,7 @@ row3_t A[5]
 
 <p>多维数组 <code>T D[R][C]</code>, 对于数组元素 D[i][j]</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\&D[i][j] = x_D + L(C * i + j) %]]></script>
+\[\&amp;D[i][j] = x_D + L(C * i + j)\]
 
 <h4 id="异质数据结构">异质数据结构</h4>
 
@@ -1226,8 +1214,8 @@ bool-expr_k : int-expr_k
 
 <p>Amdahl 定律，</p>
 
-<script type="math/tex; mode=display">T_{new} = T_{old}*[(1-a)+a/k]
-S=\frac{1}{(1-a)+a/k}</script>
+\[T_{new} = T_{old}*[(1-a)+a/k]
+S=\frac{1}{(1-a)+a/k}\]
 
 <h3 id="第六章-存储器层次结构">第六章 存储器层次结构</h3>
 
@@ -2009,7 +1997,7 @@ int pthread_join(pthread_t tid, void **thread_return);
 
 <p>加速比（speedup）：</p>
 
-<p><script type="math/tex">S_p = T_1 / T_p</script></p>
+<p>\(S_p = T_1 / T_p\)</p>
 <ul>
   <li>p，处理器数目</li>
   <li>T_k，在 k 个核上的执行时间</li>
@@ -2017,7 +2005,7 @@ int pthread_join(pthread_t tid, void **thread_return);
 
 <p>效率</p>
 
-<script type="math/tex; mode=display">E_p = S_p/p</script>
+\[E_p = S_p/p\]
 
 <p>1 75% 2</p>
 

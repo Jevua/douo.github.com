@@ -166,61 +166,61 @@
 
 <p>以文章<a href="/2012/08/20/something-about-ruhoh">Ruhoh 札记</a>为例，它的目录数据是这样的：</p>
 
-<pre><code class="language-ruby">{:level=&gt;0,
- :children=&gt;
-  [{:text=&gt;"ruhoh", :level=&gt;3, :count=&gt;0, :anchor=&gt;"toc_0", :children=&gt;[]},
-   {:text=&gt;"评论", :level=&gt;3, :count=&gt;1, :anchor=&gt;"toc_1", :children=&gt;[]},
-   {:text=&gt;"主题", :level=&gt;3, :count=&gt;2, :anchor=&gt;"toc_2", :children=&gt;[]},
-   {:text=&gt;"mustache", :level=&gt;3, :count=&gt;3, :anchor=&gt;"toc_3", :children=&gt;[]},
-   {:text=&gt;"Markdown", :level=&gt;3, :count=&gt;4, :anchor=&gt;"toc_4", :children=&gt;[]},
-   {:text=&gt;"RSS &amp;amp; Sitemap",
-    :level=&gt;3,
-    :count=&gt;5,
-    :anchor=&gt;"toc_5",
-    :children=&gt;[]},
-   {:text=&gt;"搬家", :level=&gt;3, :count=&gt;6, :anchor=&gt;"toc_6", :children=&gt;[]},
-   {:text=&gt;"部署", :level=&gt;3, :count=&gt;7, :anchor=&gt;"toc_7", :children=&gt;[]},
-   {:text=&gt;"其他",
-    :level=&gt;3,
-    :count=&gt;8,
-    :anchor=&gt;"toc_8",
-    :children=&gt;
-     [{:text=&gt;"Mathjax",
-       :level=&gt;4,
-       :count=&gt;9,
-       :anchor=&gt;"toc_9",
-       :children=&gt;[]},
-      {:text=&gt;"自动刷新", :level=&gt;4, :count=&gt;10, :anchor=&gt;"toc_10", :children=&gt;[]},
-      {:text=&gt;"TODO",
-       :level=&gt;4,
-       :count=&gt;11,
-       :anchor=&gt;"toc_11",
-       :children=&gt;[]}]}]}
-</code></pre>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="ss">:level</span><span class="o">=&gt;</span><span class="mi">0</span><span class="p">,</span>
+ <span class="ss">:children</span><span class="o">=&gt;</span>
+  <span class="p">[{</span><span class="ss">:text</span><span class="o">=&gt;</span><span class="s2">"ruhoh"</span><span class="p">,</span> <span class="ss">:level</span><span class="o">=&gt;</span><span class="mi">3</span><span class="p">,</span> <span class="ss">:count</span><span class="o">=&gt;</span><span class="mi">0</span><span class="p">,</span> <span class="ss">:anchor</span><span class="o">=&gt;</span><span class="s2">"toc_0"</span><span class="p">,</span> <span class="ss">:children</span><span class="o">=&gt;</span><span class="p">[]},</span>
+   <span class="p">{</span><span class="ss">:text</span><span class="o">=&gt;</span><span class="s2">"评论"</span><span class="p">,</span> <span class="ss">:level</span><span class="o">=&gt;</span><span class="mi">3</span><span class="p">,</span> <span class="ss">:count</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span> <span class="ss">:anchor</span><span class="o">=&gt;</span><span class="s2">"toc_1"</span><span class="p">,</span> <span class="ss">:children</span><span class="o">=&gt;</span><span class="p">[]},</span>
+   <span class="p">{</span><span class="ss">:text</span><span class="o">=&gt;</span><span class="s2">"主题"</span><span class="p">,</span> <span class="ss">:level</span><span class="o">=&gt;</span><span class="mi">3</span><span class="p">,</span> <span class="ss">:count</span><span class="o">=&gt;</span><span class="mi">2</span><span class="p">,</span> <span class="ss">:anchor</span><span class="o">=&gt;</span><span class="s2">"toc_2"</span><span class="p">,</span> <span class="ss">:children</span><span class="o">=&gt;</span><span class="p">[]},</span>
+   <span class="p">{</span><span class="ss">:text</span><span class="o">=&gt;</span><span class="s2">"mustache"</span><span class="p">,</span> <span class="ss">:level</span><span class="o">=&gt;</span><span class="mi">3</span><span class="p">,</span> <span class="ss">:count</span><span class="o">=&gt;</span><span class="mi">3</span><span class="p">,</span> <span class="ss">:anchor</span><span class="o">=&gt;</span><span class="s2">"toc_3"</span><span class="p">,</span> <span class="ss">:children</span><span class="o">=&gt;</span><span class="p">[]},</span>
+   <span class="p">{</span><span class="ss">:text</span><span class="o">=&gt;</span><span class="s2">"Markdown"</span><span class="p">,</span> <span class="ss">:level</span><span class="o">=&gt;</span><span class="mi">3</span><span class="p">,</span> <span class="ss">:count</span><span class="o">=&gt;</span><span class="mi">4</span><span class="p">,</span> <span class="ss">:anchor</span><span class="o">=&gt;</span><span class="s2">"toc_4"</span><span class="p">,</span> <span class="ss">:children</span><span class="o">=&gt;</span><span class="p">[]},</span>
+   <span class="p">{</span><span class="ss">:text</span><span class="o">=&gt;</span><span class="s2">"RSS &amp;amp; Sitemap"</span><span class="p">,</span>
+    <span class="ss">:level</span><span class="o">=&gt;</span><span class="mi">3</span><span class="p">,</span>
+    <span class="ss">:count</span><span class="o">=&gt;</span><span class="mi">5</span><span class="p">,</span>
+    <span class="ss">:anchor</span><span class="o">=&gt;</span><span class="s2">"toc_5"</span><span class="p">,</span>
+    <span class="ss">:children</span><span class="o">=&gt;</span><span class="p">[]},</span>
+   <span class="p">{</span><span class="ss">:text</span><span class="o">=&gt;</span><span class="s2">"搬家"</span><span class="p">,</span> <span class="ss">:level</span><span class="o">=&gt;</span><span class="mi">3</span><span class="p">,</span> <span class="ss">:count</span><span class="o">=&gt;</span><span class="mi">6</span><span class="p">,</span> <span class="ss">:anchor</span><span class="o">=&gt;</span><span class="s2">"toc_6"</span><span class="p">,</span> <span class="ss">:children</span><span class="o">=&gt;</span><span class="p">[]},</span>
+   <span class="p">{</span><span class="ss">:text</span><span class="o">=&gt;</span><span class="s2">"部署"</span><span class="p">,</span> <span class="ss">:level</span><span class="o">=&gt;</span><span class="mi">3</span><span class="p">,</span> <span class="ss">:count</span><span class="o">=&gt;</span><span class="mi">7</span><span class="p">,</span> <span class="ss">:anchor</span><span class="o">=&gt;</span><span class="s2">"toc_7"</span><span class="p">,</span> <span class="ss">:children</span><span class="o">=&gt;</span><span class="p">[]},</span>
+   <span class="p">{</span><span class="ss">:text</span><span class="o">=&gt;</span><span class="s2">"其他"</span><span class="p">,</span>
+    <span class="ss">:level</span><span class="o">=&gt;</span><span class="mi">3</span><span class="p">,</span>
+    <span class="ss">:count</span><span class="o">=&gt;</span><span class="mi">8</span><span class="p">,</span>
+    <span class="ss">:anchor</span><span class="o">=&gt;</span><span class="s2">"toc_8"</span><span class="p">,</span>
+    <span class="ss">:children</span><span class="o">=&gt;</span>
+     <span class="p">[{</span><span class="ss">:text</span><span class="o">=&gt;</span><span class="s2">"Mathjax"</span><span class="p">,</span>
+       <span class="ss">:level</span><span class="o">=&gt;</span><span class="mi">4</span><span class="p">,</span>
+       <span class="ss">:count</span><span class="o">=&gt;</span><span class="mi">9</span><span class="p">,</span>
+       <span class="ss">:anchor</span><span class="o">=&gt;</span><span class="s2">"toc_9"</span><span class="p">,</span>
+       <span class="ss">:children</span><span class="o">=&gt;</span><span class="p">[]},</span>
+      <span class="p">{</span><span class="ss">:text</span><span class="o">=&gt;</span><span class="s2">"自动刷新"</span><span class="p">,</span> <span class="ss">:level</span><span class="o">=&gt;</span><span class="mi">4</span><span class="p">,</span> <span class="ss">:count</span><span class="o">=&gt;</span><span class="mi">10</span><span class="p">,</span> <span class="ss">:anchor</span><span class="o">=&gt;</span><span class="s2">"toc_10"</span><span class="p">,</span> <span class="ss">:children</span><span class="o">=&gt;</span><span class="p">[]},</span>
+      <span class="p">{</span><span class="ss">:text</span><span class="o">=&gt;</span><span class="s2">"TODO"</span><span class="p">,</span>
+       <span class="ss">:level</span><span class="o">=&gt;</span><span class="mi">4</span><span class="p">,</span>
+       <span class="ss">:count</span><span class="o">=&gt;</span><span class="mi">11</span><span class="p">,</span>
+       <span class="ss">:anchor</span><span class="o">=&gt;</span><span class="s2">"toc_11"</span><span class="p">,</span>
+       <span class="ss">:children</span><span class="o">=&gt;</span><span class="p">[]}]}]}</span>
+</code></pre></div></div>
 
 <p>这是一个树结构，也是一个递归结构，在 Mustache 中需要递归载入 partial 来能表现这种数据结构。比如笔记系统所使用的两个 partial。</p>
 
 <p>note_toc.mustache:</p>
 
-<pre><code class="language-mustache">{{# page.toc }}
-&lt;div class="span3 toc"&gt;&lt;ol class="toc-list"&gt;
-   {{#children}}
-     {{&gt; toc_li}}
-   {{/children}}
-&lt;/div&gt;
-{{/ page.toc}}
-</code></pre>
+<div class="language-mustache highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">{{#</span> <span class="nv">page</span><span class="p">.</span><span class="nv">toc</span> <span class="k">}}</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"span3 toc"</span><span class="nt">&gt;&lt;ol</span> <span class="na">class=</span><span class="s">"toc-list"</span><span class="nt">&gt;</span>
+   <span class="k">{{#</span><span class="nn">children</span><span class="k">}}</span>
+     <span class="k">{{&gt;</span> <span class="nv">toc_li</span><span class="k">}}</span>
+   <span class="k">{{/</span><span class="nn">children</span><span class="k">}}</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="k">{{/</span> <span class="nv">page</span><span class="p">.</span><span class="nv">toc</span><span class="k">}}</span>
+</code></pre></div></div>
 
 <p>toc_li.mustache:</p>
 
-<pre><code class="language-mustache">&lt;li&gt;&lt;a href="#{{anchor}}"&gt;{{{text}}}&lt;/a&gt;
-&lt;ul&gt;
-   {{#children}}
-     {{&gt; toc_li}}
-   {{/children}}
-&lt;/ul&gt;
-&lt;/li&gt;
-</code></pre>
+<div class="language-mustache highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#</span><span class="k">{{</span><span class="nv">anchor</span><span class="k">}}</span><span class="s">"</span><span class="nt">&gt;</span><span class="k">{{{</span><span class="nv">text</span><span class="k">}}}</span><span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;ul&gt;</span>
+   <span class="k">{{#</span><span class="nn">children</span><span class="k">}}</span>
+     <span class="k">{{&gt;</span> <span class="nv">toc_li</span><span class="k">}}</span>
+   <span class="k">{{/</span><span class="nn">children</span><span class="k">}}</span>
+<span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;/li&gt;</span>
+</code></pre></div></div>
 
 
     </article>

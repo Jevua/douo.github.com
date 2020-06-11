@@ -146,7 +146,7 @@
   <div class="row">
 
     <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
-    <span class="post-date">2017-06-17</span>
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2017-06-17</span>
     
 </div>
 
@@ -193,35 +193,35 @@
 
 <p>首先从注解入手，可以在 build 目录下发现注解处理器为我们生成了 <code>LifecycleObserverDemo_LifecycleAdapter</code>，不过这只是一个适配器，用于将生命周期事件派发到 <code>LifecycleObserverDemo</code> 对应的方法。</p>
 
-<pre><code class="language-java">public class LifecycleObserverDemo_LifecycleAdapter implements GenericLifecycleObserver {
-  final LifecycleObserverDemo mReceiver;
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LifecycleObserverDemo_LifecycleAdapter</span> <span class="kd">implements</span> <span class="nc">GenericLifecycleObserver</span> <span class="o">{</span>
+  <span class="kd">final</span> <span class="nc">LifecycleObserverDemo</span> <span class="n">mReceiver</span><span class="o">;</span>
 
-  LifecycleObserverDemo_LifecycleAdapter(LifecycleObserverDemo receiver) {
-    this.mReceiver = receiver;
-  }
+  <span class="n">LifecycleObserverDemo_LifecycleAdapter</span><span class="o">(</span><span class="nc">LifecycleObserverDemo</span> <span class="n">receiver</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">mReceiver</span> <span class="o">=</span> <span class="n">receiver</span><span class="o">;</span>
+  <span class="o">}</span>
 
-  @Override
-  public void onStateChanged(LifecycleOwner owner, Lifecycle.Event event) {
-    mReceiver.onAny(owner,event);
-    if (event == Lifecycle.Event.ON_CREATE) {
-      mReceiver.onCreate();
-    }
-    if (event == Lifecycle.Event.ON_START) {
-      mReceiver.onStart();
-    }
-    if (event == Lifecycle.Event.ON_PAUSE) {
-      mReceiver.onPause();
-    }
-    if (event == Lifecycle.Event.ON_DESTROY) {
-      mReceiver.onDestroy();
-    }
-  }
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onStateChanged</span><span class="o">(</span><span class="nc">LifecycleOwner</span> <span class="n">owner</span><span class="o">,</span> <span class="nc">Lifecycle</span><span class="o">.</span><span class="na">Event</span> <span class="n">event</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">mReceiver</span><span class="o">.</span><span class="na">onAny</span><span class="o">(</span><span class="n">owner</span><span class="o">,</span><span class="n">event</span><span class="o">);</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">event</span> <span class="o">==</span> <span class="nc">Lifecycle</span><span class="o">.</span><span class="na">Event</span><span class="o">.</span><span class="na">ON_CREATE</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">mReceiver</span><span class="o">.</span><span class="na">onCreate</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">event</span> <span class="o">==</span> <span class="nc">Lifecycle</span><span class="o">.</span><span class="na">Event</span><span class="o">.</span><span class="na">ON_START</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">mReceiver</span><span class="o">.</span><span class="na">onStart</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">event</span> <span class="o">==</span> <span class="nc">Lifecycle</span><span class="o">.</span><span class="na">Event</span><span class="o">.</span><span class="na">ON_PAUSE</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">mReceiver</span><span class="o">.</span><span class="na">onPause</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">event</span> <span class="o">==</span> <span class="nc">Lifecycle</span><span class="o">.</span><span class="na">Event</span><span class="o">.</span><span class="na">ON_DESTROY</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">mReceiver</span><span class="o">.</span><span class="na">onDestroy</span><span class="o">();</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
 
-  public Object getReceiver() {
-    return mReceiver;
-  }
-}
-</code></pre>
+  <span class="kd">public</span> <span class="nc">Object</span> <span class="nf">getReceiver</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">mReceiver</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
 
 <h3 id="如何传达-lifecycle-事件">如何传达 lifecycle 事件</h3>
 

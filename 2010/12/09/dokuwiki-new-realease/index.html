@@ -168,8 +168,8 @@ ASCII
 
 <p>还有一点，将文件名的编码设置成utf-8的格式，那些之前用URL编码保存的文件dokuwiki是不会帮你重命名的，也就说之前的写好的wiki条目都访问不了，是很郁闷的一件事啊！于是乎趁php还未手生写了个批量重命名的php脚本。脚本如下：</p>
 
-<pre><code class="language-php">&lt;?php 
-/*  
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span> 
+<span class="cm">/*  
 *  fixfn.php  
 *  !!!注意，转换前千万个一定要备份原数据!!!!  
 *  跟要修改的data文件夹放在同目录，一般是dokuwiki的根目录。  
@@ -179,63 +179,63 @@ ASCII
 *  重复运行虽无影响,但运行完还是删了好  
 *  如果文件名中"%"出现在不应该出现的地方,那文件名肯定会错乱滴  
 *  !!!注意，转换前千万个一定要备份原数据!!!!  
-*/
-function simpleHexToNum($s){
-	$s=strtoupper($s);
-	$x = ord($s);
+*/</span>
+<span class="k">function</span> <span class="nf">simpleHexToNum</span><span class="p">(</span><span class="nv">$s</span><span class="p">){</span>
+	<span class="nv">$s</span><span class="o">=</span><span class="nb">strtoupper</span><span class="p">(</span><span class="nv">$s</span><span class="p">);</span>
+	<span class="nv">$x</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">(</span><span class="nv">$s</span><span class="p">);</span>
 	
-    if($x&gt;=ord("0") &amp;&amp; $x&lt;=ord("9")){
-       return $x-ord('0');
-    }
-    if($x&gt;=ord('A')&amp;&amp;$x&lt;=ord('F')){
-       return $x-ord('A')+10;
-    }
-    return -1;
-}
-function toUTF8($str){  //文件名中百分号(%)后面必须跟着两位16进制数才能正常工作  
-	$len = strlen($str);
-	$result ='';
-	$i=0;
-	while($i&lt;$len){
-		if($str[$i] == "%"){
-			$i++;
-			$d = simpleHexToNum($str[$i++])*16+simpleHexToNum($str[$i++]); //DIG
-			$result =$result . chr($d);
-		}else{
-			$result =$result . $str[$i++];
-		}
+    <span class="k">if</span><span class="p">(</span><span class="nv">$x</span><span class="o">&gt;=</span><span class="nb">ord</span><span class="p">(</span><span class="s2">"0"</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nv">$x</span><span class="o">&lt;=</span><span class="nb">ord</span><span class="p">(</span><span class="s2">"9"</span><span class="p">)){</span>
+       <span class="k">return</span> <span class="nv">$x</span><span class="o">-</span><span class="nb">ord</span><span class="p">(</span><span class="s1">'0'</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">if</span><span class="p">(</span><span class="nv">$x</span><span class="o">&gt;=</span><span class="nb">ord</span><span class="p">(</span><span class="s1">'A'</span><span class="p">)</span><span class="o">&amp;&amp;</span><span class="nv">$x</span><span class="o">&lt;=</span><span class="nb">ord</span><span class="p">(</span><span class="s1">'F'</span><span class="p">)){</span>
+       <span class="k">return</span> <span class="nv">$x</span><span class="o">-</span><span class="nb">ord</span><span class="p">(</span><span class="s1">'A'</span><span class="p">)</span><span class="o">+</span><span class="mi">10</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">function</span> <span class="nf">toUTF8</span><span class="p">(</span><span class="nv">$str</span><span class="p">){</span>  <span class="c1">//文件名中百分号(%)后面必须跟着两位16进制数才能正常工作  </span>
+	<span class="nv">$len</span> <span class="o">=</span> <span class="nb">strlen</span><span class="p">(</span><span class="nv">$str</span><span class="p">);</span>
+	<span class="nv">$result</span> <span class="o">=</span><span class="s1">''</span><span class="p">;</span>
+	<span class="nv">$i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+	<span class="k">while</span><span class="p">(</span><span class="nv">$i</span><span class="o">&lt;</span><span class="nv">$len</span><span class="p">){</span>
+		<span class="k">if</span><span class="p">(</span><span class="nv">$str</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"%"</span><span class="p">){</span>
+			<span class="nv">$i</span><span class="o">++</span><span class="p">;</span>
+			<span class="nv">$d</span> <span class="o">=</span> <span class="nx">simpleHexToNum</span><span class="p">(</span><span class="nv">$str</span><span class="p">[</span><span class="nv">$i</span><span class="o">++</span><span class="p">])</span><span class="o">*</span><span class="mi">16</span><span class="o">+</span><span class="nx">simpleHexToNum</span><span class="p">(</span><span class="nv">$str</span><span class="p">[</span><span class="nv">$i</span><span class="o">++</span><span class="p">]);</span> <span class="c1">//DIG</span>
+			<span class="nv">$result</span> <span class="o">=</span><span class="nv">$result</span> <span class="o">.</span> <span class="nb">chr</span><span class="p">(</span><span class="nv">$d</span><span class="p">);</span>
+		<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+			<span class="nv">$result</span> <span class="o">=</span><span class="nv">$result</span> <span class="o">.</span> <span class="nv">$str</span><span class="p">[</span><span class="nv">$i</span><span class="o">++</span><span class="p">];</span>
+		<span class="p">}</span>
 
-	}
-	return $result;
-}
-function rename_data($path){
-        if(is_dir($path)){
-				echo $path . "&lt;br /&gt;";
-                $dp=dir($path);
-                while($file=$dp-&gt;read())
-                        if($file!='.'&amp;&amp;$file!='..'){
-							//	$nfile = toUTF8($file); //亲测可用  
-								$nfile = urldecode($file);   //php自带urldeconde,这个健壮性会好很多吧 ...汗  
-								echo "rename &lt;strong&gt;" . $file."&lt;/strong&gt; to &lt;strong&gt;" .$nfile . "&lt;/strong&gt;&lt;br /&gt;";
-								echo  rename($path."/".$file , $path."/".$nfile)?"&lt;font color=\"#00FF00\"&gt;success&lt;/font&gt;":"&lt;font color=\"#FF0000\"&gt;fail&lt;/font&gt;" ;
-								echo "&lt;br /&gt;";
-                                rename_data($path.'/'.$nfile);
-						}
-                $dp-&gt;close();
-        }
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nv">$result</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">function</span> <span class="nf">rename_data</span><span class="p">(</span><span class="nv">$path</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="nb">is_dir</span><span class="p">(</span><span class="nv">$path</span><span class="p">)){</span>
+				<span class="k">echo</span> <span class="nv">$path</span> <span class="o">.</span> <span class="s2">"&lt;br /&gt;"</span><span class="p">;</span>
+                <span class="nv">$dp</span><span class="o">=</span><span class="nb">dir</span><span class="p">(</span><span class="nv">$path</span><span class="p">);</span>
+                <span class="k">while</span><span class="p">(</span><span class="nv">$file</span><span class="o">=</span><span class="nv">$dp</span><span class="o">-&gt;</span><span class="na">read</span><span class="p">())</span>
+                        <span class="k">if</span><span class="p">(</span><span class="nv">$file</span><span class="o">!=</span><span class="s1">'.'</span><span class="o">&amp;&amp;</span><span class="nv">$file</span><span class="o">!=</span><span class="s1">'..'</span><span class="p">){</span>
+							<span class="c1">//	$nfile = toUTF8($file); //亲测可用  </span>
+								<span class="nv">$nfile</span> <span class="o">=</span> <span class="nb">urldecode</span><span class="p">(</span><span class="nv">$file</span><span class="p">);</span>   <span class="c1">//php自带urldeconde,这个健壮性会好很多吧 ...汗  </span>
+								<span class="k">echo</span> <span class="s2">"rename &lt;strong&gt;"</span> <span class="o">.</span> <span class="nv">$file</span><span class="o">.</span><span class="s2">"&lt;/strong&gt; to &lt;strong&gt;"</span> <span class="o">.</span><span class="nv">$nfile</span> <span class="o">.</span> <span class="s2">"&lt;/strong&gt;&lt;br /&gt;"</span><span class="p">;</span>
+								<span class="k">echo</span>  <span class="nb">rename</span><span class="p">(</span><span class="nv">$path</span><span class="o">.</span><span class="s2">"/"</span><span class="o">.</span><span class="nv">$file</span> <span class="p">,</span> <span class="nv">$path</span><span class="o">.</span><span class="s2">"/"</span><span class="o">.</span><span class="nv">$nfile</span><span class="p">)</span><span class="o">?</span><span class="s2">"&lt;font color=</span><span class="se">\"</span><span class="s2">#00FF00</span><span class="se">\"</span><span class="s2">&gt;success&lt;/font&gt;"</span><span class="o">:</span><span class="s2">"&lt;font color=</span><span class="se">\"</span><span class="s2">#FF0000</span><span class="se">\"</span><span class="s2">&gt;fail&lt;/font&gt;"</span> <span class="p">;</span>
+								<span class="k">echo</span> <span class="s2">"&lt;br /&gt;"</span><span class="p">;</span>
+                                <span class="nx">rename_data</span><span class="p">(</span><span class="nv">$path</span><span class="o">.</span><span class="s1">'/'</span><span class="o">.</span><span class="nv">$nfile</span><span class="p">);</span>
+						<span class="p">}</span>
+                <span class="nv">$dp</span><span class="o">-&gt;</span><span class="na">close</span><span class="p">();</span>
+        <span class="p">}</span>
         
-}
-echo "&lt;html&gt;&lt;head&gt;&lt;meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"&gt;&lt;/head&gt;";
+<span class="p">}</span>
+<span class="k">echo</span> <span class="s2">"&lt;html&gt;&lt;head&gt;&lt;meta http-equiv=</span><span class="se">\"</span><span class="s2">Content-Type</span><span class="se">\"</span><span class="s2"> content=</span><span class="se">\"</span><span class="s2">text/html; charset=UTF-8</span><span class="se">\"</span><span class="s2">&gt;&lt;/head&gt;"</span><span class="p">;</span>
 
-//可能要动手修改的地方  
-$ds =dirname(__FILE__) . "/data";  //默认同目录下的data文件夹  
-//$ds = "/xxxx/dourok.info/wiki/data";  //自己指定data文件夹  
-rename_data($ds); 
+<span class="c1">//可能要动手修改的地方  </span>
+<span class="nv">$ds</span> <span class="o">=</span><span class="nb">dirname</span><span class="p">(</span><span class="k">__FILE__</span><span class="p">)</span> <span class="o">.</span> <span class="s2">"/data"</span><span class="p">;</span>  <span class="c1">//默认同目录下的data文件夹  </span>
+<span class="c1">//$ds = "/xxxx/dourok.info/wiki/data";  //自己指定data文件夹  </span>
+<span class="nx">rename_data</span><span class="p">(</span><span class="nv">$ds</span><span class="p">);</span> 
 
 
-echo "&lt;font color=\"#FF0000\"&gt;if everything running fine,delete this php file&lt;/font&gt;&lt;/html&gt;";
-?&gt;
-</code></pre>
+<span class="k">echo</span> <span class="s2">"&lt;font color=</span><span class="se">\"</span><span class="s2">#FF0000</span><span class="se">\"</span><span class="s2">&gt;if everything running fine,delete this php file&lt;/font&gt;&lt;/html&gt;"</span><span class="p">;</span>
+<span class="cp">?&gt;</span>
+</code></pre></div></div>
 
 <p>对跟我一样只有FTP权限的童鞋应该有帮助，将上面的代码复制下来，保存成php文件如fixfn.php，最好UTF8编码的，上传到服务器，位置见代码注释，访问一下搞定。再次提醒一定得<strong>备份原数据</strong>啊！php菜鸟一个，你们懂的。</p>
 

@@ -146,7 +146,7 @@
   <div class="row">
 
     <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
-    <span class="post-date">2017-06-18</span>
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2017-06-18</span>
     
 </div>
 
@@ -173,41 +173,41 @@
 
 <p>还有一个 xml <code>loading_state.xml</code></p>
 
-<pre><code class="language-xml">&lt;layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"&gt;
-    &lt;data&gt;
-        &lt;import type="com.android.example.github.vo.Resource"/&gt;
-        &lt;import type="com.android.example.github.vo.Status"/&gt;
-        &lt;variable name="resource" type="Resource"/&gt;
-        &lt;variable name="callback" type="com.android.example.github.ui.common.RetryCallback"/&gt;
-    &lt;/data&gt;
-    &lt;LinearLayout android:orientation="vertical"
-                  app:visibleGone="@{resource.data == null}"
-                  android:layout_width="wrap_content"
-                  android:gravity="center"
-                  android:padding="@dimen/default_margin"
-                  android:layout_height="wrap_content"&gt;
-        &lt;ProgressBar
-                app:visibleGone="@{resource.status == Status.LOADING}"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/progress_bar"
-                android:layout_margin="8dp"/&gt;
-        &lt;Button android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/retry"
-                android:id="@+id/retry"
-                android:onClick="@{() -&gt; callback.retry()}"
-                app:visibleGone="@{resource.status == Status.ERROR}"/&gt;
-        &lt;TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/error_msg"
-                  android:text="@{resource.message ?? @string/unknown_error}"
-                  app:visibleGone="@{resource.status == Status.ERROR}"/&gt;
-    &lt;/LinearLayout&gt;
-&lt;/layout&gt;
-</code></pre>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;layout</span> <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span>
+        <span class="na">xmlns:app=</span><span class="s">"http://schemas.android.com/apk/res-auto"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;data&gt;</span>
+        <span class="nt">&lt;import</span> <span class="na">type=</span><span class="s">"com.android.example.github.vo.Resource"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;import</span> <span class="na">type=</span><span class="s">"com.android.example.github.vo.Status"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;variable</span> <span class="na">name=</span><span class="s">"resource"</span> <span class="na">type=</span><span class="s">"Resource"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;variable</span> <span class="na">name=</span><span class="s">"callback"</span> <span class="na">type=</span><span class="s">"com.android.example.github.ui.common.RetryCallback"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/data&gt;</span>
+    <span class="nt">&lt;LinearLayout</span> <span class="na">android:orientation=</span><span class="s">"vertical"</span>
+                  <span class="na">app:visibleGone=</span><span class="s">"@{resource.data == null}"</span>
+                  <span class="na">android:layout_width=</span><span class="s">"wrap_content"</span>
+                  <span class="na">android:gravity=</span><span class="s">"center"</span>
+                  <span class="na">android:padding=</span><span class="s">"@dimen/default_margin"</span>
+                  <span class="na">android:layout_height=</span><span class="s">"wrap_content"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;ProgressBar</span>
+                <span class="na">app:visibleGone=</span><span class="s">"@{resource.status == Status.LOADING}"</span>
+                <span class="na">style=</span><span class="s">"?android:attr/progressBarStyle"</span>
+                <span class="na">android:layout_width=</span><span class="s">"wrap_content"</span>
+                <span class="na">android:layout_height=</span><span class="s">"wrap_content"</span>
+                <span class="na">android:id=</span><span class="s">"@+id/progress_bar"</span>
+                <span class="na">android:layout_margin=</span><span class="s">"8dp"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;Button</span> <span class="na">android:layout_width=</span><span class="s">"wrap_content"</span>
+                <span class="na">android:layout_height=</span><span class="s">"wrap_content"</span>
+                <span class="na">android:text=</span><span class="s">"@string/retry"</span>
+                <span class="na">android:id=</span><span class="s">"@+id/retry"</span>
+                <span class="na">android:onClick=</span><span class="s">"@{() -&gt; callback.retry()}"</span>
+                <span class="na">app:visibleGone=</span><span class="s">"@{resource.status == Status.ERROR}"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;TextView</span> <span class="na">android:layout_width=</span><span class="s">"wrap_content"</span>
+                  <span class="na">android:layout_height=</span><span class="s">"wrap_content"</span>
+                  <span class="na">android:id=</span><span class="s">"@+id/error_msg"</span>
+                  <span class="na">android:text=</span><span class="s">"@{resource.message ?? @string/unknown_error}"</span>
+                  <span class="na">app:visibleGone=</span><span class="s">"@{resource.status == Status.ERROR}"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/LinearLayout&gt;</span>
+<span class="nt">&lt;/layout&gt;</span>
+</code></pre></div></div>
 <p>主要是这三个组件:</p>
 
 <ul>

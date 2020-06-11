@@ -242,8 +242,8 @@
 <p>篇幅所限就不进行解释了，作者还介绍了两个度量组件稳定性和抽象性的量：</p>
 
 <ul>
-  <li>不稳定性：<script type="math/tex">I = F_{out}/(F_{in}+F_{out})</script>，<script type="math/tex">F_{in}</script> 传入依赖；<script type="math/tex">F_{out}</script> 传出依赖。依赖关系应该，高 I 值依赖低 I 值。</li>
-  <li>抽象性：<script type="math/tex">A = N_a/N_c</script>，<script type="math/tex">N_c</script> 类的数目；<script type="math/tex">N_a</script> 抽象类或接口的数目。</li>
+  <li>不稳定性：\(I = F_{out}/(F_{in}+F_{out})\)，\(F_{in}\) 传入依赖；\(F_{out}\) 传出依赖。依赖关系应该，高 I 值依赖低 I 值。</li>
+  <li>抽象性：\(A = N_a/N_c\)，\(N_c\) 类的数目；\(N_a\) 抽象类或接口的数目。</li>
 </ul>
 
 <p>作者还聊了编程范式的发展，他的观点也挺有意思：编程的发展，是一个添加限制的过程。三种范式都从我们身上夺走了一些东西。每一种都限制了我们编写代码的方式。</p>
@@ -298,16 +298,16 @@
 
 <p>最近一个朋友维护老项目遇到一个 <a href="https://github.com/loopj/android-async-http">android-async-http</a> 的<a href="https://github.com/loopj/android-async-http/issues/1001">问题</a>向我求助，android-async-http！！！这个不是我一开始做 Android 项目用的网络库吗？起码也是 11、12 年的事了。虽然是个不错的库但也不维护几年了吧。遇到底层的 Bug 别提有多棘手了，而且维护的价值已不大，投入太多时间又觉得亏，最终只能用一些额外的措施把它掩盖过去。</p>
 
-<p>但分离框架，谈何容易呢。这几年写的 App，数据层也从手写 Dao 到 greenDao 到 DBFlow 再到现在的 Room。Room 虽然有官方加持，但以谷歌的尿性被弃用也是随时的事。如果引入 Room，最内层的 Entity 就得使用 Room 的注解便会对 Room 的依赖。如果要分离呢，就需要在数据层也定义一套 Entity，层层之间的数据传递还需要做转换，把核心的 Entity 转换为数据层的 Entity，这样做就很清晰架构了<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>，但是有必要吗？</p>
+<p>但分离框架，谈何容易呢。这几年写的 App，数据层也从手写 Dao 到 greenDao 到 DBFlow 再到现在的 Room。Room 虽然有官方加持，但以谷歌的尿性被弃用也是随时的事。如果引入 Room，最内层的 Entity 就得使用 Room 的注解便会对 Room 的依赖。如果要分离呢，就需要在数据层也定义一套 Entity，层层之间的数据传递还需要做转换，把核心的 Entity 转换为数据层的 Entity，这样做就很清晰架构了<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup>，但是有必要吗？</p>
 
 <p>架构的矛盾在于，我们不应该预见抽象的必要性。知道 YAGNI（You aren’t gonna need it）吗？这是个饱含智慧的理念：“你不需要它。”。因为过度工程往往比不够工程化更糟糕。典型的移动应用程序与典型的企业应用程序有很大不同。它要小得多，并且通常需要快速交付。记住架构是演化的，不能简单地在项目的开始时决定实施哪些边界以及忽略哪些边界。相反，随着系统的发展，边界会慢慢变的清晰，你会关注到它，再权衡实施和忽略的成本，在实施成本低于忽略成本的拐点时做出决定。</p>
 
 <p>不能手里有个锤子看到什么都是钉子。就像当初学设计模式一样，学了之后又要让你忘掉它。</p>
 
-<div class="footnotes">
+<div class="footnotes" role="doc-endnotes">
   <ol>
-    <li id="fn:1">
-      <p><a href="https://github.com/android10/Android-CleanArchitecture">Android-CleanArchitecture</a> 就是这样的设计，但在 <a href="https://fernandocejas.com/2018/05/07/architecting-android-reloaded/">Kotlin 版</a>已经不用了。 <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    <li id="fn:1" role="doc-endnote">
+      <p><a href="https://github.com/android10/Android-CleanArchitecture">Android-CleanArchitecture</a> 就是这样的设计，但在 <a href="https://fernandocejas.com/2018/05/07/architecting-android-reloaded/">Kotlin 版</a>已经不用了。 <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
 </div>

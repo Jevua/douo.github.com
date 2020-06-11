@@ -146,7 +146,7 @@
   <div class="row">
 
     <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
-    <span class="post-date">2017-06-17</span>
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2017-06-17</span>
     
 </div>
 
@@ -223,31 +223,31 @@ binding.hello.setText("Hello World")
 <p>Remember to give the include tag an ID or no public field will be given to it.
 Variables may be passed into an included layout’s binding from the containing layout by <strong>using the application namespace and the variable name in an attribute</strong>:</p>
 
-<pre><code class="language-xml">hello_world.xml
-&lt;layout xmlns:android="http://schemas.android.com/apk/res/android"&gt;
-    &lt;LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"&gt;
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hello_world.xml
+<span class="nt">&lt;layout</span> <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;LinearLayout</span>
+            <span class="na">android:layout_width=</span><span class="s">"match_parent"</span>
+            <span class="na">android:layout_height=</span><span class="s">"match_parent"</span>
+            <span class="na">android:orientation=</span><span class="s">"vertical"</span><span class="nt">&gt;</span>
 
-        &lt;TextView
-                android:id="@+id/hello"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/&gt;
-        &lt;include
-                android:id="@+id/included"
-                layout="@layout/included_layout"/&gt;
-    &lt;/LinearLayout&gt;
-&lt;/layout&gt;
+        <span class="nt">&lt;TextView</span>
+                <span class="na">android:id=</span><span class="s">"@+id/hello"</span>
+                <span class="na">android:layout_width=</span><span class="s">"wrap_content"</span>
+                <span class="na">android:layout_height=</span><span class="s">"wrap_content"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;include</span>
+                <span class="na">android:id=</span><span class="s">"@+id/included"</span>
+                <span class="na">layout=</span><span class="s">"@layout/included_layout"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/LinearLayout&gt;</span>
+<span class="nt">&lt;/layout&gt;</span>
 included_layout.xml
-&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;layout xmlns:android="http://schemas.android.com/apk/res/android"&gt;
-    &lt;TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/world"/&gt;
-&lt;/layout&gt;
-</code></pre>
+<span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="nt">&lt;layout</span> <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;TextView</span>
+            <span class="na">android:layout_width=</span><span class="s">"wrap_content"</span>
+            <span class="na">android:layout_height=</span><span class="s">"wrap_content"</span>
+            <span class="na">android:id=</span><span class="s">"@+id/world"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/layout&gt;</span>
+</code></pre></div></div>
 
 <h3 id="功能">功能</h3>
 

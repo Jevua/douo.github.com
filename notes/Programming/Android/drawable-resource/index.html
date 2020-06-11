@@ -146,7 +146,7 @@
   <div class="row">
 
     <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
-    <span class="post-date">2013-02-28</span>
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2013-02-28</span>
     
 </div>
 
@@ -155,24 +155,24 @@
 
 <p>普通的位图和 9-patch 都是支持 xml 的</p>
 
-<pre><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;bitmap
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:src="@[package:]drawable/drawable_resource"
-    android:antialias=["true" | "false"]
-    android:dither=["true" | "false"]
-    android:filter=["true" | "false"]
-    android:gravity=["top" | "bottom" | "left" | "right" | "center_vertical" |
-                      "fill_vertical" | "center_horizontal" | "fill_horizontal" |
-                      "center" | "fill" | "clip_vertical" | "clip_horizontal"]
-    android:tileMode=["disabled" | "clamp" | "repeat" | "mirror"] /&gt;
-</code></pre>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="nt">&lt;bitmap</span>
+    <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span>
+    <span class="na">android:src=</span><span class="s">"@[package:]drawable/drawable_resource"</span>
+    <span class="na">android:antialias=</span><span class="s">["true"</span> <span class="err">|</span> <span class="err">"false"]</span>
+    <span class="na">android:dither=</span><span class="s">["true"</span> <span class="err">|</span> <span class="err">"false"]</span>
+    <span class="na">android:filter=</span><span class="s">["true"</span> <span class="err">|</span> <span class="err">"false"]</span>
+    <span class="na">android:gravity=</span><span class="s">["top"</span> <span class="err">|</span> <span class="err">"bottom"</span> <span class="err">|</span> <span class="err">"left"</span> <span class="err">|</span> <span class="err">"right"</span> <span class="err">|</span> <span class="err">"center_vertical"</span> <span class="err">|</span>
+                      <span class="err">"fill_vertical"</span> <span class="err">|</span> <span class="err">"center_horizontal"</span> <span class="err">|</span> <span class="err">"fill_horizontal"</span> <span class="err">|</span>
+                      <span class="err">"center"</span> <span class="err">|</span> <span class="err">"fill"</span> <span class="err">|</span> <span class="err">"clip_vertical"</span> <span class="err">|</span> <span class="err">"clip_horizontal"]</span>
+    <span class="na">android:tileMode=</span><span class="s">["disabled"</span> <span class="err">|</span> <span class="err">"clamp"</span> <span class="err">|</span> <span class="err">"repeat"</span> <span class="err">|</span> <span class="err">"mirror"]</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
 
-<pre><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;bitmap xmlns:android="http://schemas.android.com/apk/res/android"
-    android:src="@drawable/icon"
-    android:tileMode="repeat" /&gt;
-</code></pre>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="nt">&lt;bitmap</span> <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span>
+    <span class="na">android:src=</span><span class="s">"@drawable/icon"</span>
+    <span class="na">android:tileMode=</span><span class="s">"repeat"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
 
 <p>ImageView 会忽略 xml bitmap 的配置。</p>
 
@@ -180,49 +180,49 @@
 
 <p>描述一个 drawable 数组，每一个对象都可以当成一个图层。</p>
 
-<pre><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;layer-list
-    xmlns:android="http://schemas.android.com/apk/res/android" &gt;
-    &lt;item
-        android:drawable="@[package:]drawable/drawable_resource"
-        android:id="@[+][package:]id/resource_name"
-        android:top="dimension"
-        android:right="dimension"
-        android:bottom="dimension"
-        android:left="dimension" /&gt;
-&lt;/layer-list&gt;
-</code></pre>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="nt">&lt;layer-list</span>
+    <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span> <span class="nt">&gt;</span>
+    <span class="nt">&lt;item</span>
+        <span class="na">android:drawable=</span><span class="s">"@[package:]drawable/drawable_resource"</span>
+        <span class="na">android:id=</span><span class="s">"@[+][package:]id/resource_name"</span>
+        <span class="na">android:top=</span><span class="s">"dimension"</span>
+        <span class="na">android:right=</span><span class="s">"dimension"</span>
+        <span class="na">android:bottom=</span><span class="s">"dimension"</span>
+        <span class="na">android:left=</span><span class="s">"dimension"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/layer-list&gt;</span>
+</code></pre></div></div>
 
 <p>item 的四个方向属性，其实就是这个图层在图像四个方向上各自的偏移。item 还可以继续嵌套子节点。下面的代码用 bitmap 描述 drawable，让 drawable 居中</p>
 
-<pre><code class="language-xml">&lt;item&gt;
-  &lt;bitmap android:src="@drawable/image"
-          android:gravity="center" /&gt;
-&lt;/item&gt;
-</code></pre>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;item&gt;</span>
+  <span class="nt">&lt;bitmap</span> <span class="na">android:src=</span><span class="s">"@drawable/image"</span>
+          <span class="na">android:gravity=</span><span class="s">"center"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/item&gt;</span>
+</code></pre></div></div>
 
 <h3 id="state-list">State List</h3>
 
 <p>State List 是一个描述 View 的不同状态显示不同 drawable 的文件。相比直接在 view 里定义提高了灵活性吧。</p>
 
-<pre><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;selector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:constantSize=["true" | "false"]
-    android:dither=["true" | "false"]
-    android:variablePadding=["true" | "false"] &gt;
-    &lt;item
-        android:drawable="@[package:]drawable/drawable_resource"
-        android:state_pressed=["true" | "false"]
-        android:state_focused=["true" | "false"]
-        android:state_hovered=["true" | "false"]
-        android:state_selected=["true" | "false"]
-        android:state_checkable=["true" | "false"]
-        android:state_checked=["true" | "false"]
-        android:state_enabled=["true" | "false"]
-        android:state_activated=["true" | "false"]
-        android:state_window_focused=["true" | "false"] /&gt;
-&lt;/selector&gt;
-</code></pre>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="nt">&lt;selector</span> <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span>
+    <span class="na">android:constantSize=</span><span class="s">["true"</span> <span class="err">|</span> <span class="err">"false"]</span>
+    <span class="na">android:dither=</span><span class="s">["true"</span> <span class="err">|</span> <span class="err">"false"]</span>
+    <span class="na">android:variablePadding=</span><span class="s">["true"</span> <span class="err">|</span> <span class="err">"false"]</span> <span class="nt">&gt;</span>
+    <span class="nt">&lt;item</span>
+        <span class="na">android:drawable=</span><span class="s">"@[package:]drawable/drawable_resource"</span>
+        <span class="na">android:state_pressed=</span><span class="s">["true"</span> <span class="err">|</span> <span class="err">"false"]</span>
+        <span class="na">android:state_focused=</span><span class="s">["true"</span> <span class="err">|</span> <span class="err">"false"]</span>
+        <span class="na">android:state_hovered=</span><span class="s">["true"</span> <span class="err">|</span> <span class="err">"false"]</span>
+        <span class="na">android:state_selected=</span><span class="s">["true"</span> <span class="err">|</span> <span class="err">"false"]</span>
+        <span class="na">android:state_checkable=</span><span class="s">["true"</span> <span class="err">|</span> <span class="err">"false"]</span>
+        <span class="na">android:state_checked=</span><span class="s">["true"</span> <span class="err">|</span> <span class="err">"false"]</span>
+        <span class="na">android:state_enabled=</span><span class="s">["true"</span> <span class="err">|</span> <span class="err">"false"]</span>
+        <span class="na">android:state_activated=</span><span class="s">["true"</span> <span class="err">|</span> <span class="err">"false"]</span>
+        <span class="na">android:state_window_focused=</span><span class="s">["true"</span> <span class="err">|</span> <span class="err">"false"]</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/selector&gt;</span>
+</code></pre></div></div>
 
 <h3 id="level-list">Level List</h3>
 
@@ -243,10 +243,10 @@
 
 <p>还是需要通过代码才能发挥作用</p>
 
-<pre><code class="language-java">ImageButton button = (ImageButton) findViewById(R.id.button);
-TransitionDrawable drawable = (TransitionDrawable) button.getDrawable();
-drawable.startTransition(500);
-</code></pre>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ImageButton</span> <span class="n">button</span> <span class="o">=</span> <span class="o">(</span><span class="nc">ImageButton</span><span class="o">)</span> <span class="n">findViewById</span><span class="o">(</span><span class="no">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">button</span><span class="o">);</span>
+<span class="nc">TransitionDrawable</span> <span class="n">drawable</span> <span class="o">=</span> <span class="o">(</span><span class="nc">TransitionDrawable</span><span class="o">)</span> <span class="n">button</span><span class="o">.</span><span class="na">getDrawable</span><span class="o">();</span>
+<span class="n">drawable</span><span class="o">.</span><span class="na">startTransition</span><span class="o">(</span><span class="mi">500</span><span class="o">);</span>
+</code></pre></div></div>
 
 <p>通过<code>startTransition()</code> <code>reverseTransition()</code> 控制第二张的变化。</p>
 
@@ -254,29 +254,29 @@ drawable.startTransition(500);
 
 <p>设置Margin?</p>
 
-<pre><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;inset
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:drawable="@drawable/drawable_resource"
-    android:insetTop="dimension"
-    android:insetRight="dimension"
-    android:insetBottom="dimension"
-    android:insetLeft="dimension" /&gt;
-</code></pre>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="nt">&lt;inset</span>
+    <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span>
+    <span class="na">android:drawable=</span><span class="s">"@drawable/drawable_resource"</span>
+    <span class="na">android:insetTop=</span><span class="s">"dimension"</span>
+    <span class="na">android:insetRight=</span><span class="s">"dimension"</span>
+    <span class="na">android:insetBottom=</span><span class="s">"dimension"</span>
+    <span class="na">android:insetLeft=</span><span class="s">"dimension"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
 
 <h3 id="clip">Clip</h3>
 
 <p>从各个方向切割掉各个图片，切割的范围由<code>setLevel</code>控制，0～10000，0表示完全不可见，10000表示完全可见。</p>
 
-<pre><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;clip
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:drawable="@drawable/drawable_resource"
-    android:clipOrientation=["horizontal" | "vertical"]
-    android:gravity=["top" | "bottom" | "left" | "right" | "center_vertical" |
-                     "fill_vertical" | "center_horizontal" | "fill_horizontal" |
-                     "center" | "fill" | "clip_vertical" | "clip_horizontal"] /&gt;
-</code></pre>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="nt">&lt;clip</span>
+    <span class="na">xmlns:android=</span><span class="s">"http://schemas.android.com/apk/res/android"</span>
+    <span class="na">android:drawable=</span><span class="s">"@drawable/drawable_resource"</span>
+    <span class="na">android:clipOrientation=</span><span class="s">["horizontal"</span> <span class="err">|</span> <span class="err">"vertical"]</span>
+    <span class="na">android:gravity=</span><span class="s">["top"</span> <span class="err">|</span> <span class="err">"bottom"</span> <span class="err">|</span> <span class="err">"left"</span> <span class="err">|</span> <span class="err">"right"</span> <span class="err">|</span> <span class="err">"center_vertical"</span> <span class="err">|</span>
+                     <span class="err">"fill_vertical"</span> <span class="err">|</span> <span class="err">"center_horizontal"</span> <span class="err">|</span> <span class="err">"fill_horizontal"</span> <span class="err">|</span>
+                     <span class="err">"center"</span> <span class="err">|</span> <span class="err">"fill"</span> <span class="err">|</span> <span class="err">"clip_vertical"</span> <span class="err">|</span> <span class="err">"clip_horizontal"]</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
 
 <pre><code>ImageView imageview = (ImageView) findViewById(R.id.image);
 ClipDrawable drawable = (ClipDrawable) imageview.getDrawable();

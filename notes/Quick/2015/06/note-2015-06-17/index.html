@@ -146,7 +146,7 @@
   <div class="row">
 
     <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
-    <span class="post-date">2015-06-17</span>
+<span class="post-date tooltipped" data-tooltip="最后更新 17-12-01">2015-06-17</span>
     
 </div>
 
@@ -167,16 +167,16 @@
 
 <p>2-&gt;10 :</p>
 
-<script type="math/tex; mode=display">2^w*b_i</script>
+\[2^w*b_i\]
 
 <p>10-&gt;2:</p>
 
-<script type="math/tex; mode=display">(a_w/2)= a_{w-1}...b_{w-1}\\
-b_wb_{w-1}...b</script>
+\[(a_w/2)= a_{w-1}...b_{w-1}\\
+b_wb_{w-1}...b\]
 
 <p>16-&gt;10:</p>
 
-<script type="math/tex; mode=display">16^w*b_i</script>
+\[16^w*b_i\]
 
 <h5 id="大小端">大小端</h5>
 
@@ -205,24 +205,24 @@ b_wb_{w-1}...b</script>
 
 <p>用</p>
 
-<script type="math/tex; mode=display">\vec x</script>
+\[\vec x\]
 
 <p>表示二进制序列</p>
 
 <p>无符号（unsigned）编码:</p>
 
-<script type="math/tex; mode=display">B2U_w(\vec x)=\sum_{i=0}^{w-1}x_i2^i</script>
+\[B2U_w(\vec x)=\sum_{i=0}^{w-1}x_i2^i\]
 
 <p>补码(two’s-complement)编码</p>
 
-<script type="math/tex; mode=display">B2T_w(\vec x)=-x_{w-1}2^{w-1}+\sum_{i=0}^{w-2}x_i2^i</script>
+\[B2T_w(\vec x)=-x_{w-1}2^{w-1}+\sum_{i=0}^{w-2}x_i2^i\]
 
 <p>有符号与无符号的转换</p>
 
-<script type="math/tex; mode=display">B2U_w(\vec x) - B2T_w(\vec x) = 2^wx_{w-1}\\
+\[B2U_w(\vec x) - B2T_w(\vec x) = 2^wx_{w-1}\\
 B2U_w(\vec x) = B2T_w(\vec x) + 2^wx_{w-1}\\
 \vec x = T2B_w(x)\\
-B2U_w(T2B_w(x)) = x + 2^wx_{w-1}\\</script>
+B2U_w(T2B_w(x)) = x + 2^wx_{w-1}\\\]
 
 <p>当 <code>x_{w-1} 等于0，x&gt;=0, T2U_w(x) = x</code>
 当 <code>x_{w-1} 等于1，x&lt;0, T2U_w(x) = x + 2^w</code></p>

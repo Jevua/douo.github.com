@@ -146,7 +146,7 @@
   <div class="row">
 
     <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
-    <span class="post-date">2017-02-21</span>
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2017-02-21</span>
     
 </div>
 
@@ -249,8 +249,8 @@ P/Y-code DGPS receivers ~0.5 -2.0 m.</p>
 
 <p>PendingIntent 可以通过这样的方式获取更新的 Location 对象</p>
 
-<pre><code class="language-java">Location location = getIntent().getParcelableExtra(LocationManager.KEY_LOCATION_CHANGED);
-</code></pre>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Location</span> <span class="n">location</span> <span class="o">=</span> <span class="n">getIntent</span><span class="o">().</span><span class="na">getParcelableExtra</span><span class="o">(</span><span class="nc">LocationManager</span><span class="o">.</span><span class="na">KEY_LOCATION_CHANGED</span><span class="o">);</span>
+</code></pre></div></div>
 
 <h4 id="gps-卫星">Gps 卫星</h4>
 
@@ -360,23 +360,23 @@ Where:
 
 <p>用下面代码在真机上进行测试</p>
 
-<pre><code class="language-java">mLocationManager.addNmeaListener(new OnNmeaMessageListener() {
-                long firstTimestamp = -1;
-                int count;
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mLocationManager</span><span class="o">.</span><span class="na">addNmeaListener</span><span class="o">(</span><span class="k">new</span> <span class="nc">OnNmeaMessageListener</span><span class="o">()</span> <span class="o">{</span>
+                <span class="kt">long</span> <span class="n">firstTimestamp</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+                <span class="kt">int</span> <span class="n">count</span><span class="o">;</span>
 
-                @Override
-                public void onNmeaMessage(String message, long timestamp) {
-                    if (firstTimestamp == -1) {
-                        firstTimestamp = timestamp;
-                    }
-                    count++;
-                    Log.d(TAG, message);
-                    if (timestamp != firstTimestamp) {
-                        Log.d(TAG, "rate:" + (count * 1000 / (timestamp - firstTimestamp)) + "sen/s");
-                    }
-                }
-            });
-</code></pre>
+                <span class="nd">@Override</span>
+                <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onNmeaMessage</span><span class="o">(</span><span class="nc">String</span> <span class="n">message</span><span class="o">,</span> <span class="kt">long</span> <span class="n">timestamp</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="k">if</span> <span class="o">(</span><span class="n">firstTimestamp</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="n">firstTimestamp</span> <span class="o">=</span> <span class="n">timestamp</span><span class="o">;</span>
+                    <span class="o">}</span>
+                    <span class="n">count</span><span class="o">++;</span>
+                    <span class="nc">Log</span><span class="o">.</span><span class="na">d</span><span class="o">(</span><span class="no">TAG</span><span class="o">,</span> <span class="n">message</span><span class="o">);</span>
+                    <span class="k">if</span> <span class="o">(</span><span class="n">timestamp</span> <span class="o">!=</span> <span class="n">firstTimestamp</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="nc">Log</span><span class="o">.</span><span class="na">d</span><span class="o">(</span><span class="no">TAG</span><span class="o">,</span> <span class="s">"rate:"</span> <span class="o">+</span> <span class="o">(</span><span class="n">count</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">/</span> <span class="o">(</span><span class="n">timestamp</span> <span class="o">-</span> <span class="n">firstTimestamp</span><span class="o">))</span> <span class="o">+</span> <span class="s">"sen/s"</span><span class="o">);</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>
+            <span class="o">});</span>
+</code></pre></div></div>
 
 <ul>
   <li>Nexus 6p，NMEA 的接收频率大概是 10 句每秒，接收的设备类型前缀有<code>GP</code>（GPS）和 <code>GL</code>（GLONASS）</li>

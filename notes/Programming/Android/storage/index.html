@@ -146,7 +146,7 @@
   <div class="row">
 
     <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
-    <span class="post-date">2016-12-10</span>
+<span class="post-date tooltipped" data-tooltip="最后更新 17-12-21">2016-12-10</span>
     
 </div>
 
@@ -185,11 +185,11 @@
 
 <p>另外，修改 <code>/system/ect/permissions/platform.xml</code>，也能让应用拥有写入第二外置存储器的权限。</p>
 
-<pre><code class="language-xml">&lt;permission name=”android.permission.WRITE_MEDIA_STORAGE” &gt;
-&lt;group gid=”sdcard_rw” /&gt;
-&lt;group gid=”media_rw” /&gt;
-&lt;/permission&gt;
-</code></pre>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;permission</span> <span class="na">name=</span><span class="s">”android.permission.WRITE_MEDIA_STORAGE”</span> <span class="nt">&gt;</span>
+<span class="nt">&lt;group</span> <span class="na">gid=</span><span class="s">”sdcard_rw”</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;group</span> <span class="na">gid=</span><span class="s">”media_rw”</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/permission&gt;</span>
+</code></pre></div></div>
 
 <p>L 以后可能又不一样了，POSIX 的权限管理不足以处理复杂的权限或者可移除 sdcard 常用的 fat 文件系统不支持多用户，所以 android 将外置存储器挂着为 <a href="https://zh.wikipedia.org/wiki/FUSE">FUSE</a>，提供自己一套安全策略来管理。待阅读：http://kernel.meizu.com/android-m-external-storage.html</p>
 

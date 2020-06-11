@@ -146,7 +146,7 @@
   <div class="row">
 
     <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
-    <span class="post-date">2018-04-24</span>
+<span class="post-date tooltipped" data-tooltip="最后更新 18-08-02">2018-04-24</span>
     
 </div>
 
@@ -372,7 +372,7 @@
 如果需要依赖，可以通过 DIP 来实现，依赖反转<br />
 组件结构不能从上到下设计。 这不是系统设计的第一件事，而是随着系统的发展和变化而发展。组件依赖关系图与描述应用程序的功能很少有关系。 相反，它们是应用程序的可构建性和可维护性的映射。</li>
   <li>稳定依赖原则 SDP（Stable Dependencies Principle），朝着的稳定的方向进行依赖
-度量稳定性，F-in ，传入依赖；F-out，传出依赖；I，不稳定性；<script type="math/tex">I = F-out/(F-in+F-out)</script>，依赖关系应该，高 I 值依赖低 I 值。</li>
+度量稳定性，F-in ，传入依赖；F-out，传出依赖；I，不稳定性；\(I = F-out/(F-in+F-out)\)，依赖关系应该，高 I 值依赖低 I 值。</li>
   <li>稳定抽象原则 SAP（Stable Abstractions Principle），包的抽象程度应该和其稳定程度一致。 
 度量组件抽象性，Nc，类的数目；Na，抽象类或接口的数目；A = Na/Nc</li>
 </ol>
@@ -385,7 +385,7 @@
   <li>（1，0）与（0，1）之间称为主序列（Main Sequence），是远离两个区的最远的点的集合。</li>
 </ul>
 
-<p>D 定义为与主序列之间的距离。<script type="math/tex">D = |A + I - 1|</script>，任何D值不接近于零的组件都可以考虑重新检查和重构。D 值衡量设计与依赖和抽象模式的一致性。</p>
+<p>D 定义为与主序列之间的距离。\(D = |A + I - 1|\)，任何D值不接近于零的组件都可以考虑重新检查和重构。D 值衡量设计与依赖和抽象模式的一致性。</p>
 
 <h2 id="清晰架构">清晰架构</h2>
 

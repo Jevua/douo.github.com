@@ -146,7 +146,7 @@
   <div class="row">
 
     <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
-    <span class="post-date">2018-06-14</span>
+<span class="post-date tooltipped" data-tooltip="最后更新 18-11-09">2018-06-14</span>
     
 </div>
 
@@ -216,30 +216,30 @@ for(i in 1 until 100) [1,...,99]
 
 <h2 id="returns-and-jumps">Returns and jumps</h2>
 
-<pre><code class="language-kotlin">loop@ for (i in 1..100) {
-    for (j in 1..100) {
-        if (...) break@loop
-    }
-}
-</code></pre>
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">loop@</span> <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">..</span><span class="mi">100</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="k">in</span> <span class="mi">1</span><span class="o">..</span><span class="mi">100</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">..</span><span class="p">.)</span> <span class="k">break</span><span class="nd">@loop</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
-<pre><code class="language-kotlin">fun foo() {
-    listOf(1, 2, 3, 4, 5).forEach lit@{
-        // lambda 内的 return 默认是返回外部函数
-        if (it == 3) return@lit // local return to the caller of the lambda, i.e. the forEach loop
-        print(it)
-    }
-    print(" done with explicit label")
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nf">listOf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">).</span><span class="n">forEach</span> <span class="nd">lit@</span><span class="p">{</span>
+        <span class="c1">// lambda 内的 return 默认是返回外部函数</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">it</span> <span class="p">==</span> <span class="mi">3</span><span class="p">)</span> <span class="k">return</span><span class="nd">@lit</span> <span class="c1">// local return to the caller of the lambda, i.e. the forEach loop</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">it</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">" done with explicit label"</span><span class="p">)</span>
     
-fun foo() {
-    listOf(1, 2, 3, 4, 5).forEach {
-        if (it == 3) return@forEach // local return to the caller of the lambda, i.e. the forEach loop
-        print(it)
-    }
-    print(" done with implicit label")
-}
-}
-</code></pre>
+<span class="k">fun</span> <span class="nf">foo</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nf">listOf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">).</span><span class="nf">forEach</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">it</span> <span class="p">==</span> <span class="mi">3</span><span class="p">)</span> <span class="k">return</span><span class="nd">@forEach</span> <span class="c1">// local return to the caller of the lambda, i.e. the forEach loop</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">it</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">" done with implicit label"</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>如果是带有返回值的<code>return@a 1</code>:”return <code>1</code> at label <code>@a</code>”</p>
 
@@ -469,18 +469,18 @@ instance.apply{
 
 <h4 id="conventions">conventions</h4>
 
-<pre><code class="language-kotlin">data class Point(val x: Int, val y: Int) {
-  operator fun plus(other: Point): Point {
-    return Point(x + other.x, y + other.y)
-  } 
-}
-</code></pre>
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">data class</span> <span class="nc">Point</span><span class="p">(</span><span class="kd">val</span> <span class="py">x</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="kd">val</span> <span class="py">y</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">operator</span> <span class="k">fun</span> <span class="nf">plus</span><span class="p">(</span><span class="n">other</span><span class="p">:</span> <span class="nc">Point</span><span class="p">):</span> <span class="nc">Point</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nc">Point</span><span class="p">(</span><span class="n">x</span> <span class="p">+</span> <span class="n">other</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="p">+</span> <span class="n">other</span><span class="p">.</span><span class="n">y</span><span class="p">)</span>
+  <span class="p">}</span> 
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>也可以定义为扩展函数</p>
-<pre><code class="language-kotlin">operator fun Point.plus(other: Point): Point {
-    return Point(x + other.x, y + other.y)
-}
-</code></pre>
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">operator</span> <span class="k">fun</span> <span class="nc">Point</span><span class="p">.</span><span class="nf">plus</span><span class="p">(</span><span class="n">other</span><span class="p">:</span> <span class="nc">Point</span><span class="p">):</span> <span class="nc">Point</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nc">Point</span><span class="p">(</span><span class="n">x</span> <span class="p">+</span> <span class="n">other</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="p">+</span> <span class="n">other</span><span class="p">.</span><span class="n">y</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <p>操作符重载支持不同类型，但 kotlin 不能主动实现交换律，即便运算是可交换的。</p>
 
@@ -511,11 +511,11 @@ instance.apply{
 
 <p><code>val (a,b) = p</code>  等价于  <code>val a = p.component1() val b = p.component2()</code>，对于 data 类来说 1、2 就是成员属性定义的顺序。对于非 data 类，也可以手动声明</p>
 
-<pre><code class="language-kotlin">class Point(val x: Int, val y: Int) {
-    operator fun component1() = x
-    operator fun component2() = y
-}
-</code></pre>
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Point</span><span class="p">(</span><span class="kd">val</span> <span class="py">x</span><span class="p">:</span> <span class="nc">Int</span><span class="p">,</span> <span class="kd">val</span> <span class="py">y</span><span class="p">:</span> <span class="nc">Int</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">operator</span> <span class="k">fun</span> <span class="nf">component1</span><span class="p">()</span> <span class="p">=</span> <span class="n">x</span>
+    <span class="k">operator</span> <span class="k">fun</span> <span class="nf">component2</span><span class="p">()</span> <span class="p">=</span> <span class="n">y</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <h3 id="泛型">泛型</h3>
 
@@ -539,10 +539,10 @@ instance.apply{
 
 <p><code>reified</code> 关键字只能用于内联函数</p>
 
-<pre><code class="language-kotlin">val items = listOf("one", 2, "three")
-println(items.filterIsInstance&lt;String&gt;())
-[one, three]
-</code></pre>
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">items</span> <span class="p">=</span> <span class="nf">listOf</span><span class="p">(</span><span class="s">"one"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s">"three"</span><span class="p">)</span>
+<span class="nf">println</span><span class="p">(</span><span class="n">items</span><span class="p">.</span><span class="n">filterIsInstance</span><span class="p">&lt;</span><span class="nc">String</span><span class="p">&gt;())</span>
+<span class="na">[one, three]</span>
+</code></pre></div></div>
 
 <h4 id="可变性">可变性</h4>
 
@@ -606,10 +606,10 @@ var f2 : Function1&lt;Int, Any&gt; = f
 
 <p>避免 callback hell</p>
 
-<pre><code class="language-kotlin">requestToken
-createPost
-processPost
-</code></pre>
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">requestToken</span>
+<span class="n">createPost</span>
+<span class="n">processPost</span>
+</code></pre></div></div>
 
 <p>Future/Promise/Rx</p>
 
@@ -659,16 +659,16 @@ processPost
   <li>continuation</li>
 </ul>
 
-<pre><code class="language-kotlin">requestToken //action
-createPost // continuation
-</code></pre>
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">requestToken</span> <span class="c1">//action</span>
+<span class="n">createPost</span> <span class="c1">// continuation</span>
+</code></pre></div></div>
 
 <p>cps == callbacks</p>
 
-<pre><code class="language-kotlin">requestToken{ token -&gt;  // action
-  createPost(token,item) //continuation
-}
-</code></pre>
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">requestToken</span><span class="p">{</span> <span class="n">token</span> <span class="p">-&gt;</span>  <span class="c1">// action</span>
+  <span class="nf">createPost</span><span class="p">(</span><span class="n">token</span><span class="p">,</span><span class="n">item</span><span class="p">)</span> <span class="c1">//continuation</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <h4 id="coroutines-direst-style">coroutines direst style</h4>
 

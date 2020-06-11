@@ -277,24 +277,24 @@ ruhoh titleize #快速为草稿文件命名
 
 <p>webfaction 真心不错。给 git 加个钩子，用 post-receive 解决全部问题</p>
 
-<pre><code class="language-bash">#!/bin/bash
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
 
-HOME=/home/xxx
-LOG=$HOME/ruhoh.log
-BUILD_DIR=$HOME/tmp/
-SITE_DIR=$BUILD_DIR/compiled/
-DEPLOY_DIR=$HOME/deploy/
-source $HOME/.rvm/scripts/rvm
-date &gt;&gt;  $LOG 
-unset GIT_DIR
-cd $BUILD_DIR
-PATH=$HOME/douo-ruhoh/bin:$PATH  #use custom ruhoh to compile
-#echo $PATH &gt;&gt;  $LOG
-git pull  &gt;&gt;  $LOG
-which ruhoh &gt;&gt; $LOG
-ruhoh compile &gt;&gt; $LOG
-rsync -a --delete-after $SITE_DIR $DEPLOY_DIR &gt;&gt;  $LOG
-</code></pre>
+<span class="nv">HOME</span><span class="o">=</span>/home/xxx
+<span class="nv">LOG</span><span class="o">=</span><span class="nv">$HOME</span>/ruhoh.log
+<span class="nv">BUILD_DIR</span><span class="o">=</span><span class="nv">$HOME</span>/tmp/
+<span class="nv">SITE_DIR</span><span class="o">=</span><span class="nv">$BUILD_DIR</span>/compiled/
+<span class="nv">DEPLOY_DIR</span><span class="o">=</span><span class="nv">$HOME</span>/deploy/
+<span class="nb">source</span> <span class="nv">$HOME</span>/.rvm/scripts/rvm
+<span class="nb">date</span> <span class="o">&gt;&gt;</span>  <span class="nv">$LOG</span> 
+<span class="nb">unset </span>GIT_DIR
+<span class="nb">cd</span> <span class="nv">$BUILD_DIR</span>
+<span class="nv">PATH</span><span class="o">=</span><span class="nv">$HOME</span>/douo-ruhoh/bin:<span class="nv">$PATH</span>  <span class="c">#use custom ruhoh to compile</span>
+<span class="c">#echo $PATH &gt;&gt;  $LOG</span>
+git pull  <span class="o">&gt;&gt;</span>  <span class="nv">$LOG</span>
+which ruhoh <span class="o">&gt;&gt;</span> <span class="nv">$LOG</span>
+ruhoh compile <span class="o">&gt;&gt;</span> <span class="nv">$LOG</span>
+rsync <span class="nt">-a</span> <span class="nt">--delete-after</span> <span class="nv">$SITE_DIR</span> <span class="nv">$DEPLOY_DIR</span> <span class="o">&gt;&gt;</span>  <span class="nv">$LOG</span>
+</code></pre></div></div>
 
 <h3 id="其他">其他</h3>
 
@@ -302,7 +302,7 @@ rsync -a --delete-after $SITE_DIR $DEPLOY_DIR &gt;&gt;  $LOG
 
 <p>Mathjax的使用非常方便，直接在頁面嵌入腳本就行，然後通過一個 widgets 來載入 mathjax 的腳本。就可以展示公式了。关键是如何定义插入公式的语法，刚好 plusjade 扩展一下转换器插件实现了这个語法：<a href="https://gist.github.com/2699636">mathjax.rb</a>。</p>
 
-<script type="math/tex; mode=display">e^{i\pi} + 1 = 0</script>
+\[e^{i\pi} + 1 = 0\]
 
 <p>我考虑是否要为页面加入一个Mathjax开关，因为大部分博文都无需用到Mathjax。另外，Mathjax 好像会不定时的出现一些布局错乱的问题。</p>
 

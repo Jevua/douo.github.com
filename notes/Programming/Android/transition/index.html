@@ -146,7 +146,7 @@
   <div class="row">
 
     <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
-    <span class="post-date">2017-03-14</span>
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2017-03-14</span>
     
 </div>
 
@@ -241,7 +241,7 @@ getWindow().setExitTransition(slideTransition);
        |-- Explode
 </code></pre>
 
-<p>另外 Widows 有个 <code>FEATURE_CONTENT_TRANSITIONS</code>，为 Activity 多次 setContentView 之间提供过渡效果<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>，对 AppCompatActivity 无效。</p>
+<p>另外 Widows 有个 <code>FEATURE_CONTENT_TRANSITIONS</code>，为 Activity 多次 setContentView 之间提供过渡效果<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup>，对 AppCompatActivity 无效。</p>
 
 <h3 id="共享元素过渡shared-element-transition">共享元素过渡（Shared Element Transition）</h3>
 
@@ -304,19 +304,19 @@ getWindow().setExitTransition(slideTransition);
 
 <p>Transition 如何断定两个状态的 View 是同一个 View，并不单单看是否是同一个实例，Transition 有四种判断方法，分别是 transitionName 、同一个实例、id、itemId，默认的顺序如下：</p>
 
-<pre><code class="language-java"> private static final int[] DEFAULT_MATCH_ORDER = {
-        MATCH_NAME,
-        MATCH_INSTANCE,
-        MATCH_ID,
-        MATCH_ITEM_ID, // 对于 ListView
-    };
-</code></pre>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span><span class="o">[]</span> <span class="no">DEFAULT_MATCH_ORDER</span> <span class="o">=</span> <span class="o">{</span>
+        <span class="no">MATCH_NAME</span><span class="o">,</span>
+        <span class="no">MATCH_INSTANCE</span><span class="o">,</span>
+        <span class="no">MATCH_ID</span><span class="o">,</span>
+        <span class="no">MATCH_ITEM_ID</span><span class="o">,</span> <span class="c1">// 对于 ListView</span>
+    <span class="o">};</span>
+</code></pre></div></div>
 
 <p>Transition 有个 setMatchOrders 方法，可以更改默认顺序。<code>TransitionValueMap</code> 还相当于一索引表，保存了这些 match 类型和 View 的对应关系。</p>
 
 <p>判断两个 TransitionValue 是同一个 View后，便各自传入列表 <code>mStartValuesList</code> 和 <code>mEndValuesList</code> 中。所以这个两个列表中的 <code>TransitionValue</code> 是一一对应的（索引相同），至于那些至于 startValue 或者 endValue 的 View，另外一个列表对应的位置便是 <code>null</code>。 最后遍历两个列表，传入子类的 <code>createAnimator(ViewGroup sceneRoot, TransitionValues startValues, TransitionValues endValues)</code> 方法。</p>
 
-<p>TransitionValue 是可以在多个 Transition 中共享的，所以 key 的取值必须注意唯一性<sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup>。</p>
+<p>TransitionValue 是可以在多个 Transition 中共享的，所以 key 的取值必须注意唯一性<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote">2</a></sup>。</p>
 
 <p><code>TransitionManage.go(Scene,Transition)</code>，做了三件事，</p>
 
@@ -353,13 +353,13 @@ getWindow().setExitTransition(slideTransition);
 <h3 id="xml">xml</h3>
 
 <p>transition manager 也支持用 xml 定义。</p>
-<div class="footnotes">
+<div class="footnotes" role="doc-endnotes">
   <ol>
-    <li id="fn:1">
-      <p>见 <a href="https://stackoverflow.com/questions/28975840/feature-activity-transitions-vs-feature-content-transitions">StackOverFlow</a> <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    <li id="fn:1" role="doc-endnote">
+      <p>见 <a href="https://stackoverflow.com/questions/28975840/feature-activity-transitions-vs-feature-content-transitions">StackOverFlow</a> <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:2">
-      <p>见 <a href="http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/5.1.1_r1/android/transition/TransitionSet.java#448">TransitionSet.java#448</a> <a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
+    <li id="fn:2" role="doc-endnote">
+      <p>见 <a href="http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/5.1.1_r1/android/transition/TransitionSet.java#448">TransitionSet.java#448</a> <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
 </div>

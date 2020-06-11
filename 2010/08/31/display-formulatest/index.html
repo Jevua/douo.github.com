@@ -190,14 +190,14 @@ y)，这样就可以实现鼠标指针沿轨迹移动的效果。</p>
 
 <p>另外也可以一次性运算好所有点。并保存成Point[]，之后每一次画轨迹，只需按顺序历遍Point[]上的值。代码大致如下:</p>
 
-<pre><code class="language-java">for(int i = 0 ; points.length ; i++){
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">;</span> <span class="n">points</span><span class="o">.</span><span class="na">length</span> <span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
 
-           robot.delay(speed);
+           <span class="n">robot</span><span class="o">.</span><span class="na">delay</span><span class="o">(</span><span class="n">speed</span><span class="o">);</span>
 
-           robot.mouseMove(points[i].x， points[i].y);
+           <span class="n">robot</span><span class="o">.</span><span class="na">mouseMove</span><span class="o">(</span><span class="n">points</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">x</span><span class="err">，</span> <span class="n">points</span><span class="o">[</span><span class="n">i</span><span class="o">].</span><span class="na">y</span><span class="o">);</span>
 
-       }
-</code></pre>
+       <span class="o">}</span>
+</code></pre></div></div>
 
 <p>接下来，我们再来看下如何画出上图的轨迹。首先，我们看下红色的轨迹，似乎可以很牵强地把它看成字母’S’，但是实际上它是一条正弦函数取区间<img src="http://www.forkosh.dreamhost.com/mathtex.cgi?%5Cparstyle%5Ccolor%5Brgb%5D%7B0.73,0.73,0.73%7D%5Ccolorbox%5Brgb%5D%7B0.067,0.067,0.067%7D%7B%24%5Cleft%5B-%5Cpi,%5Cpi%5Cright%5D%24%7D" alt="" title="\left[-\pi,\pi\right]" />的曲线。当然也可以说是余弦函数。这不是重点，重点是如何这条曲线映射到屏幕上的实际位置。无非通过缩放、旋转、移位。知道曲线和横坐标距离是<img src="http://www.forkosh.dreamhost.com/mathtex.cgi?%5Cparstyle%5Ccolor%5Brgb%5D%7B0.73,0.73,0.73%7D%5Ccolorbox%5Brgb%5D%7B0.067,0.067,0.067%7D%7B%242%5Cpi%24%7D" alt="" title="2\pi" />。而相对应于屏幕上的距离<img src="http://www.forkosh.dreamhost.com/mathtex.cgi?%5Cparstyle%5Ccolor%5Brgb%5D%7B0.73,0.73,0.73%7D%5Ccolorbox%5Brgb%5D%7B0.067,0.067,0.067%7D%7B%24d=p_2-p_1%24%7D" alt="" title="d=p_2-p_1" />。所以可以知道曲线放大的倍数就是<img src="http://www.forkosh.dreamhost.com/mathtex.cgi?%5Cparstyle%5Ccolor%5Brgb%5D%7B0.73,0.73,0.73%7D%5Ccolorbox%5Brgb%5D%7B0.067,0.067,0.067%7D%7B%24n=(p_2-p_1)/2%5Cpi%24%7D" alt="" title="n=(p_2-p_1)/2\pi" />。显示在屏幕上的曲线是旋转<img src="http://www.forkosh.dreamhost.com/mathtex.cgi?%5Cparstyle%5Ccolor%5Brgb%5D%7B0.73,0.73,0.73%7D%5Ccolorbox%5Brgb%5D%7B0.067,0.067,0.067%7D%7B%2490%5Ctextdegree%24%7D" alt="" title="90\textdegree" />的。也就是原本曲线的y变成屏幕上的x。而x变成屏幕上的y。在加上偏移量m。就可以算出屏幕上x，y的值了。让i为正弦函数的变量，取<img src="http://www.forkosh.dreamhost.com/mathtex.cgi?%5Cparstyle%5Ccolor%5Brgb%5D%7B0.73,0.73,0.73%7D%5Ccolorbox%5Brgb%5D%7B0.067,0.067,0.067%7D%7B%24i=-%5Cpi%24%7D" alt="" title="i=-\pi" />
 可知y每增加一个像素，<img src="http://www.forkosh.dreamhost.com/mathtex.cgi?%5Cparstyle%5Ccolor%5Brgb%5D%7B0.73,0.73,0.73%7D%5Ccolorbox%5Brgb%5D%7B0.067,0.067,0.067%7D%7B%24i%24%7D" alt="" title="i" />便增加<img src="http://www.forkosh.dreamhost.com/mathtex.cgi?%5Cparstyle%5Ccolor%5Brgb%5D%7B0.73,0.73,0.73%7D%5Ccolorbox%5Brgb%5D%7B0.067,0.067,0.067%7D%7B%24%20%5Cfrac%20in%24%7D" alt="" title="\frac in" />。</p>
@@ -216,49 +216,49 @@ y)，这样就可以实现鼠标指针沿轨迹移动的效果。</p>
 
 <p>现在就可以写出生成所有轨迹的点的集合的代码了，具体如下:</p>
 
-<pre><code class="language-java">final int m = 150;// 上下的边距
-final int xpoints[];// 保存x坐标.因为y是递增的，规律简单，可以不用保存
-final int dist = 200;// 两条曲线间的距离
-final int y1 = m,
-y2 = Toolkit.getDefaultToolkit().getScreenSize().height - m;
-final int d = y2 - y1;
-final double n = (y2 - y1) / (2 * Math.PI);
-final int x1 = (Toolkit.getDefaultToolkit().getScreenSize().width - dist)
-                / 2 - (int) Math.round(n);
-final int x3 = x1 + dist;
-xpoints = new int[d * 3];// 点的总量是d*3;
-double i = -Math.PI;
-int nn = 0;
-while (nn &lt; d) {
-        xpoints[nn] = (int) Math.round(x1 + n * Math.sin(i));// 红色轨迹
-        xpoints[d + nn] = x3;// 蓝色轨迹
-        xpoints[2 * d + nn] = x3 + Math.abs(xpoints[nn] - x1);// 橙色轨迹
-        nn++;
-        i += 1 / n;
-}
-</code></pre>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">final</span> <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">150</span><span class="o">;</span><span class="c1">// 上下的边距</span>
+<span class="kd">final</span> <span class="kt">int</span> <span class="n">xpoints</span><span class="o">[];</span><span class="c1">// 保存x坐标.因为y是递增的，规律简单，可以不用保存</span>
+<span class="kd">final</span> <span class="kt">int</span> <span class="n">dist</span> <span class="o">=</span> <span class="mi">200</span><span class="o">;</span><span class="c1">// 两条曲线间的距离</span>
+<span class="kd">final</span> <span class="kt">int</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">m</span><span class="o">,</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="nc">Toolkit</span><span class="o">.</span><span class="na">getDefaultToolkit</span><span class="o">().</span><span class="na">getScreenSize</span><span class="o">().</span><span class="na">height</span> <span class="o">-</span> <span class="n">m</span><span class="o">;</span>
+<span class="kd">final</span> <span class="kt">int</span> <span class="n">d</span> <span class="o">=</span> <span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="o">;</span>
+<span class="kd">final</span> <span class="kt">double</span> <span class="n">n</span> <span class="o">=</span> <span class="o">(</span><span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="o">)</span> <span class="o">/</span> <span class="o">(</span><span class="mi">2</span> <span class="o">*</span> <span class="nc">Math</span><span class="o">.</span><span class="na">PI</span><span class="o">);</span>
+<span class="kd">final</span> <span class="kt">int</span> <span class="n">x1</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Toolkit</span><span class="o">.</span><span class="na">getDefaultToolkit</span><span class="o">().</span><span class="na">getScreenSize</span><span class="o">().</span><span class="na">width</span> <span class="o">-</span> <span class="n">dist</span><span class="o">)</span>
+                <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="nc">Math</span><span class="o">.</span><span class="na">round</span><span class="o">(</span><span class="n">n</span><span class="o">);</span>
+<span class="kd">final</span> <span class="kt">int</span> <span class="n">x3</span> <span class="o">=</span> <span class="n">x1</span> <span class="o">+</span> <span class="n">dist</span><span class="o">;</span>
+<span class="n">xpoints</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">d</span> <span class="o">*</span> <span class="mi">3</span><span class="o">];</span><span class="c1">// 点的总量是d*3;</span>
+<span class="kt">double</span> <span class="n">i</span> <span class="o">=</span> <span class="o">-</span><span class="nc">Math</span><span class="o">.</span><span class="na">PI</span><span class="o">;</span>
+<span class="kt">int</span> <span class="n">nn</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="k">while</span> <span class="o">(</span><span class="n">nn</span> <span class="o">&lt;</span> <span class="n">d</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">xpoints</span><span class="o">[</span><span class="n">nn</span><span class="o">]</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="nc">Math</span><span class="o">.</span><span class="na">round</span><span class="o">(</span><span class="n">x1</span> <span class="o">+</span> <span class="n">n</span> <span class="o">*</span> <span class="nc">Math</span><span class="o">.</span><span class="na">sin</span><span class="o">(</span><span class="n">i</span><span class="o">));</span><span class="c1">// 红色轨迹</span>
+        <span class="n">xpoints</span><span class="o">[</span><span class="n">d</span> <span class="o">+</span> <span class="n">nn</span><span class="o">]</span> <span class="o">=</span> <span class="n">x3</span><span class="o">;</span><span class="c1">// 蓝色轨迹</span>
+        <span class="n">xpoints</span><span class="o">[</span><span class="mi">2</span> <span class="o">*</span> <span class="n">d</span> <span class="o">+</span> <span class="n">nn</span><span class="o">]</span> <span class="o">=</span> <span class="n">x3</span> <span class="o">+</span> <span class="nc">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">xpoints</span><span class="o">[</span><span class="n">nn</span><span class="o">]</span> <span class="o">-</span> <span class="n">x1</span><span class="o">);</span><span class="c1">// 橙色轨迹</span>
+        <span class="n">nn</span><span class="o">++;</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">n</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
 
 <p>接下来就是主角登场了。</p>
 
-<pre><code class="language-java">final int speed=5;//休眠时间，就是是鼠标运动的速度
-     try {
-        Robot r = new Robot();//实例化一个Robot对象
-        int tmpY= 0 ;
-       while(true){
-           if(nn&gt;=d&amp;&amp;nn&lt;=2*d)
-        //为保持鼠标移动速度的一致，直线的距离要比两条曲线的距离短，而实际的关键点是一样多.所以每个关键像素的
-           //停留时间都要缩短一下，当然1/2是不准确的估计.见@http://dourok.info/2010/08/316/最上面的红色公式.
-               r.delay(speed/2);
-           else
-               r.delay(speed);
-        r.mouseMove(xpoints[nn]，(tmpY+y1));//mouseMove移动的是绝对位置而不是相对位置
-        tmpY=(tmpY+1)%(d);
-        nn=(nn+1)%xpoints.length;//让鼠标不断循环的画轨迹
-       }
-    }catch (AWTException ex) {
-        ex.printStackTrace();
-    }
-</code></pre>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">final</span> <span class="kt">int</span> <span class="n">speed</span><span class="o">=</span><span class="mi">5</span><span class="o">;</span><span class="c1">//休眠时间，就是是鼠标运动的速度</span>
+     <span class="k">try</span> <span class="o">{</span>
+        <span class="nc">Robot</span> <span class="n">r</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Robot</span><span class="o">();</span><span class="c1">//实例化一个Robot对象</span>
+        <span class="kt">int</span> <span class="n">tmpY</span><span class="o">=</span> <span class="mi">0</span> <span class="o">;</span>
+       <span class="k">while</span><span class="o">(</span><span class="kc">true</span><span class="o">){</span>
+           <span class="k">if</span><span class="o">(</span><span class="n">nn</span><span class="o">&gt;=</span><span class="n">d</span><span class="o">&amp;&amp;</span><span class="n">nn</span><span class="o">&lt;=</span><span class="mi">2</span><span class="o">*</span><span class="n">d</span><span class="o">)</span>
+        <span class="c1">//为保持鼠标移动速度的一致，直线的距离要比两条曲线的距离短，而实际的关键点是一样多.所以每个关键像素的</span>
+           <span class="c1">//停留时间都要缩短一下，当然1/2是不准确的估计.见@http://dourok.info/2010/08/316/最上面的红色公式.</span>
+               <span class="n">r</span><span class="o">.</span><span class="na">delay</span><span class="o">(</span><span class="n">speed</span><span class="o">/</span><span class="mi">2</span><span class="o">);</span>
+           <span class="k">else</span>
+               <span class="n">r</span><span class="o">.</span><span class="na">delay</span><span class="o">(</span><span class="n">speed</span><span class="o">);</span>
+        <span class="n">r</span><span class="o">.</span><span class="na">mouseMove</span><span class="o">(</span><span class="n">xpoints</span><span class="o">[</span><span class="n">nn</span><span class="o">]</span><span class="err">，</span><span class="o">(</span><span class="n">tmpY</span><span class="o">+</span><span class="n">y1</span><span class="o">));</span><span class="c1">//mouseMove移动的是绝对位置而不是相对位置</span>
+        <span class="n">tmpY</span><span class="o">=(</span><span class="n">tmpY</span><span class="o">+</span><span class="mi">1</span><span class="o">)%(</span><span class="n">d</span><span class="o">);</span>
+        <span class="n">nn</span><span class="o">=(</span><span class="n">nn</span><span class="o">+</span><span class="mi">1</span><span class="o">)%</span><span class="n">xpoints</span><span class="o">.</span><span class="na">length</span><span class="o">;</span><span class="c1">//让鼠标不断循环的画轨迹</span>
+       <span class="o">}</span>
+    <span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="nc">AWTException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">ex</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+    <span class="o">}</span>
+</code></pre></div></div>
 
 <p>程序到此就完成了，直接放在main方法里就可以运行。请注意，程序无法退出,并且鼠标无法操作，要怎么结束呢?没错，任务管理器。嗯，确实挺无聊的。当Robot非但不无聊，还很强大，顺便一提delay()其实就是睡眠当前线程。Thread.sleep()一样。不过注意delay()里的参数是int。而且如果不在
 0 到 60，000 毫秒的范围内，就会抛出错误。</p>

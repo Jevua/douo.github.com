@@ -179,8 +179,8 @@ offset,int len)方法,居然可以最后一字节没被读出来；用new String
 
 <p>Logger 是一个接口只有一个方法</p>
 
-<pre><code class="language-java">public void println(String txt , int level);
-</code></pre>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">println</span><span class="o">(</span><span class="nc">String</span> <span class="n">txt</span> <span class="o">,</span> <span class="kt">int</span> <span class="n">level</span><span class="o">);</span>
+</code></pre></div></div>
 
 <p>要自己实现logger只需实现这个接口便可，比如说把Log消息写文件里面去，发送到服务器等等。</p>
 
@@ -195,19 +195,19 @@ screen)，传入的Displayable为调用显示控制台是的当前界面，从Co
 
 <p>一个使用控制台的例程可以像这样</p>
 
-<pre><code class="language-java">Display dis = Display.getDisplay(this);
-Console console = Console.getConsole(dis);
-Log.showDebug = true;
-Log.addLogDestination(console);
-Log.logInfo("console already");
-Log.logDebug(Console.getMemoryInfo());
-try{
-//一些可能抛出异常的操作
-}catch(Exception e){
-Log.logError("ERROR" , e);
-console.showConsole(null);
-}
-</code></pre>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Display</span> <span class="n">dis</span> <span class="o">=</span> <span class="nc">Display</span><span class="o">.</span><span class="na">getDisplay</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+<span class="nc">Console</span> <span class="n">console</span> <span class="o">=</span> <span class="nc">Console</span><span class="o">.</span><span class="na">getConsole</span><span class="o">(</span><span class="n">dis</span><span class="o">);</span>
+<span class="nc">Log</span><span class="o">.</span><span class="na">showDebug</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+<span class="nc">Log</span><span class="o">.</span><span class="na">addLogDestination</span><span class="o">(</span><span class="n">console</span><span class="o">);</span>
+<span class="nc">Log</span><span class="o">.</span><span class="na">logInfo</span><span class="o">(</span><span class="s">"console already"</span><span class="o">);</span>
+<span class="nc">Log</span><span class="o">.</span><span class="na">logDebug</span><span class="o">(</span><span class="nc">Console</span><span class="o">.</span><span class="na">getMemoryInfo</span><span class="o">());</span>
+<span class="k">try</span><span class="o">{</span>
+<span class="c1">//一些可能抛出异常的操作</span>
+<span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">){</span>
+<span class="nc">Log</span><span class="o">.</span><span class="na">logError</span><span class="o">(</span><span class="s">"ERROR"</span> <span class="o">,</span> <span class="n">e</span><span class="o">);</span>
+<span class="n">console</span><span class="o">.</span><span class="na">showConsole</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
 
 <p>Console还有个String getMemoryInfo()的方法，来得到当前虚拟机的内存信息。</p>
 

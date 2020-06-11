@@ -146,7 +146,7 @@
   <div class="row">
 
     <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
-    <span class="post-date">2019-11-25</span>
+<span class="post-date tooltipped" data-tooltip="最后更新 19-12-19">2019-11-25</span>
     
 </div>
 
@@ -186,24 +186,24 @@
 
 <p>下面是 Databinding 绑定 Observable 的代码，</p>
 
-<pre><code class="language-java">private boolean updateRegistration(int localFieldId, Object observable,
-            CreateWeakListener listenerCreator) {
-        if (observable == null) {
-            return unregisterFrom(localFieldId);
-        }
-        WeakListener listener = mLocalFieldObservers[localFieldId];
-        if (listener == null) {
-            registerTo(localFieldId, observable, listenerCreator);
-            return true;
-        }
-        if (listener.getTarget() == observable) {
-            return false;//nothing to do, same object
-        }
-        unregisterFrom(localFieldId);
-        registerTo(localFieldId, observable, listenerCreator);
-        return true;
-    }
-</code></pre>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">updateRegistration</span><span class="o">(</span><span class="kt">int</span> <span class="n">localFieldId</span><span class="o">,</span> <span class="nc">Object</span> <span class="n">observable</span><span class="o">,</span>
+            <span class="nc">CreateWeakListener</span> <span class="n">listenerCreator</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">observable</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="nf">unregisterFrom</span><span class="o">(</span><span class="n">localFieldId</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="nc">WeakListener</span> <span class="n">listener</span> <span class="o">=</span> <span class="n">mLocalFieldObservers</span><span class="o">[</span><span class="n">localFieldId</span><span class="o">];</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">listener</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">registerTo</span><span class="o">(</span><span class="n">localFieldId</span><span class="o">,</span> <span class="n">observable</span><span class="o">,</span> <span class="n">listenerCreator</span><span class="o">);</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">listener</span><span class="o">.</span><span class="na">getTarget</span><span class="o">()</span> <span class="o">==</span> <span class="n">observable</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span><span class="c1">//nothing to do, same object</span>
+        <span class="o">}</span>
+        <span class="n">unregisterFrom</span><span class="o">(</span><span class="n">localFieldId</span><span class="o">);</span>
+        <span class="n">registerTo</span><span class="o">(</span><span class="n">localFieldId</span><span class="o">,</span> <span class="n">observable</span><span class="o">,</span> <span class="n">listenerCreator</span><span class="o">);</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+</code></pre></div></div>
 
 <p>CreateWeakListener 是 WeakListener 的抽象工厂， WeakListener 继承自持有 当前 Databinding 的软引用，WeakListener 还封装了 ObservableReference<T></T></p>
 

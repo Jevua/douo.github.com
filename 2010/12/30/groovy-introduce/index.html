@@ -188,17 +188,17 @@ groovy也没像python那样的强制缩进.还是得用花括号，这个比较�
 
 <p>「==」操作符，不再比较引用，如下面的的代码输出2个true</p>
 
-<pre><code class="language-groovy">a = new String("wtf")
-b = new String("wtf")
-println a == b
-println a.equals(b)
-</code></pre>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s2">"wtf"</span><span class="o">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="k">new</span> <span class="n">String</span><span class="o">(</span><span class="s2">"wtf"</span><span class="o">)</span>
+<span class="n">println</span> <span class="n">a</span> <span class="o">==</span> <span class="n">b</span>
+<span class="n">println</span> <span class="n">a</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">b</span><span class="o">)</span>
+</code></pre></div></div>
 
 <p><code>Output:true
 true
 </code>
 正则表达式也有独立的操作符，正则表达式要用两个斜杠包围起来。 是否匹配
-==~ 如 <code>println "potatoe" ==~ /potatoe/</code> <code>Output:true</code> 匹配结果 =~\
+==~ 如 <code>println "potatoe" ==~ /potatoe/</code> <code>Output:true</code> 匹配结果 =~<br />
 会返回一个相当于java.util.regex.Matcher的对象。</p>
 
 <h3 id="闭包closure">闭包(Closure)</h3>
@@ -208,10 +208,10 @@ true
 <p>闭包就像这样 <code>s = {println it}</code> 一个变量名 指向一个代码块 调用s(5)
 就会打印出 5 官方帮助的例子是</p>
 
-<pre><code class="language-groovy">square = { it * it}
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">square</span> <span class="o">=</span> <span class="o">{</span> <span class="n">it</span> <span class="o">*</span> <span class="n">it</span><span class="o">}</span>
 
-println square(9)
-</code></pre>
+<span class="n">println</span> <span class="nf">square</span><span class="o">(</span><span class="mi">9</span><span class="o">)</span>
+</code></pre></div></div>
 
 <p><code>Output:81</code></p>
 
@@ -232,22 +232,22 @@ key, value -&gt; println key + "=" + value
 
 <p>还可以这样写</p>
 
-<pre><code class="language-groovy">n = 5;
-({
-for(int i in 1..100)
-println i*n
-}).call()
-</code></pre>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">n</span> <span class="o">=</span> <span class="mi">5</span><span class="o">;</span>
+<span class="o">({</span>
+<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">..</span><span class="mi">100</span><span class="o">)</span>
+<span class="n">println</span> <span class="n">i</span><span class="o">*</span><span class="n">n</span>
+<span class="o">}).</span><span class="na">call</span><span class="o">()</span>
+</code></pre></div></div>
 
 <p>闭包内部可以调用其外部的变量
 这个如何实现的也很好奇啊 在官网上的例子还看过这么一个用法</p>
 
-<pre><code class="language-groovy">def groovyImage = new GroovyImage();
-def argAndClosure = ['-d':{groovyImage.srcDir = new File(it)},
-'-q':{groovyImage.outputPattern = it},
-'-p':{groovyImage.pattern = it},
-'-h':{groovyImage.help()}];
-</code></pre>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">def</span> <span class="n">groovyImage</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GroovyImage</span><span class="o">();</span>
+<span class="kt">def</span> <span class="n">argAndClosure</span> <span class="o">=</span> <span class="o">[</span><span class="s1">'-d'</span><span class="o">:{</span><span class="n">groovyImage</span><span class="o">.</span><span class="na">srcDir</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="o">(</span><span class="n">it</span><span class="o">)},</span>
+<span class="s1">'-q'</span><span class="o">:{</span><span class="n">groovyImage</span><span class="o">.</span><span class="na">outputPattern</span> <span class="o">=</span> <span class="n">it</span><span class="o">},</span>
+<span class="s1">'-p'</span><span class="o">:{</span><span class="n">groovyImage</span><span class="o">.</span><span class="na">pattern</span> <span class="o">=</span> <span class="n">it</span><span class="o">},</span>
+<span class="s1">'-h'</span><span class="o">:{</span><span class="n">groovyImage</span><span class="o">.</span><span class="na">help</span><span class="o">()}];</span>
+</code></pre></div></div>
 
 <p>闭包当成Map的Value，直接Map[key].call()果然很方便。</p>
 
@@ -258,124 +258,124 @@ def argAndClosure = ['-d':{groovyImage.srcDir = new File(it)},
 <p>最后再看看Groovy的效率如何，分别在Java、Python、Groovy上写了个生成素数表的方法，代码几乎一致。
 Java：</p>
 
-<pre><code class="language-java">/*
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
- */
+ */</span>
 
-package org.dou.euler;
+<span class="kn">package</span> <span class="nn">org.dou.euler</span><span class="o">;</span>
 
-import java.util.ArrayList;
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
 
-/**
+<span class="cm">/**
  *
  * @author DouO
- */
-public class Prime {
- public static ArrayList&lt;Long&gt; primes = new ArrayList&lt;Long&gt;(100);
-    public static void buildPrimeTable(int n){
-        primes.add(2L);
-        primes.add(3L);
-        int k = 2;
-        long s = 5;
-        for (int i = 0; i &lt; n-2; i++) {
-            int j = 0;
-            int q = (int) Math.ceil(Math.sqrt(s));;
-            while (j &lt; i ) {
-                if (primes.get(j)&lt;=q&amp;&amp;s % primes.get(j) == 0) {
-                     s+=k;
-                     k = (k+k)%6;
-                     q = (int) Math.ceil(Math.sqrt(s));
-                      j = 0;
-                } else {
-                    j++;
-                }
-            }
-            j = 0;
-            primes.add(s);
-            s+=k;
-            k = (k+k)%6;
-            q = (int) Math.ceil(Math.sqrt(s));
-        }
-    }
-    public static void main(String[] args) {
-        long t = System.currentTimeMillis();
-        buildPrimeTable(10001);
-        System.out.println(System.currentTimeMillis() - t);
-        System.out.println(primes.get(10000));
-    }
-}
-</code></pre>
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Prime</span> <span class="o">{</span>
+ <span class="kd">public</span> <span class="kd">static</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Long</span><span class="o">&gt;</span> <span class="n">primes</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Long</span><span class="o">&gt;(</span><span class="mi">100</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">buildPrimeTable</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">){</span>
+        <span class="n">primes</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">2L</span><span class="o">);</span>
+        <span class="n">primes</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">3L</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+        <span class="kt">long</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">5</span><span class="o">;</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+            <span class="kt">int</span> <span class="n">q</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="nc">Math</span><span class="o">.</span><span class="na">ceil</span><span class="o">(</span><span class="nc">Math</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="n">s</span><span class="o">));;</span>
+            <span class="k">while</span> <span class="o">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">i</span> <span class="o">)</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">primes</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">j</span><span class="o">)&lt;=</span><span class="n">q</span><span class="o">&amp;&amp;</span><span class="n">s</span> <span class="o">%</span> <span class="n">primes</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">j</span><span class="o">)</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                     <span class="n">s</span><span class="o">+=</span><span class="n">k</span><span class="o">;</span>
+                     <span class="n">k</span> <span class="o">=</span> <span class="o">(</span><span class="n">k</span><span class="o">+</span><span class="n">k</span><span class="o">)%</span><span class="mi">6</span><span class="o">;</span>
+                     <span class="n">q</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="nc">Math</span><span class="o">.</span><span class="na">ceil</span><span class="o">(</span><span class="nc">Math</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="n">s</span><span class="o">));</span>
+                      <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+                <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                    <span class="n">j</span><span class="o">++;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+            <span class="n">primes</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+            <span class="n">s</span><span class="o">+=</span><span class="n">k</span><span class="o">;</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="o">(</span><span class="n">k</span><span class="o">+</span><span class="n">k</span><span class="o">)%</span><span class="mi">6</span><span class="o">;</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="nc">Math</span><span class="o">.</span><span class="na">ceil</span><span class="o">(</span><span class="nc">Math</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="n">s</span><span class="o">));</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">long</span> <span class="n">t</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+        <span class="n">buildPrimeTable</span><span class="o">(</span><span class="mi">10001</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">-</span> <span class="n">t</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">primes</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">10000</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
 
 <p>Python:</p>
 
-<pre><code class="language-python">import math
-import time
-primes = []
-def buildTable(n):
-#    if(len(primes)&lt;=0):
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="n">primes</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">def</span> <span class="nf">buildTable</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="c1">#    if(len(primes)&lt;=0):
 #        primes.append(2)
 #        sindex = 1;
 #    else:
 #        sindex = len(primes+1);
-    primes.append(2)
-    primes.append(3)
-    s = 5
-    k = 2
-    for i in range(0,n):
-        j=0
-        q = int(math.sqrt(s)+0.5)
-        while(j&lt;i):
-            if(primes[j]&lt;=q and s%primes[j]==0):
-                s+=k
-                k=(k+k)%6
-                q = int(math.sqrt(s)+0.5)
-                j=0
-            else:
-                j+=1
-        primes.append(s)
-        s+=k
-        k=(k+k)%6
-        q = int(math.sqrt(s)+0.5)
+</span>    <span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">j</span><span class="o">=</span><span class="mi">0</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">j</span><span class="o">&lt;</span><span class="n">i</span><span class="p">):</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">primes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">q</span> <span class="ow">and</span> <span class="n">s</span><span class="o">%</span><span class="n">primes</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">):</span>
+                <span class="n">s</span><span class="o">+=</span><span class="n">k</span>
+                <span class="n">k</span><span class="o">=</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="n">k</span><span class="p">)</span><span class="o">%</span><span class="mi">6</span>
+                <span class="n">q</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span>
+                <span class="n">j</span><span class="o">=</span><span class="mi">0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">j</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="n">primes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="n">s</span><span class="o">+=</span><span class="n">k</span>
+        <span class="n">k</span><span class="o">=</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="n">k</span><span class="p">)</span><span class="o">%</span><span class="mi">6</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span>
 
-time.clock()
-buildTable(10000)
-print primes[10000]
-print time.clock()
-</code></pre>
+<span class="n">time</span><span class="p">.</span><span class="n">clock</span><span class="p">()</span>
+<span class="n">buildTable</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">primes</span><span class="p">[</span><span class="mi">10000</span><span class="p">]</span>
+<span class="k">print</span> <span class="n">time</span><span class="p">.</span><span class="n">clock</span><span class="p">()</span>
+</code></pre></div></div>
 
 <p>Groovy:</p>
 
-<pre><code class="language-groovy">primes = []
-def buildPrimeTable(n){
-    primes.add(2)
-    primes.add(3)
-    s = 5
-    k = 2
-    for(i in 0..n-2){
-        j = 0
-        q = (int) Math.ceil(Math.sqrt(s))
-        while(j&lt;i){
-            if(primes[j]&lt;=q &amp;&amp; s%primes[j]==0){
-                s+=k
-                k=(k+k)%6
-                q = (int) Math.ceil(Math.sqrt(s))
-                j = 0
-            }else{
-                j++;
-            }
-        }
-        primes.add(s)
-        s+=k
-        k = (k+k)%6
-        q = (int) Math.ceil(Math.sqrt(s))
-    }
-}
-t = System.currentTimeMillis()
-buildPrimeTable(10000)
-println System.currentTimeMillis() - t
-println primes[10000]
-</code></pre>
+<div class="language-groovy highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">primes</span> <span class="o">=</span> <span class="o">[]</span>
+<span class="kt">def</span> <span class="nf">buildPrimeTable</span><span class="o">(</span><span class="n">n</span><span class="o">){</span>
+    <span class="n">primes</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span>
+    <span class="n">primes</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="k">for</span><span class="o">(</span><span class="n">i</span> <span class="k">in</span> <span class="mi">0</span><span class="o">..</span><span class="na">n</span><span class="o">-</span><span class="mi">2</span><span class="o">){</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="n">Math</span><span class="o">.</span><span class="na">ceil</span><span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="n">s</span><span class="o">))</span>
+        <span class="k">while</span><span class="o">(</span><span class="n">j</span><span class="o">&lt;</span><span class="n">i</span><span class="o">){</span>
+            <span class="k">if</span><span class="o">(</span><span class="n">primes</span><span class="o">[</span><span class="n">j</span><span class="o">]&lt;=</span><span class="n">q</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="o">%</span><span class="n">primes</span><span class="o">[</span><span class="n">j</span><span class="o">]==</span><span class="mi">0</span><span class="o">){</span>
+                <span class="n">s</span><span class="o">+=</span><span class="n">k</span>
+                <span class="n">k</span><span class="o">=(</span><span class="n">k</span><span class="o">+</span><span class="n">k</span><span class="o">)%</span><span class="mi">6</span>
+                <span class="n">q</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="n">Math</span><span class="o">.</span><span class="na">ceil</span><span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="n">s</span><span class="o">))</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="o">}</span><span class="k">else</span><span class="o">{</span>
+                <span class="n">j</span><span class="o">++;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="n">primes</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">s</span><span class="o">)</span>
+        <span class="n">s</span><span class="o">+=</span><span class="n">k</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="o">(</span><span class="n">k</span><span class="o">+</span><span class="n">k</span><span class="o">)%</span><span class="mi">6</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="n">Math</span><span class="o">.</span><span class="na">ceil</span><span class="o">(</span><span class="n">Math</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="n">s</span><span class="o">))</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span>
+<span class="n">buildPrimeTable</span><span class="o">(</span><span class="mi">10000</span><span class="o">)</span>
+<span class="n">println</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()</span> <span class="o">-</span> <span class="n">t</span>
+<span class="n">println</span> <span class="n">primes</span><span class="o">[</span><span class="mi">10000</span><span class="o">]</span>
+</code></pre></div></div>
 
 <p>以生成前10000位素数为例，结果如下：
 Java:718ms，表现不错。

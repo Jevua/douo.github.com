@@ -146,7 +146,7 @@
   <div class="row">
 
     <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
-    <span class="post-date">2017-05-09</span>
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2017-05-09</span>
     
 </div>
 
@@ -157,22 +157,22 @@
 
 <p>通过 class 关键字声明一个类，如果原来有这个类，会在原来的类上修改，而不会覆盖整个类</p>
 
-<pre><code class="language-ruby">    class A
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">class</span> <span class="nc">A</span>
       
-      def a
-       puts "a"
-      end
+      <span class="k">def</span> <span class="nf">a</span>
+       <span class="nb">puts</span> <span class="s2">"a"</span>
+      <span class="k">end</span>
     
-    end
+    <span class="k">end</span>
 
-    class A
+    <span class="k">class</span> <span class="nc">A</span>
       
-      def b
-       puts "b"
-      end
+      <span class="k">def</span> <span class="nf">b</span>
+       <span class="nb">puts</span> <span class="s2">"b"</span>
+      <span class="k">end</span>
     
-    end
-</code></pre>
+    <span class="k">end</span>
+</code></pre></div></div>
 
 <ul>
   <li>类 A 会有两个方法：a、b。</li>
@@ -197,13 +197,13 @@
 
 <p>Module 是 Class 的超类。</p>
 
-<pre><code class="language-ruby">module M3
-  prepend M1 # 添加在当前模块（类）前面
-  include M2 # 添加在当前模块后面。
-end
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">module</span> <span class="nn">M3</span>
+  <span class="n">prepend</span> <span class="no">M1</span> <span class="c1"># 添加在当前模块（类）前面</span>
+  <span class="kp">include</span> <span class="no">M2</span> <span class="c1"># 添加在当前模块后面。</span>
+<span class="k">end</span>
 
-M3.ancestors # =&gt; [M1,M3,M2]
-</code></pre>
+<span class="no">M3</span><span class="p">.</span><span class="nf">ancestors</span> <span class="c1"># =&gt; [M1,M3,M2]</span>
+</code></pre></div></div>
 
 <h4 id="kernel-模块">Kernel 模块</h4>
 

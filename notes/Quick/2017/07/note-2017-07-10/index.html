@@ -146,7 +146,7 @@
   <div class="row">
 
     <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
-    <span class="post-date">2017-07-10</span>
+<span class="post-date tooltipped" data-tooltip="最后更新 17-11-30">2017-07-10</span>
     
 </div>
 
@@ -157,21 +157,21 @@
 
 <h4 id="定义-fileprovider">定义 FileProvider</h4>
 
-<pre><code class="language-xml">&lt;manifest&gt;
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;manifest&gt;</span>
     ...
-    &lt;application&gt;
+    <span class="nt">&lt;application&gt;</span>
         ...
-        &lt;provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.mydomain.fileprovider"
-            android:exported="false"
-            android:grantUriPermissions="true"&gt;
+        <span class="nt">&lt;provider</span>
+            <span class="na">android:name=</span><span class="s">"android.support.v4.content.FileProvider"</span>
+            <span class="na">android:authorities=</span><span class="s">"com.mydomain.fileprovider"</span>
+            <span class="na">android:exported=</span><span class="s">"false"</span>
+            <span class="na">android:grantUriPermissions=</span><span class="s">"true"</span><span class="nt">&gt;</span>
             ...
-        &lt;/provider&gt;
+        <span class="nt">&lt;/provider&gt;</span>
         ...
-    &lt;/application&gt;
-&lt;/manifest&gt;
-</code></pre>
+    <span class="nt">&lt;/application&gt;</span>
+<span class="nt">&lt;/manifest&gt;</span>
+</code></pre></div></div>
 
 <h4 id="granturipermission">grantUriPermission</h4>
 

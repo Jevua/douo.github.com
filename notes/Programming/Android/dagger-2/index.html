@@ -146,7 +146,7 @@
   <div class="row">
 
     <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
-    <span class="post-date">2017-05-15</span>
+<span class="post-date tooltipped" data-tooltip="最后更新 18-09-27">2017-05-15</span>
     
 </div>
 
@@ -261,18 +261,18 @@ public ServletRequest provideServletRequet(HttpServletRequest httpRequest){
 <p>Component 的实现主要由 @Component.Buidler 来做。一般 Component.Buidler 是由 Dagger 生成的，Builder 将会生成各个 module 和 依赖组件（dependencies Component）的 setter 方法，方法名有 module 或依赖类型的小写驼峰式命名。
 如果 Module 有无参构造函数那也可以省略，Dagger 会自动实例化。</p>
 
-<pre><code class="language-java">   public static void main(String[] args) {
-     OtherComponent otherComponent = ...;
-     MyComponent component = DaggerMyComponent.builder()
-         // required because component dependencies must be set
-         .otherComponent(otherComponent)
-         // required because FlagsModule has constructor parameters
-         .flagsModule(new FlagsModule(args))
-         // may be elided because a no-args constructor is visible
-         .myApplicationModule(new MyApplicationModule())
-         .build();
-   }
-</code></pre>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+     <span class="nc">OtherComponent</span> <span class="n">otherComponent</span> <span class="o">=</span> <span class="o">...;</span>
+     <span class="nc">MyComponent</span> <span class="n">component</span> <span class="o">=</span> <span class="nc">DaggerMyComponent</span><span class="o">.</span><span class="na">builder</span><span class="o">()</span>
+         <span class="c1">// required because component dependencies must be set</span>
+         <span class="o">.</span><span class="na">otherComponent</span><span class="o">(</span><span class="n">otherComponent</span><span class="o">)</span>
+         <span class="c1">// required because FlagsModule has constructor parameters</span>
+         <span class="o">.</span><span class="na">flagsModule</span><span class="o">(</span><span class="k">new</span> <span class="nc">FlagsModule</span><span class="o">(</span><span class="n">args</span><span class="o">))</span>
+         <span class="c1">// may be elided because a no-args constructor is visible</span>
+         <span class="o">.</span><span class="na">myApplicationModule</span><span class="o">(</span><span class="k">new</span> <span class="nc">MyApplicationModule</span><span class="o">())</span>
+         <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+   <span class="o">}</span>
+</code></pre></div></div>
 
 <p>也可以自己用 @Compoent.Builder 实现，一般注解内部静态抽象类或接口。</p>
 

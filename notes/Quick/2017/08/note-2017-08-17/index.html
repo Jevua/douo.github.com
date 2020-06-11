@@ -146,7 +146,7 @@
   <div class="row">
 
     <div class="content col s12 m8 offset-m1 xl7 offset-xl1"> <div class="post-meta">
-    <span class="post-date">2017-08-17</span>
+<span class="post-date tooltipped" data-tooltip="最后更新 17-12-01">2017-08-17</span>
     
 </div>
 
@@ -239,12 +239,12 @@ DynamicArray&lt;? super Integer&gt; arr，表示 arr 是泛型类型是 Integer 
 
 <h3 id="泛型中的协变与逆变">泛型中的协变与逆变</h3>
 
-<p>逆变与协变用来描述类型转换（type transformation）后的继承关系，其定义：如果 A、B 表示类型，f(⋅) 表示类型转换，<script type="math/tex">≤</script>表示继承关系（比如，A≤B 表示A是由B派生出来的子类）；</p>
+<p>逆变与协变用来描述类型转换（type transformation）后的继承关系，其定义：如果 A、B 表示类型，f(⋅) 表示类型转换，\(≤\)表示继承关系（比如，A≤B 表示A是由B派生出来的子类）；</p>
 
 <ul>
-  <li><script type="math/tex">f(⋅)</script> 是逆变（contravariant）的，当<script type="math/tex">A≤B</script>时有 <script type="math/tex">f(B)≤f(A)</script>成立；</li>
-  <li><script type="math/tex">f(⋅)</script> 是协变（covariant）的，当<script type="math/tex">A≤B</script>时有<script type="math/tex">f(A)≤f(B)</script>成立；</li>
-  <li><script type="math/tex">f(⋅)</script> 是不变（invariant）的，当<script type="math/tex">A≤B</script>时上述两个式子均不成立，即<script type="math/tex">f(A)</script>与<script type="math/tex">f(B)</script>相互之间没有继承关系。</li>
+  <li>\(f(⋅)\) 是逆变（contravariant）的，当\(A≤B\)时有 \(f(B)≤f(A)\)成立；</li>
+  <li>\(f(⋅)\) 是协变（covariant）的，当\(A≤B\)时有\(f(A)≤f(B)\)成立；</li>
+  <li>\(f(⋅)\) 是不变（invariant）的，当\(A≤B\)时上述两个式子均不成立，即\(f(A)\)与\(f(B)\)相互之间没有继承关系。</li>
 </ul>
 
 <p>在 Java 中， Number 与 Integer 是继承关系，但 List<Number> 与 List<Integer> 之间没有继承关系。所以当$$ f(⋅)=List&lt;⋅&gt;? $$ 时，$$ f(⋅) $$ 是**不变的**。</Integer></Number></p>
