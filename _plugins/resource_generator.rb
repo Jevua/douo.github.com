@@ -8,6 +8,8 @@ module Moon
       @dir = dir
       @name = name
       @realpath = realpath
+      @relative_path = File.join(*[@dir, @name].compact)
+      @extname = File.extname(realpath)
     end
 
     def modified_time

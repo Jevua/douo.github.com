@@ -2,6 +2,7 @@ _diary
 # Jekyll
 _site
 .jekyll-metadata
+.jekyll-cache
 
 # sass
 .sass-cache

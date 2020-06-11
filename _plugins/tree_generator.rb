@@ -56,7 +56,7 @@ module Moon
       end
     end
 
-    def order (y)
+    def order(y)
       # FIXME
       order = @site.config['notes']["order"]
       if order.index(name)
@@ -70,7 +70,7 @@ module Moon
       end
     end
 
-    def <=> (y)
+    def <=>(y)
       # FIXME HACK 优化排序
       if level == 2
         order(y)
@@ -144,8 +144,6 @@ module Moon
   #
   #
   class TreeGenerator < Jekyll::Generator
-    safe true
-    priority :lowest
 
     def generate(site)
       site.collections.each do |_,collection|
