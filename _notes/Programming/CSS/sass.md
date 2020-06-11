@@ -1,6 +1,7 @@
 ---
 title: SASS
 date: '2014-05-31'
+todo: true
 description:
 
 ---
@@ -29,7 +30,7 @@ SCSS 除了 CSS 的 `/**/` 外，还支持 `//` 行注释。
 
     a {
         color: red;
-    
+
         .nav-menu &{
             color: blue;
         }
@@ -38,10 +39,10 @@ SCSS 除了 CSS 的 `/**/` 外，还支持 `//` 行注释。
 生成的CSS:
 
     a {
-      color: red; 
+      color: red;
     }
     .nav-menu a {
-      color: blue; 
+      color: blue;
     }
 
 ### Mixin
@@ -68,7 +69,7 @@ SCSS 除了 CSS 的 `/**/` 外，还支持 `//` 行注释。
 	if($condition,  $if-true,  $if-false) //chooses between two values based on  a  Boolean  value.  If  $condition  is  true,  then  it  returns  $if-true.
 
 #### Color
-	
+
 	adjust($color, ...) //ex: adjust($color, $lightness: 15%, $hue: 10deg)
 	scale($color, ...)
 	mix($color-1,  $color-2,  [$weight])
@@ -90,13 +91,13 @@ SCSS 除了 CSS 的 `/**/` 外，还支持 `//` 行注释。
 	"This element is #{$color}";
 
 #### Bug
-{{!TODO}}
+{{ TODO }}
 插值遇到一个 Bug。
 
     @each $vendor in ('-webkit-', '-moz-', '-ms-', '-o-', '') {
         @include glowheader($vendor);
     }
-    
+
     @mixin glowheader($vendor) {
         $at: '@';
         @debug #{$at}#{$vendor}keyframes; //正常
@@ -118,7 +119,7 @@ SCSS 除了 CSS 的 `/**/` 外，还支持 `//` 行注释。
 列表可以通过`空格`或者`逗号`分隔，`a b c` 或 `a, b, c`
 
 
-`nth($list, $n)`, 返回列表中的第 n 个值。 **Sass 的列表由 l 开始算起。** 
+`nth($list, $n)`, 返回列表中的第 n 个值。 **Sass 的列表由 l 开始算起。**
 
 `join($list1, $list2, [$separator])` 整合两个列表返回一个新列表。
 
@@ -214,25 +215,25 @@ font-files 自动通过 `font-url` 来加载文件，具体的路径可以在 co
       font-size: 1.5em;
       margin: 0.83em 0;
     }
-    
+
     /* line 146, ../sass/_pure.scss */
     h3, .post-content h4, .post-content h5, .post-content h6 {
       font-size: 1.17em;
       margin: 1em 0;
     }
-    
+
     /* line 151, ../sass/_pure.scss */
     h4, .post-content h5, .post-content h6 {
       font-size: 1em;
       margin: 1.33em 0;
     }
-    
+
     /* line 156, ../sass/_pure.scss */
     h5, .post-content h6 {
       font-size: 0.83em;
       margin: 1.67em 0;
     }
-    
+
     /* line 161, ../sass/_pure.scss */
     h6 {
       font-size: 0.67em;
@@ -245,17 +246,17 @@ font-files 自动通过 `font-url` 来加载文件，具体的路径可以在 co
       font-size: 1.5em;
       margin: 0.83em 0;
     }
-    
+
     h3, .post-content h4 {
       font-size: 1.17em;
       margin: 1em 0;
     }
-    
+
     h4, .post-content h5 {
       font-size: 1em;
       margin: 1.33em 0;
     }
-    
+
     h5, .post-content h6 {
       font-size: 0.83em;
       margin: 1.67em 0;
@@ -277,7 +278,7 @@ font-files 自动通过 `font-url` 来加载文件，具体的路径可以在 co
     @mixin extendHeader($i) {
         @extend h#{$i};
     }
-    
+
     .post-content {
         @for $i from 3 through 6 {
     	h#{$i} { @include extendHeader($i - 1)}
@@ -296,11 +297,11 @@ font-files 自动通过 `font-url` 来加载文件，具体的路径可以在 co
 
 占位符也没有用：
 
-    @for $i from 3 through 6 { 
-         %post-h#{$i} { @extend h#{$i - 1} ; } 
-    } 
-    
-    
+    @for $i from 3 through 6 {
+         %post-h#{$i} { @extend h#{$i - 1} ; }
+    }
+
+
     .post-content {
         @for $i from 3 through 4 {
     	h#{$i} { @extend %post-h#{$i} ; }
@@ -312,11 +313,11 @@ font-files 自动通过 `font-url` 来加载文件，具体的路径可以在 co
     .foo {
         margin: 2em;
     }
-    
+
     .bar {
         padding: 1em;
     }
-    
+
     .test {
        .foo {
            @extend .bar
@@ -324,7 +325,7 @@ font-files 自动通过 `font-url` 来加载文件，具体的路径可以在 co
        .bar {
            @extend .foo;
        }
-    
+
     }
 
 Output：
@@ -333,7 +334,7 @@ Output：
     .foo, .test .bar, .test .foo {
       margin: 2em;
     }
-    
+
     /* line 352, ../sass/screen.scss */
     .bar, .test .foo, .test .bar {
       padding: 1em;
@@ -346,7 +347,7 @@ Output：
     .foo, .test .bar {
       margin: 2em;
     }
-    
+
     /* line 352, ../sass/screen.scss */
     .bar, .test .foo {
       padding: 1em;
