@@ -61,7 +61,7 @@ module Moon
       order = @site.config['notes']["order"]
       if order.index(name)
         if order.index(y.name)
-          order.index(y.name) <=> order.index(name) 
+          order.index(y.name) <=> order.index(name)
         else
           1
         end
@@ -144,6 +144,8 @@ module Moon
   #
   #
   class TreeGenerator < Jekyll::Generator
+    safe true
+    priority :lowest
 
     def generate(site)
       site.collections.each do |_,collection|

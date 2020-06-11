@@ -4,6 +4,9 @@ module Moon
   # 生成用于搜索要素的 json
   #
   class IndexGenerator < Jekyll::Generator
+    safe true
+    priority :lowest
+
     def generate(site)
       data = []
       site.collections.flat_map{ |_,c| c.docs }.each do |d|

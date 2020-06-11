@@ -7,14 +7,14 @@ layout: default
 
 <div class="content mdl-color--white mdl-shadow--4dp mdl-color-text--grey-800 mdl-cell--8-col mdl-cell">
   <h2 id="newest-ref">最新发布</h2>
-  {% assign notes_by_date = site.notes | sort "date" | reverse %}
+  {% assign notes_by_date = site.notes | sort: "date" | reverse %}
   {% for post in notes_by_date limit:18 %}
     {% if forloop.first %}<ul>{% endif %}
     {% include post-list post=post %}
     {% if forloop.last %}</ul>{% endif %}
   {% endfor %}
   <h2 id="last-modified-ref">最新修改</h2>
-  {% assign notes_by_last = site.notes | sort "last_modified_at" | reverse %}
+  {% assign notes_by_last = site.notes | sort: "last_modified_at" | reverse %}
   {% for post in notes_by_last limit:18 %}
     {% if forloop.first %}<ul>{% endif %}
     <li class="post-list"><a href="{{ post.url }}">{{ post.title }}</a>

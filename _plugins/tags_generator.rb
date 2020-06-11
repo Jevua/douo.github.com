@@ -3,11 +3,14 @@
 module Moon
     # 生成用于搜索要素的 json
     #
-    class TagsGenerator < Jekyll::Generator
+  class TagsGenerator < Jekyll::Generator
+    safe true
+    priority :lowest
+
       def generate(site)
 
         file = PageWithoutAFile.new(site, site.dest, "",'tags.json')
-        file.content = site.tags.map{|k,v| 
+        file.content = site.tags.map{|k,v|
           {:name => k,
           :size => v.size}
         }.to_json
@@ -18,4 +21,3 @@ module Moon
       end
     end
   end
-  
